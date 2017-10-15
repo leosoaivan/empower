@@ -18,8 +18,8 @@ gem 'figaro', '~> 1.1', '>= 1.1.1'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'capybara', '~> 2.13'
-  gem 'selenium-webdriver'
+  gem 'rspec-rails', '~> 3.6', '>= 3.6.1'
+  gem 'factory_girl_rails', '~> 4.5'
 end
 
 group :development do
@@ -27,6 +27,14 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+end
+
+group :test do
+  gem 'capybara', '~> 2.13'
+  gem 'selenium-webdriver'
+  gem 'faker', '~> 1.8', '>= 1.8.4'
+  gem 'launchy', '~> 2.4', '>= 2.4.3'
+  gem 'database_cleaner', '~> 1.6', '>= 1.6.1'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
