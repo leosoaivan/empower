@@ -52,7 +52,7 @@ guard :rspec, cmd: "bundle exec rspec" do
       rspec.spec.call("acceptance/#{m[1]}")
     ]
   end
-
+  
   # Rails config changes
   watch(rails.spec_helper)     { rspec.spec_dir }
   watch(rails.routes)          { "#{rspec.spec_dir}/routing" }
