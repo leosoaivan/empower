@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Empower</title>
+    <title>
+      <%= yield(:title) %> | Empower
+    </title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,6 +11,15 @@
   </head>
 
   <body>
+    <% flash.each do |flash_type, message| %>
+      <div class="alert alert-<%= flash_type %>">
+        <button type='button' class='close fade' data-dismiss='alert'>
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <%= message %>
+      </div>
+    <% end%>
+  
     <%= yield %>
   </body>
 </html>
