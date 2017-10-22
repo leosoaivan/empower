@@ -8,18 +8,14 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville|Libre+Franklin" rel="stylesheet">
   </head>
 
   <body>
-    <% flash.each do |flash_type, message| %>
-      <div class="alert alert-<%= flash_type %>">
-        <button type='button' class='close fade' data-dismiss='alert'>
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <%= message %>
-      </div>
-    <% end%>
-  
-    <%= yield %>
+    <div class="container">
+      <%= render 'shared/flash'%>
+      <%= yield %>
+    </div>
+    <%# console %>
   </body>
 </html>

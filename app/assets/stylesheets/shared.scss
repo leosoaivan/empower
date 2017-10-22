@@ -1,0 +1,26 @@
+@import "materialize";
+
+h1 {
+  font-family: Libre Franklin, sans-serif;
+}
+
+h5 {
+  font-family: Libre Baskerville, serif; 
+}
+
+@mixin flash-alert {
+  padding: 10px;
+  text-align: center;
+}
+
+.flash__alert--danger {
+  @extend .red.lighten-4;
+  @include flash-alert;
+  color: red;
+}
+
+.flash__alert--success {
+  @extend .green.lighten-4;
+  @include flash-alert;
+  color: green;
+}
