@@ -1,0 +1,26 @@
+@import 'materialize';
+
+@media only screen and (min-width: 992px) {
+  #logo {
+    padding-left: 15px;
+  }
+}
+
+#hamburger {
+  padding-left: 15px;
+}
+
+#slide-out {
+  i, span {
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
+#slide-out .side-nav__list-item {
+  padding: 0px;
+
+  i {
+    padding-right: 5%;
+  }
+}

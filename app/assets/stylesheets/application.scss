@@ -13,4 +13,12 @@
  *= require_tree .
  *= require_self
  */
- 
+
+ @import 'materialize';
+
+ @media only screen and (max-width: 320px) {
+  
+  h1 { 
+    font-size: 44px !important;
+  }
+}

@@ -1,13 +1,5 @@
 @import "materialize";
 
-h1 {
-  font-family: Libre Franklin, sans-serif;
-}
-
-h5 {
-  font-family: Libre Baskerville, serif; 
-}
-
 @mixin flash-alert {
   padding: 10px;
   text-align: center;

@@ -1,0 +1,45 @@
+<nav>
+  <div class='nav-wrapper'>
+    <a id='logo' href="#" class="brand-logo">Empower</a>
+    <a id='hamburger' href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons show-on-small">menu</i></a>
+    <ul class="right hide-on-med-and-down">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Find Client</a></li>
+      <li><a href="#">Response Line Activity</a></li>
+      <li><a href="#">Create Interview</a></li>
+      <li><a href="#">Log Off</a></li>
+    </ul>
+    <ul id='slide-out' class="side-nav">
+      <li class='side-nav__list-item'>
+        <a href="#">
+          <i class='material-icons'>home</i>
+          <span>Home</span>
+        </a>
+      </li>
+      <li class='side-nav__list-item'>
+        <a href="#">
+          <i class='material-icons'>search</i>
+          <span>Find client</span>
+        </a>
+      </li>
+      <li class='side-nav__list-item'>
+        <a href="#">
+          <i class='material-icons'>phone</i>
+          <span>Response Line Activity</span>
+        </a>
+      </li>
+      <li class='side-nav__list-item'>
+        <a href="#">
+          <i class='material-icons'>question_answer</i>
+          <span>Create Interview</span>
+        </a>
+      </li>
+      <li class='side-nav__list-item'>
+        <%= link_to logout_path, method: :delete do %>
+          <i class='material-icons'>exit_to_app</i>
+          <span>Log Off</span>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+</nav>
