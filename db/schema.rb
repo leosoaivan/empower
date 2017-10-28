@@ -10,10 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171015191959) do
+ActiveRecord::Schema.define(version: 20171026011447) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
+
+  create_table "clients", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "firstname"
+    t.string "lastname"
+    t.date "dob"
+    t.string "telephone"
+    t.hstore "address"
+    t.integer "children"
+    t.string "gender"
+    t.string "email"
+    t.string "special_population"
+    t.string "ethnicity"
+    t.string "language"
+  end
+
+  create_table "episodes", force: :cascade do |t|
+    t.integer "petitioner_id"
+    t.integer "respondent_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["petitioner_id"], name: "index_episodes_on_petitioner_id"
+    t.index ["respondent_id"], name: "index_episodes_on_respondent_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
