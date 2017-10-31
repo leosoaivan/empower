@@ -1,8 +1,23 @@
 require 'rails_helper'
 
-RSpec.describe User, type: :feature do
+feature 'Login management' do
   let (:user) { FactoryGirl.create(:user, name: "Triss Merigold") }
   
+  describe "authenticating" do
+    context "when not logged in" do
+      before :each do
+        visit clients_path
+      end
+
+      it "redirects to login" do
+        expect(current_path).to eql(login_path)
+      end
+
+      it "flashes a warning message" do
+        expect(page).to have_content("Please log in to continue")
+      end
+    end
+  end
   describe "logging in" do
     before :each do
       visit root_path
@@ -10,9 +25,7 @@ RSpec.describe User, type: :feature do
 
     context "with correct credentials" do
       before :each do
-        fill_in 'username', with: user.username
-        fill_in 'password', with: user.password
-        click_button 'LOGIN'
+        log_in(user)
       end
 
       it "flashes a successful message" do
@@ -42,11 +55,8 @@ RSpec.describe User, type: :feature do
 
   describe "logging out" do
     it "redirects to login" do
-      visit root_path
-      fill_in 'username', with: user.username
-      fill_in 'password', with: user.password
-      click_button 'LOGIN'
- 
+      log_in(user)
+
       click_link 'LOGOUT'
       expect(current_path).to eq(login_path)
     end

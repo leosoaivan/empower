@@ -10,4 +10,27 @@ RSpec.describe Client, type: :model do
       expect(client.all_episodes).to include(episode1, episode2)
     end
   end
+
+  describe ".search(params)" do
+    let (:client) { create(:client, firstname: "Kevin", lastname: "Smith") }
+    let (:params) { params = { 
+      firstname: client.firstname,
+      lastname: client.lastname 
+      }
+    }
+
+    it "returns a user if there is a firstname match" do
+      params = { firstname: client.firstname, lastname: "" }
+      expect(Client.search(params)).to include(client)
+    end
+
+    it "returns a user if there is a last match" do
+      params = { firstname: "", lastname: client.lastname }
+      expect(Client.search(params)).to include(client)
+    end
+
+    it "returns a user if there is a full name match" do
+      expect(Client.search(params)).to include(client)
+    end
+  end
 end

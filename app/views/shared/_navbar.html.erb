@@ -4,10 +4,18 @@
     <a id='hamburger' href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons show-on-small">menu</i></a>
     <ul class="right hide-on-med-and-down">
       <li><a href="#">Home</a></li>
-      <li><a href="#">Find Client</a></li>
+      <li>
+        <%= link_to clients_path do %>
+          <span>Find client</span>
+        <% end %>
+      </li>
       <li><a href="#">Response Line Activity</a></li>
       <li><a href="#">Create Interview</a></li>
-      <li><a href="#">Log Off</a></li>
+      <li>
+        <%= link_to logout_path, method: :delete do %>
+          <span>Log Off</span>
+        <% end %>
+      </li>
     </ul>
     <ul id='slide-out' class="side-nav">
       <li class='side-nav__list-item'>
@@ -17,10 +25,10 @@
         </a>
       </li>
       <li class='side-nav__list-item'>
-        <a href="#">
+        <%= link_to clients_path do %>
           <i class='material-icons'>search</i>
           <span>Find client</span>
-        </a>
+        <% end %>
       </li>
       <li class='side-nav__list-item'>
         <a href="#">

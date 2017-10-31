@@ -10,4 +10,12 @@ class Client < ApplicationRecord
     self.petitioned_episodes.or(self.responded_episodes)
   end
 
+  def self.search(params)
+    if params[:firstname] || params[:lastname]
+      where("lower(firstname) LIKE ? AND lower(lastname) LIKE ?", "#{params[:firstname].downcase}%", "#{params[:lastname].downcase}%")
+    else
+      all
+    end
+  end
+
 end

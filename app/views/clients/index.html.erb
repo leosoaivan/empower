@@ -1,0 +1,26 @@
+<h1>Search clients</h1>
+
+<%= form_with url: clients_path, method: :get, local: true do |f| %>
+  <%= text_field_tag 'firstname', params[:firstname], placeholder: 'first name' %>
+  <%= text_field_tag 'lastname', params[:lastname], placeholder: 'last name' %>
+  <%= submit_tag 'Search' %>
+<% end %>
+
+<% if @clients %>
+  <table id='search-results'>
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @clients.each do |client| %>
+        <tr>
+          <td class='firstname'><%= client.firstname %></td>
+          <td class='lastname'><%= client.lastname %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

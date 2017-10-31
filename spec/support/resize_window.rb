@@ -1,5 +1,4 @@
 module ResponsiveHelpers
- 
   def resize_window_to_mobile
     resize_window_by([640, 480])
   end
@@ -17,5 +16,8 @@ module ResponsiveHelpers
   def resize_window_by(size)
     Capybara.current_session.driver.browser.manage.window.resize_to(size[0], size[1]) if Capybara.current_session.driver.browser.respond_to? 'manage'
   end
- 
+end
+
+RSpec.configure do |config|
+  config.include ResponsiveHelpers, type: :feature
 end
