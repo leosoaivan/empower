@@ -1,5 +1,7 @@
 {
   "name": "empower",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "simple-autoreload-server": "^0.2.7"
+  }
 }

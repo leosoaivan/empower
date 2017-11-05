@@ -14,11 +14,22 @@
  *= require_self
  */
 
- @import 'materialize';
+@import 'materialize';
 
- @media only screen and (max-width: 320px) {
-  
-  h1 { 
-    font-size: 44px !important;
+
+@media only screen and (max-width: 320px) {
+  .container {
+    margin: 0 auto;
+    width: 100%;
+    // padding: 0;
   }
+
+  h1 { 
+    font-size: 36px !important;
+    line-height: 1.25em;
+  }
+}
+
+h1 {
+  margin: 12px 0px;
 }

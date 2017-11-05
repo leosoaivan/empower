@@ -11,6 +11,7 @@ user = User.create(
 )
 
 FactoryGirl.create_list(:client, 5)
+FactoryGirl.create(:client, id: 44558, lastname: 'Smith-Lee-Buckridge')
 
 FactoryGirl.create(:episode, petitioner_id: '1', respondent_id: '2')
 FactoryGirl.create(:episode, petitioner_id: '1', respondent_id: '3')

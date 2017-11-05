@@ -1,10 +1,32 @@
-<h1>Search clients</h1>
+<h1>Search</h1>
 
-<%= form_with url: clients_path, method: :get, local: true do |f| %>
-  <%= text_field_tag 'id', params[:id], placeholder: 'ID' %>
-  <%= text_field_tag 'firstname', params[:firstname], placeholder: 'first name' %>
-  <%= text_field_tag 'lastname', params[:lastname], placeholder: 'last name' %>
-  <%= submit_tag 'Search' %>
+<%= form_with url: clients_path, method: :get, local: true, class: 'search-form' do |f| %>
+  <div class='row'> 
+    <div class='input-field col s12 l6'>
+      <%= text_field_tag 'id', params[:id],
+        placeholder: 'ID',
+        class: 'search-form__input' %>
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='col s12 l6 pull-l6'>
+      <%= text_field_tag 'firstname', params[:firstname],
+        placeholder: 'first name',
+        class: 'search-form__input' %>
+    </div>
+    <div class='col s12 l6'>
+      <%= text_field_tag 'lastname', params[:lastname],
+        placeholder: 'last name',
+        class: 'search-form__input' %>
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='col s12 l7'>
+      <%= submit_tag 'Search', class: 'search-form__submit btn' %>
+    </div>
+  </div>
 <% end %>
 
 <% if @clients %>
@@ -12,8 +34,9 @@
     <thead>
       <tr>
         <th>ID</th>
-        <th>First Name</th>
-        <th>Last Name</th>
+        <th>First</th>
+        <th>Last</th>
+        <th>DOB</th>
       </tr>
     </thead>
     <tbody>
@@ -22,6 +45,7 @@
           <td class='id'><%= client.id %></td>
           <td class='firstname'><%= client.firstname %></td>
           <td class='lastname'><%= client.lastname %></td>
+          <td class='dob'><%= client.mmddyyyy %></td>
         </tr>
       <% end %>
     </tbody>
