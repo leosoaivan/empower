@@ -11,26 +11,17 @@ RSpec.describe Client, type: :model do
     end
   end
 
-  describe ".search(params)" do
-    let (:client) { create(:client, firstname: "Kevin", lastname: "Smith") }
-    let (:params) { params = { 
-      firstname: client.firstname,
-      lastname: client.lastname 
-      }
-    }
-
-    it "returns a user if there is a firstname match" do
-      params = { firstname: client.firstname, lastname: "" }
-      expect(Client.search(params)).to include(client)
+  describe '.mmddyyy' do
+    it "returns a client's DOB in mm/dd/yyyy format" do
+      client = create(:client, dob: Date.new(2017, 11, 3))
+      expect(client.mmddyyyy).to eq('11/03/2017')
     end
+  end
 
-    it "returns a user if there is a last match" do
-      params = { firstname: "", lastname: client.lastname }
-      expect(Client.search(params)).to include(client)
-    end
-
-    it "returns a user if there is a full name match" do
-      expect(Client.search(params)).to include(client)
+  describe '.fullname' do
+    it "returns a client's full name" do
+      client = create(:client, firstname: "Kevin", lastname: "Smith")
+      expect(client.fullname).to eq("Kevin Smith")
     end
   end
 end

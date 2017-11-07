@@ -5,4 +5,8 @@ class ClientsController < ApplicationController
       .lastname_like(params[:lastname])
     @clients = ClientsQuery.new(clients_with_matching_name).id_like(params[:id])
   end
+
+  def show
+    @client = Client.find(params[:id])
+  end
 end

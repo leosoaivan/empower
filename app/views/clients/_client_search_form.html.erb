@@ -1,0 +1,28 @@
+<%= form_with url: clients_path, method: :get, local: true, class: 'search-form' do |f| %>
+  <div class='row'> 
+    <div class='input-field col s12 l6'>
+      <%= text_field_tag 'id', params[:id],
+        placeholder: 'ID',
+        class: 'search-form__input' %>
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='col s12 l6 pull-l6'>
+      <%= text_field_tag 'firstname', params[:firstname],
+        placeholder: 'first name',
+        class: 'search-form__input' %>
+    </div>
+    <div class='col s12 l6'>
+      <%= text_field_tag 'lastname', params[:lastname],
+        placeholder: 'last name',
+        class: 'search-form__input' %>
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='col s12 l7'>
+      <%= submit_tag 'Search', class: 'search-form__submit btn' %>
+    </div>
+  </div>
+<% end %>

@@ -1,53 +1,11 @@
 <h1>Search</h1>
 
-<%= form_with url: clients_path, method: :get, local: true, class: 'search-form' do |f| %>
-  <div class='row'> 
-    <div class='input-field col s12 l6'>
-      <%= text_field_tag 'id', params[:id],
-        placeholder: 'ID',
-        class: 'search-form__input' %>
-    </div>
-  </div>
+<%= render partial: 'client_search_form' %>
 
-  <div class='row'>
-    <div class='col s12 l6 pull-l6'>
-      <%= text_field_tag 'firstname', params[:firstname],
-        placeholder: 'first name',
-        class: 'search-form__input' %>
-    </div>
-    <div class='col s12 l6'>
-      <%= text_field_tag 'lastname', params[:lastname],
-        placeholder: 'last name',
-        class: 'search-form__input' %>
-    </div>
+<div class='row'>
+  <div class='col s12 m6'>
+    <% @clients.each do |client| %>
+      <%= render partial: 'client_card', locals: { client: client } %>
+    <% end %>
   </div>
-
-  <div class='row'>
-    <div class='col s12 l7'>
-      <%= submit_tag 'Search', class: 'search-form__submit btn' %>
-    </div>
-  </div>
-<% end %>
-
-<% if @clients %>
-  <table id='search-results'>
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>First</th>
-        <th>Last</th>
-        <th>DOB</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @clients.each do |client| %>
-        <tr>
-          <td class='id'><%= client.id %></td>
-          <td class='firstname'><%= client.firstname %></td>
-          <td class='lastname'><%= client.lastname %></td>
-          <td class='dob'><%= client.mmddyyyy %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% end %>
+</div>

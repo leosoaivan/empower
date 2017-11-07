@@ -23,8 +23,8 @@ feature 'Client search management' do
       lastname: "Hopper") 
   }
 
-  let (:data_row) { 'tbody tr' }
-  
+  let (:client_data) { '.card' }
+
   before :each do
     log_in(user)
     visit clients_path
@@ -35,12 +35,12 @@ feature 'Client search management' do
       expect(page).to have_css('form')
     end
 
-    it "shows a results table" do
-      expect(page).to have_css('table#search-results')
+    it "shows search result cards" do
+      expect(page).to have_css('.card')
     end
 
     it "returns all clients" do
-      expect(find('table')).to have_css(data_row, count: Client.count)
+      expect(page).to have_css('.card', count: Client.count)
     end
   end
 
@@ -52,11 +52,11 @@ feature 'Client search management' do
       end
       
       it "edits the table with matching result" do
-        expect(find(data_row)).to have_content(client1.id)
+        expect(find(client_data)).to have_content(client1.id)
       end
 
       it "returns a specific client" do
-        expect(page).to have_css(data_row, count: 1)
+        expect(page).to have_css(client_data, count: 1)
       end
     end
 
@@ -69,11 +69,11 @@ feature 'Client search management' do
       end
 
       it "edits the table with matching result" do
-        expect(find(data_row)).to have_content(client1.id)
+        expect(find(client_data)).to have_content(client1.id)
       end
 
       it "returns a specific client" do
-        expect(page).to have_css(data_row, count: 1)
+        expect(page).to have_css(client_data, count: 1)
       end
     end
 
@@ -83,7 +83,7 @@ feature 'Client search management' do
         fill_in 'firstname', with: client1.firstname
         fill_in 'lastname', with: "Grace"
         click_button 'Search'
-        expect(page).to_not have_css(data_row)
+        expect(page).to_not have_css(client_data)
       end
     end
 
@@ -93,7 +93,7 @@ feature 'Client search management' do
         fill_in 'firstname', with: "Topher"
         fill_in 'lastname', with: "Smith"
         click_button 'Search'
-        expect(page).to_not have_css(data_row)
+        expect(page).to_not have_css(client_data)
       end
     end
 
@@ -101,7 +101,7 @@ feature 'Client search management' do
       it "returns no hits" do
         fill_in 'id', with: 100
         click_button 'Search'
-        expect(page).to_not have_css(data_row)
+        expect(page).to_not have_css(client_data)
       end
     end
 
@@ -111,7 +111,7 @@ feature 'Client search management' do
         fill_in 'firstname', with: client1.firstname
         fill_in 'lastname', with: "Grace"
         click_button 'Search'
-        expect(page).to_not have_css(data_row)
+        expect(page).to_not have_css(client_data)
       end
     end
 
@@ -121,7 +121,7 @@ feature 'Client search management' do
         fill_in 'firstname', with: "Topher"
         fill_in 'lastname', with: client1.lastname
         click_button 'Search'
-        expect(page).to_not have_css(data_row)
+        expect(page).to_not have_css(client_data)
       end
     end
   end
@@ -131,7 +131,7 @@ feature 'Client search management' do
       it "edits the table with matching results" do
         fill_in 'firstname', with: client1.firstname
         click_button 'Search'
-        expect(page).to have_css(data_row, count: 2)
+        expect(page).to have_css(client_data, count: 2)
       end
     end
 
@@ -139,7 +139,7 @@ feature 'Client search management' do
       it "edits the table with matching results" do
         fill_in 'firstname', with: client1.firstname[0, 3]
         click_button 'Search'
-        expect(page).to have_css(data_row, count: 2)
+        expect(page).to have_css(client_data, count: 2)
       end
     end
 
@@ -147,7 +147,7 @@ feature 'Client search management' do
       it "edits the table with matching results" do
         fill_in 'lastname', with: client1.lastname
         click_button 'Search'
-        expect(page).to have_css(data_row, count: 2)
+        expect(page).to have_css(client_data, count: 2)
       end
     end
 
@@ -155,7 +155,7 @@ feature 'Client search management' do
       it "edits the table with matching results" do
         fill_in 'lastname', with: client1.lastname[0, 3]
         click_button 'Search'
-        expect(page).to have_css(data_row, count: 2)
+        expect(page).to have_css(client_data, count: 2)
       end
     end
 
@@ -164,7 +164,7 @@ feature 'Client search management' do
         fill_in 'firstname', with: client1.firstname
         fill_in 'lastname', with: client1.lastname
         click_button 'Search'
-        expect(page).to have_css(data_row, count: 1)
+        expect(page).to have_css(client_data, count: 1)
       end
     end
 
@@ -173,7 +173,7 @@ feature 'Client search management' do
         fill_in 'firstname', with: client1.firstname[0, 3]
         fill_in 'lastname', with: client1.lastname[0, 3]
         click_button 'Search'
-        expect(page).to have_css(data_row, count: 1)
+        expect(page).to have_css(client_data, count: 1)
       end
     end
 
@@ -182,7 +182,7 @@ feature 'Client search management' do
         fill_in 'firstname', with: client1.firstname
         fill_in 'lastname', with: "Mike"
         click_button 'Search'
-        expect(page).to_not have_css(data_row)
+        expect(page).to_not have_css(client_data)
       end
     end
 
@@ -191,8 +191,21 @@ feature 'Client search management' do
         fill_in 'firstname', with: "Topher"
         fill_in 'lastname', with: client1.lastname
         click_button 'Search'
-        expect(page).to_not have_css(data_row)
+        expect(page).to_not have_css(client_data)
       end
+    end
+  end
+
+  describe "clicking on view button" do
+    it "navigates user to client's page" do
+      fill_in 'firstname', with: client1.firstname
+      fill_in 'lastname', with: client1.lastname
+      click_button 'Search'
+      # save_and_open_page
+      within('.card .card-action') do
+        click_on 'VIEW'
+      end
+      expect(current_path).to eq(client_path(client1))
     end
   end
 end

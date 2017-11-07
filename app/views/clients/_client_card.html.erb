@@ -1,0 +1,19 @@
+<div class='card blue-grey lighten-1'>
+  <div class='card-content white-text'>
+    <span class='card-title white-text'>
+      <b>Client ID <%= client.id %></b>
+    </span>
+    <p><%= client.fullname %></p>
+    <p><%= client.mmddyyyy %></p>
+  </div>
+  <div class='card-action blue-grey lighten-3'>
+    <a href="#" class="card__view-telephone black-text">
+      <%= client.telephone %>
+    </a>
+    <%= link_to client_path(client), 
+      class: "card__view-button btn white-text" do %>
+      VIEW
+      <i class="material-icons right">send</i>
+    <% end %>
+  </div>
+</div>
