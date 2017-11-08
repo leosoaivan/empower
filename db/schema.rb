@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171026011447) do
+ActiveRecord::Schema.define(version: 20171108210721) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,10 @@ ActiveRecord::Schema.define(version: 20171026011447) do
     t.integer "respondent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "relationship", array: true
+    t.string "victimization", array: true
+    t.boolean "arrest"
+    t.boolean "open", default: true
     t.index ["petitioner_id"], name: "index_episodes_on_petitioner_id"
     t.index ["respondent_id"], name: "index_episodes_on_respondent_id"
   end
