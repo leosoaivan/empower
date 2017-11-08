@@ -51,7 +51,7 @@ feature 'Client search management' do
         click_button 'Search'
       end
       
-      it "edits the table with matching result" do
+      it "returns a match" do
         expect(find(client_data)).to have_content(client1.id)
       end
 
@@ -68,7 +68,7 @@ feature 'Client search management' do
         click_button 'Search'
       end
 
-      it "edits the table with matching result" do
+      it "returns a match" do
         expect(find(client_data)).to have_content(client1.id)
       end
 
@@ -128,7 +128,7 @@ feature 'Client search management' do
   
   describe "searching by name only" do
     context "with a valid firstname" do
-      it "edits the table with matching results" do
+      it "returns match(es)" do
         fill_in 'firstname', with: client1.firstname
         click_button 'Search'
         expect(page).to have_css(client_data, count: 2)
@@ -136,7 +136,7 @@ feature 'Client search management' do
     end
 
     context "with a partial firstname" do
-      it "edits the table with matching results" do
+      it "returns match(es)" do
         fill_in 'firstname', with: client1.firstname[0, 3]
         click_button 'Search'
         expect(page).to have_css(client_data, count: 2)
@@ -144,7 +144,7 @@ feature 'Client search management' do
     end
 
     context "with a valid lastname" do
-      it "edits the table with matching results" do
+      it "returns match(es)" do
         fill_in 'lastname', with: client1.lastname
         click_button 'Search'
         expect(page).to have_css(client_data, count: 2)
@@ -152,7 +152,7 @@ feature 'Client search management' do
     end
 
     context "with a partial lastname" do
-      it "edits the table with matching results" do
+      it "returns match(es)" do
         fill_in 'lastname', with: client1.lastname[0, 3]
         click_button 'Search'
         expect(page).to have_css(client_data, count: 2)
@@ -160,7 +160,7 @@ feature 'Client search management' do
     end
 
     context "with valid firstname AND lastname" do
-      it "edits the table with matching results" do
+      it "returns match(es)" do
         fill_in 'firstname', with: client1.firstname
         fill_in 'lastname', with: client1.lastname
         click_button 'Search'
@@ -169,7 +169,7 @@ feature 'Client search management' do
     end
 
     context "with partial firstname AND lastname" do
-      it "edits the table with matching results" do
+      it "returns match(es)" do
         fill_in 'firstname', with: client1.firstname[0, 3]
         fill_in 'lastname', with: client1.lastname[0, 3]
         click_button 'Search'
@@ -201,7 +201,6 @@ feature 'Client search management' do
       fill_in 'firstname', with: client1.firstname
       fill_in 'lastname', with: client1.lastname
       click_button 'Search'
-      # save_and_open_page
       within('.card .card-action') do
         click_on 'VIEW'
       end
