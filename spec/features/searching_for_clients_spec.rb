@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Client search management' do
+feature 'Client search' do
   let (:user) { FactoryGirl.create(:user) }
   let! (:client1) { 
     FactoryGirl.create(:client,

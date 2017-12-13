@@ -1,6 +1,20 @@
 require 'rails_helper'
 
 RSpec.describe Client, type: :model do
+  let (:client) { create(:client) }
+
+  describe "a valid client" do
+    it "must have a firstname" do
+      client.firstname = nil
+      expect(client).to_not be_valid
+    end
+
+    it "must have a lastname" do
+      client.lastname = nil
+      expect(client).to_not be_valid
+    end
+  end
+
   describe "#all_episodes" do
     it "returns all episodes in which a client is either petitioner or respondent" do
       client = create(:client)

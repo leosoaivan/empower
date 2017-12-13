@@ -1,6 +1,8 @@
 // Place all the styles related to the Clients controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+// index
 .search-form {
   .row {
     margin: 0px;
@@ -28,5 +30,14 @@
 
   div.card-action {
     padding: 15px 20px;
+  }
+}
+
+//show
+#client-demographic {
+  line-height: 1.5em;
+
+  h2 {
+    margin-bottom: 10px;
   }
 }

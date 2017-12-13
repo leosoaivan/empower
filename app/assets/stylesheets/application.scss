@@ -17,19 +17,33 @@
 @import 'materialize';
 
 
-@media only screen and (max-width: 320px) {
+@media only screen and (max-width: 321px) {
   .container {
     margin: 0 auto;
     width: 100%;
-    // padding: 0;
   }
 
   h1 { 
-    font-size: 36px !important;
+    font-size: 30px !important;
     line-height: 1.25em;
+  }
+
+  h2 {
+    font-size: 20px !important;
+    line-height: 1.25em;
+    margin-top: 10px !important;
   }
 }
 
 h1 {
+  margin: 0px;
+}
+
+h2 {
+  font-size: 30px;
+  margin: 0px;
+}
+
+p {
   margin: 0px;
 }
