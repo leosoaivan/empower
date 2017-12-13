@@ -1,8 +1,0 @@
-{
-  "name": "empower",
-  "private": true,
-  "dependencies": {
-    "send": "^0.16.1",
-    "simple-autoreload-server": "^0.2.7"
-  }
-}
