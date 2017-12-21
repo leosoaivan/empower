@@ -1,4 +1,6 @@
 class ClientsController < ApplicationController
+  before_action :find_client, only: [:show, :edit, :update]
+
   def index
     clients_with_matching_name = ClientsQuery.new(ClientsQuery.new
       .firstname_like(params[:firstname]))
@@ -7,7 +9,6 @@ class ClientsController < ApplicationController
   end
 
   def show
-    @client = Client.find(params[:id])
     @episodes = @client.all_episodes
   end
 
@@ -16,17 +17,20 @@ class ClientsController < ApplicationController
   end
   
   def update
-    @client = Client.find(params[:id])
     if @client.update_attributes(client_params)
-      flash[:success] = "Client successfully edited"
+      flash[:success] = "Client successfully edited."
       redirect_to(@client)
     else
-      flash.now[:danger] = "Invalid edit"
+      flash.now[:danger] = "There was an error. Try again!"
       render :edit
     end
   end
 
   private
+
+  def find_client
+    @client = Client.find(params[:id])
+  end
 
   def client_params
     params.require(:client).permit(:firstname, :lastname, :dob, :telephone)
