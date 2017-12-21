@@ -7,8 +7,6 @@ class Client < ApplicationRecord
   validates :firstname, presence: true
   validates :lastname,  presence: true
 
-
-
   def all_episodes
     self.petitioned_episodes.or(self.responded_episodes)
   end

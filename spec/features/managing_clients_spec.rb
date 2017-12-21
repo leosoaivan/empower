@@ -3,23 +3,25 @@ require 'rails_helper'
 feature 'Client management' do
   let (:user)   { create(:user) }
   let (:client) { create(:client) }
+  let (:alert_danger) { ".flash__alert--danger" }
+  let (:alert_success) { ".flash__alert--success" }
 
   before :each do
-    log_in(user)
-    search_for_client(client.id)
+    log_in user
+    search_for_client client.id
   end
 
-  describe "Editing a client" do
+  describe "editing a client" do
     before :each do
       click_on 'Edit'
     end
 
-    it "redirects to the edit page" do
-      expect(current_path).to eql(edit_client_path(client))
+    it "redirects a user to the client's edit page" do
+      expect(current_path).to eql edit_client_path(client)
     end
 
-    it "shows an edit form" do
-      expect(page).to have_css('form')
+    it "displays an edit form" do
+      expect(page).to have_css "form"
     end
 
     context "with valid attributes" do
@@ -28,17 +30,17 @@ feature 'Client management' do
         fill_in 'lastname', with: "Black"
         click_on 'Update'
       end
-
-      it "redirects to the client's page" do
-        expect(current_path).to eql(client_path(client))
-      end
-
+      
       it "flashes a successful message" do
-        expect(page).to have_content("Client successfully edited")
+        expect(page).to have_css alert_success
       end
 
-      it "displays the correct attributes" do
-        expect(page).to have_content("Jack Black")
+      it "redirects a user back to the client's page" do
+        expect(current_path).to eql client_path(client)
+      end
+
+      it "displays the updated attributes" do
+        expect(page).to have_content "Jack Black"
       end
     end
 
@@ -49,12 +51,12 @@ feature 'Client management' do
         click_button 'Update'
       end
       
-      it "shows the edit form" do
-        expect(page).to have_css('form')
+      it "flashes a danger message" do
+        expect(page).to have_css alert_danger
       end
 
-      it "flashes a danger message" do
-        expect(page).to have_content("Invalid edit")
+      it "returns the edit form" do
+        expect(page).to have_css 'form'
       end
     end
   end
