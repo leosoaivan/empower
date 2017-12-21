@@ -2,63 +2,74 @@ require 'rails_helper'
 
 feature 'Login management' do
   let (:user) { FactoryGirl.create(:user, name: "Triss Merigold") }
+  let (:alert_danger) { ".flash__alert--danger" }
+  let (:alert_success) { ".flash__alert--success" }
   
   describe "authenticating" do
     context "when not logged in" do
-      before :each do
+      it "flashes a danger message" do
         visit clients_path
+        expect(page).to have_css alert_danger
       end
 
-      it "redirects to login" do
-        expect(current_path).to eql(login_path)
-      end
-
-      it "flashes a warning message" do
-        expect(page).to have_content("Please log in to continue")
+      it "redirects a user to login" do
+        visit clients_path
+        expect(current_path).to eq login_path
       end
     end
   end
+
   describe "logging in" do
-    before :each do
-      visit root_path
-    end
-
     context "with correct credentials" do
-      before :each do
-        log_in(user)
+      it "flashes a success message" do
+        visit root_path
+        log_in user
+        expect(page).to have_css alert_success
       end
 
-      it "flashes a successful message" do
-        expect(page).to have_content("Welcome back, #{user.name}.")
-      end
       it "redirects a user to their profile" do
-        expect(current_path).to eq(user_path(user))
+        visit root_path
+        log_in user
+        expect(current_path).to eq user_path(user)
       end
     end
 
     context "with incorrect credentials" do
-      before :each do
+      it "flashes a danger message" do
+        visit root_path
         fill_in 'username', with: user.username
         fill_in 'password', with: "foobarbaz"
         click_button 'LOGIN'
-      end
-
-      it "flashes a warning" do
-        expect(page).to have_content("Invalid username/password combination")
+        expect(page).to have_css alert_danger
       end
       
       it "re-renders the login page" do
-        expect(current_path).to eq(login_path)
+        visit root_path
+        fill_in 'username', with: user.username
+        fill_in 'password', with: "foobarbaz"
+        click_button 'LOGIN'
+        expect(current_path).to eq login_path
       end
     end
   end
 
   describe "logging out" do
-    it "redirects to login" do
-      log_in(user)
+    before :each do
+      log_in user
+      click_on 'LOGOUT'
+    end
 
-      click_link 'LOGOUT'
-      expect(current_path).to eq(login_path)
+    it "flashes a success message" do
+      expect(page).to have_css alert_success
+    end
+    
+    it "redirects to login" do
+      expect(current_path).to eq login_path
+    end
+
+    it "prevents access to non-login pages" do
+      visit clients_path
+      expect(current_path).to_not eq clients_path
     end
   end
 end
