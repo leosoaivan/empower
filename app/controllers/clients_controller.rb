@@ -8,6 +8,22 @@ class ClientsController < ApplicationController
     @clients = ClientsQuery.new(clients_with_matching_name).id_like(params[:id])
   end
 
+  def new
+    @client = Client.new
+  end
+
+  def create
+    @client = Client.new(client_params)
+
+    if @client.save
+      flash[:success] = "Client was successfully created."
+      redirect_to @client
+    else
+      flash.now[:error] = "There was an error. Try again."
+      render :new
+    end
+  end
+
   def show
     @episodes = @client.all_episodes
   end
@@ -18,10 +34,10 @@ class ClientsController < ApplicationController
   
   def update
     if @client.update_attributes(client_params)
-      flash[:success] = "Client successfully edited."
+      flash[:success] = "Client was successfully edited."
       redirect_to(@client)
     else
-      flash.now[:danger] = "There was an error. Try again!"
+      flash.now[:danger] = "There was an error. Try again."
       render :edit
     end
   end

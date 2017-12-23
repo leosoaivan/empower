@@ -25,13 +25,13 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.6', '>= 3.6.1'
   gem 'factory_girl_rails', '~> 4.5'
   gem 'faker', '~> 1.8', '>= 1.8.4'
+  gem 'spring', '~> 2.0', '>= 2.0.2'
   gem 'spring-commands-rspec', '~> 1.0', '>= 1.0.4'
 end
 
 group :development do
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
-  gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'guard', '~> 2.14', '>= 2.14.1'
   gem 'guard-livereload', '~> 2.5', require: false
