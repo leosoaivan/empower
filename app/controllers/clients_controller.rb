@@ -19,7 +19,7 @@ class ClientsController < ApplicationController
       flash[:success] = "Client was successfully created."
       redirect_to @client
     else
-      flash.now[:error] = "There was an error. Try again."
+      flash.now[:danger] = "There was an error. Try again."
       render :new
     end
   end

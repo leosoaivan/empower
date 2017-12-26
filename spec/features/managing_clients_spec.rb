@@ -8,16 +8,12 @@ feature 'Client management' do
 
   before :each do
     log_in user
-    search_for_client client.id
   end
-
+  
   describe "editing a client" do
     before :each do
+      search_for_client client.id
       click_on 'Edit'
-    end
-
-    it "redirects a user to the client's edit page" do
-      expect(current_path).to eql edit_client_path(client)
     end
 
     it "displays an edit form" do
@@ -28,7 +24,7 @@ feature 'Client management' do
       before :each do
         fill_in 'firstname', with: "Jack"
         fill_in 'lastname', with: "Black"
-        click_on 'Update'
+        click_on 'Edit Client'
       end
       
       it "flashes a successful message" do
@@ -48,7 +44,7 @@ feature 'Client management' do
       before :each do
         fill_in 'firstname', with: "Jack"
         fill_in 'lastname', with: ""
-        click_button 'Update'
+        click_button 'Edit Client'
       end
       
       it "flashes a danger message" do
@@ -57,6 +53,53 @@ feature 'Client management' do
 
       it "returns the edit form" do
         expect(page).to have_css 'form'
+      end
+    end
+  end
+
+  describe "creating a client" do
+    
+    before :each do
+      visit new_client_path
+    end
+    
+    it "displays a create form" do
+      expect(page).to have_css "form"
+    end
+
+    context "with valid attributes" do
+      before :each do
+        fill_in 'firstname', with: "Joe"
+        fill_in 'lastname', with: "Black"
+        click_on 'Create Client'
+      end
+
+      it "flashes a successful message" do
+        expect(page).to have_css alert_success
+      end
+
+      it "redirects back to a client's page" do
+        expect(current_path).to eql client_path(Client.last)
+      end
+
+      it "displays a client's attributes" do
+        expect(page).to have_content "Joe Black"
+      end
+    end
+
+    context "with invalid attributes" do
+      before :each do
+        fill_in 'firstname', with: "Joe"
+        fill_in 'lastname', with: ""
+        click_on 'Create Client'
+      end
+
+      it "flashes a danger message" do
+        expect(page).to have_css alert_danger
+      end
+
+      it "returns the create form" do
+        expect(page).to have_css "form"
       end
     end
   end
