@@ -1,5 +1,5 @@
 class ClientsController < ApplicationController
-  before_action :find_client, only: [:show, :edit, :update]
+  before_action :find_client, only: [:show, :edit, :update, :destroy]
 
   def index
     clients_with_matching_name = ClientsQuery.new(ClientsQuery.new
@@ -39,6 +39,17 @@ class ClientsController < ApplicationController
     else
       flash.now[:danger] = "There was an error. Try again."
       render :edit
+    end
+  end
+
+  def destroy
+    if @client.all_episodes.present?
+      flash.now[:danger] = "This client has episodes, or is the respondent in other episodes. Client cannot be deleted."
+      render :show
+    else
+      @client.destroy
+      flash[:sucess] = "Client successfully deleted."
+      redirect_to clients_path
     end
   end
 
