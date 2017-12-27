@@ -8,13 +8,13 @@
     <%= form_with url: login_path, local: true do |f| %>
   
       <div class="input-field">
-        <% f.label :username %>
-        <%= f.text_field :username, placeholder: "username" %>
+        <%= f.label :username %>
+        <%= f.text_field :username %>
       </div>
     
       <div class="input-field">
-        <% f.label :password %>
-        <%= f.password_field :password, placeholder: "password" %>
+        <%= f.label :password %>
+        <%= f.password_field :password %>
       </div>
     
       <div class="input-field right">

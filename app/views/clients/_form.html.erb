@@ -1,7 +1,23 @@
 <%= form_with model: @client, local: true do |form| %>
-  <%= form.text_field :firstname, id: 'firstname', placeholder: 'first name' %>
-  <%= form.text_field :lastname, id: 'lastname', placeholder: 'last name' %>
-  <%= form.date_field :dob, id: 'dob', placeholder: 'mm/dd/yyyy'%>
-  <%= form.text_field :telephone, id: 'telephone', placeholder: 'telephone' %>
-  <%= form.submit form_submit_action %>
+  <div class="input-field">
+    <%= form.label :firstname, "First name", class: set_label_class(:firstname) %>
+    <%= form.text_field :firstname %>
+  </div>
+  
+  <div class="input-field">
+    <%= form.label :lastname, "Last name", class: set_label_class(:lastname) %>
+    <%= form.text_field :lastname %>
+  </div>
+  
+  <div class="input-field">
+    <% form.label :dob %>
+    <%= form.date_field :dob %>
+  </div>
+
+  <div class="input-field">
+    <%= form.label :telephone, "Telephone", class: set_label_class(:telephone) %>
+    <%= form.text_field :telephone %>
+  </div>
+
+  <%= form.submit form_submit_action, class: "btn teal" %>
 <% end %>
