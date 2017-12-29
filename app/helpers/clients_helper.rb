@@ -6,4 +6,10 @@ module ClientsHelper
   def set_label_class(attr)
     @client.send(attr).present? ? "active" : ""
   end
+
+  def if_client(client, attr)
+    unless client.nil?
+      episode.respondent.sent(attr)
+    end
+  end
 end

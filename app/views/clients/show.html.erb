@@ -1,4 +1,3 @@
-
 <div class='row'>
   <div class='col s12'>
     <div id='client-demographic' class='card-panel'>
@@ -12,6 +11,10 @@
         class: "btn-flat orange" do %>
         Edit client
       <% end %>
+      <%= link_to client_path(@client), method: :delete, 
+        class: "btn-flat red", data: { confirm: "Are you sure? Deleting client cannot be undone." } do %>
+        Delete client
+      <% end %>
     </div>
   </div>
 </div>
@@ -21,9 +24,9 @@
     <div class='row'>
       <div class='col s12'>
         <div class='card-panel'>
-          <p>Respondent: <%= episode.respondent.fullname %></p>
-          <p>Date of birth: <%= episode.respondent.mmddyyyy %></p>
-          <p>Gender: <%= episode.respondent.gender %></p>
+          <p>Respondent: <%= if_client(episode.respondent, :fullname) %></p>
+          <p>Date of birth: <%= if_client(episode.respondent, :mmddyyyy) %></p>
+          <p>Gender: <%= if_client(episode.respondent, :gender) %></p>
           <p>Relationship:</p>
           <% episode.relationship.each do |type| %>
             <li><%= type %></li>
