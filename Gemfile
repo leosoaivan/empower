@@ -5,7 +5,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-ruby '~> 2.4'
+ruby '~> 2.4.0'
 
 gem 'rails', '~> 5.1.4'
 gem 'pg', '~> 0.21'
@@ -45,6 +45,7 @@ group :test do
   gem 'launchy', '~> 2.4', '>= 2.4.3'
   gem 'database_cleaner', '~> 1.6', '>= 1.6.1'
   gem 'guard-rspec', '~> 4.7', '>= 4.7.3', require: false
+  gem 'chromedriver-helper', '~> 1.1'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
