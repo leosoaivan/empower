@@ -48,7 +48,7 @@ class ClientsController < ApplicationController
       render :show
     else
       @client.destroy
-      flash[:sucess] = "Client successfully deleted."
+      flash[:success] = "Client successfully deleted."
       redirect_to clients_path
     end
   end

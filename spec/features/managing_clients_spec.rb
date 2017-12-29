@@ -3,6 +3,7 @@ require 'rails_helper'
 feature 'Client management' do
   let (:user)   { create(:user) }
   let (:client) { create(:client) }
+  let (:client_with_episodes) { create(:client_with_episodes) }
   let (:alert_danger) { ".flash__alert--danger" }
   let (:alert_success) { ".flash__alert--success" }
 
@@ -22,8 +23,8 @@ feature 'Client management' do
 
     context "with valid attributes" do
       before :each do
-        fill_in 'firstname', with: "Jack"
-        fill_in 'lastname', with: "Black"
+        fill_in "client[firstname]", with: "Jack"
+        fill_in "client[lastname]", with: "Black"
         click_on 'Edit Client'
       end
       
@@ -42,8 +43,8 @@ feature 'Client management' do
 
     context "with invalid attributes" do
       before :each do
-        fill_in 'firstname', with: "Jack"
-        fill_in 'lastname', with: ""
+        fill_in "client[firstname]", with: "Jack"
+        fill_in "client[lastname]", with: ""
         click_button 'Edit Client'
       end
       
@@ -58,7 +59,6 @@ feature 'Client management' do
   end
 
   describe "creating a client" do
-    
     before :each do
       visit new_client_path
     end
@@ -69,8 +69,8 @@ feature 'Client management' do
 
     context "with valid attributes" do
       before :each do
-        fill_in 'firstname', with: "Joe"
-        fill_in 'lastname', with: "Black"
+        fill_in "client[firstname]", with: "Joe"
+        fill_in "client[lastname]", with: "Black"
         click_on 'Create Client'
       end
 
@@ -89,8 +89,8 @@ feature 'Client management' do
 
     context "with invalid attributes" do
       before :each do
-        fill_in 'firstname', with: "Joe"
-        fill_in 'lastname', with: ""
+        fill_in "client[firstname]", with: "Joe"
+        fill_in "client[lastname]", with: ""
         click_on 'Create Client'
       end
 
@@ -100,6 +100,42 @@ feature 'Client management' do
 
       it "returns the create form" do
         expect(page).to have_css "form"
+      end
+    end
+  end
+
+  describe "deleting a client", js: true do
+    context "when the client has no related episodes" do
+      before :each do
+        visit client_path client
+        accept_confirm do
+          click_on "Delete"
+        end
+      end
+
+      it "flashes a successful message" do
+        expect(page).to have_css alert_success
+      end
+      
+      it "redirects back to the clients search page" do
+        expect(current_path).to eql clients_path
+      end
+    end
+
+    context "when the client has related episodes" do
+      before :each do
+        visit client_path client_with_episodes
+        accept_confirm do
+          click_on "Delete"
+        end
+      end
+
+      it "flashes a danger message" do
+        expect(page).to have_css alert_danger
+      end
+
+      it "returns the client page" do
+        expect(current_path).to eql client_path client_with_episodes
       end
     end
   end
