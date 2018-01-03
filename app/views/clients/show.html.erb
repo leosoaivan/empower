@@ -1,44 +1,11 @@
 <div class='row'>
   <div class='col s12'>
-    <div id='client-demographic' class='card-panel'>
-      <h2><%= @client.fullname %></h2>
-      <p>ID: <%= @client.id %></p>
-      <p>Date of birth: <%= @client.mmddyyyy %><p>
-      <p>Gender: <%= @client.gender %></p>
-      <p>Telephone: <%= @client.telephone %></p>
-      <%= link_to edit_client_path(@client),
-        id: "edit-client-button", 
-        class: "btn-flat orange" do %>
-        Edit client
-      <% end %>
-      <%= link_to client_path(@client), method: :delete, 
-        class: "btn-flat red", data: { confirm: "Are you sure? Deleting client cannot be undone." } do %>
-        Delete client
-      <% end %>
-    </div>
+    <%= render @client %>
   </div>
 </div>
 
-<% if @episodes %>
-  <% @episodes.each do |episode| %>
-    <div class='row'>
-      <div class='col s12'>
-        <div class='card-panel'>
-          <p>Respondent: <%= if_client(episode.respondent, :fullname) %></p>
-          <p>Date of birth: <%= if_client(episode.respondent, :mmddyyyy) %></p>
-          <p>Gender: <%= if_client(episode.respondent, :gender) %></p>
-          <p>Relationship:</p>
-          <% episode.relationship.each do |type| %>
-            <li><%= type %></li>
-          <% end %>
-          <p>Victimization:</p>
-          <% episode.victimization.each do |type| %>
-            <li><%= type %></li>
-          <% end %>
-          <p>Respondent arrest: <%= episode.arrest %></p>
-          <p>Status: <%= episode.open %></p>
-        </div>
-      </div>
-    </div>
-  <% end %>
-<% end %>
+<div class='row'>
+  <div class='col s12'>
+    <%= episodes_any %>
+  </div>
+</div>

@@ -8,8 +8,15 @@ module ClientsHelper
   end
 
   def if_client(client, attr)
-    unless client.nil?
-      episode.respondent.sent(attr)
+    client.send(attr) unless client.nil?
+  end
+
+  def episodes_any
+    if @episodes.present?
+      render @episodes
+    else
+      render 'episodes/no_episodes'
     end
   end
+
 end

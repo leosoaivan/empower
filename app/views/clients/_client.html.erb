@@ -1,0 +1,16 @@
+<div id='client-demographic' class='card-panel'>
+  <h2><%= @client.fullname %></h2>
+  <p>ID: <%= @client.id %></p>
+  <p>Date of birth: <%= @client.mmddyyyy %><p>
+  <p>Gender: <%= @client.gender %></p>
+  <p>Telephone: <%= @client.telephone %></p>
+  <%= link_to edit_client_path(@client),
+    id: "edit-client-button", 
+    class: "btn-flat orange" do %>
+    Edit client
+  <% end %>
+  <%= link_to client_path(@client), method: :delete, 
+    class: "btn-flat red", data: { confirm: "Are you sure? Deleting client cannot be undone." } do %>
+    Delete client
+  <% end %>
+</div>
