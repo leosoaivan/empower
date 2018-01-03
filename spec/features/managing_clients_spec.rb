@@ -10,7 +10,53 @@ feature 'Client management' do
   before :each do
     log_in user
   end
-  
+
+  describe "viewing a client" do
+    context "without episodes" do
+      before :each do
+        visit client_path(client)
+      end
+
+      it "displays their page" do
+        expect(current_path).to eql client_path(client)
+      end
+
+      it "displays their demographic info" do
+        expect(page).to have_css "#client-demographic"
+      end
+
+      it "displays a message indicating a lack of episodes" do
+        expect(page).to have_content "There are no episodes for this client"
+      end
+    end
+
+    context "with episodes" do
+      let (:respondent) { create(:client) }
+      let (:episode) {
+        client.petitioned_episodes.create(
+          attributes_for(:episode, respondent_id: respondent.id)
+        )
+      }
+
+      before :each do
+        episode
+        visit client_path(client)
+      end
+
+      it "displays their page" do
+        expect(current_path).to eql client_path(client)
+      end
+
+      it "displays their demographic info" do
+        expect(page).to have_css "#client-demographic"
+      end
+
+      it "displays their episodes" do
+        expect(page).to have_css ".card-panel__episode"
+      end
+    end
+  end
+    
   describe "editing a client" do
     before :each do
       search_for_client client.id
