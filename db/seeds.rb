@@ -11,8 +11,14 @@ user = User.create(
 )
 
 FactoryGirl.create_list(:client, 5)
-FactoryGirl.create(:client, id: 44558, lastname: 'Smith-Lee-Buckr')
+FactoryGirl.create(:client, id: 44558, lastname: 'Smith-Lee-Buckner')
 
 FactoryGirl.create(:episode, petitioner_id: '1', respondent_id: '2')
 FactoryGirl.create(:episode, petitioner_id: '1', respondent_id: '3')
 FactoryGirl.create(:episode, petitioner_id: '2', respondent_id: '1')
+
+episode = Episode.first
+
+5.times do
+  episode.contacts.create(body: Faker::HeyArnold.quote, user_id: user.id)
+end
