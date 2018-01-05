@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171108210721) do
+ActiveRecord::Schema.define(version: 20180105023305) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,16 @@ ActiveRecord::Schema.define(version: 20171108210721) do
     t.string "special_population"
     t.string "ethnicity"
     t.string "language"
+  end
+
+  create_table "contacts", force: :cascade do |t|
+    t.text "body"
+    t.bigint "user_id"
+    t.bigint "episode_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["episode_id"], name: "index_contacts_on_episode_id"
+    t.index ["user_id"], name: "index_contacts_on_user_id"
   end
 
   create_table "episodes", force: :cascade do |t|
@@ -56,4 +66,6 @@ ActiveRecord::Schema.define(version: 20171108210721) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "contacts", "episodes"
+  add_foreign_key "contacts", "users"
 end

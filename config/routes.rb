@@ -7,4 +7,7 @@ Rails.application.routes.draw do
 
   resources :users
   resources :clients
+  resources :episodes do
+    resources :contacts
+  end
 end

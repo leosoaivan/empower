@@ -4,4 +4,6 @@ class Episode < ApplicationRecord
 
   validates :relationship,  presence: true
   validates :victimization, presence: true
+
+  has_many :contacts
 end
