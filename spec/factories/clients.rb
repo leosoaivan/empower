@@ -6,7 +6,7 @@ FactoryGirl.define do
 
   factory :client_with_episodes, parent: :client do
     after(:create) do |client, evaluator|
-      create_list(:episode, 1, petitioner: client)
+      create_list(:episode, 2, petitioner: client)
     end
   end
 end
