@@ -3,7 +3,10 @@
     <a id='logo' href="#" class="brand-logo">Empower</a>
     <a id='hamburger' href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons show-on-small">menu</i></a>
     <ul class="right hide-on-med-and-down">
-      <li><a href="#">Home</a></li>
+      <li>
+        <%= link_to current_user do %>
+          <span>Home</span>
+        <% end %>
       <li>
         <%= link_to clients_path do %>
           <span>Find client</span>
@@ -19,10 +22,10 @@
     </ul>
     <ul id='slide-out' class="side-nav">
       <li class='side-nav__list-item'>
-        <a href="#">
+        <% link_to current_user do %>
           <i class='material-icons'>home</i>
           <span>Home</span>
-        </a>
+        <% end %>
       </li>
       <li class='side-nav__list-item'>
         <%= link_to clients_path do %>
