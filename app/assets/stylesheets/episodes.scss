@@ -1,0 +1,30 @@
+// Place all the styles related to the Episodes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+// Form
+#respondent-info {
+  display: grid;
+  height: 100%;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: auto;
+}
+
+#respondent-info-name {
+  grid-column: 1 / span 1;
+  grid-row: 1/ span 1;
+  width: 90%;
+  align-self: end;
+}
+
+#respondent-info-arrest {
+  grid-column: 2 / span 1;
+  grid-row: 1/ span 1;
+  width: 75%;
+  padding-bottom: 25px;
+  align-self: end;
+
+  label {
+    margin-right: 20px;
+  }
+}

@@ -13,4 +13,9 @@
     class: "btn-flat red", data: { confirm: "Are you sure? Deleting client cannot be undone." } do %>
     Delete client
   <% end %>
+  <%= link_to new_client_episode_path(@client),
+    id: "btn__new-client-episode", 
+    class: "btn-flat green" do %>
+    Create new episode
+  <% end %>
 </div>

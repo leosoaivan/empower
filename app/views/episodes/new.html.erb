@@ -1,0 +1,39 @@
+  <%= form_with model: [@petitioner, @episode], local: true do |f| %>
+    <div id="respondent-info" class="row">
+      <div id="respondent-info-name" class="input-field col s6">
+        <%= f.label :respondent, "Respondent" %>
+        <%= f.text_field :respondent %>
+      </div>
+  
+      <div id="respondent-info-arrest" class="col s6">
+        Arrested?
+          <%= f.radio_button :arrest, true, id: "episode_arrest_true" %>
+          <%= f.label "arrest_true", "Yes" %>
+          <%= f.radio_button :arrest, false, id: "episode_arrest_false" %>
+          <%= f.label "arrest_false", "No" %>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col s6">
+        <p>Relationship type:</p>
+        <% @relationships.each do |type| %>
+          <div>
+            <%= f.check_box "relationship", { id: "episode_relationship[#{type}]", multiple: true }, type, nil %>
+            <%= f.label "relationship[#{type}]", type %>
+          </div>
+        <% end %>
+      </div>
+    
+      <div class="col s6">
+        <p>Victimization type:</p>
+        <% @victimizations.each do |type| %>
+          <%= f.check_box "victimization", { id: "episode_victimization[#{type}]", multiple: true }, type, nil %>
+          <%= f.label "victimization_[#{type}]", type %><br />
+        <% end %>
+      </div>
+    </div>
+  
+    <%= f.submit "Create Episode" %>
+  <% end %>
+</div>
