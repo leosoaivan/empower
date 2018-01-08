@@ -3,7 +3,6 @@ require 'rails_helper'
 feature 'Client management' do
   let (:user)   { create(:user) }
   let (:client) { create(:client) }
-  let (:client_with_episodes) { create(:client_with_episodes) }
   let (:alert_danger) { ".flash__alert--danger" }
   let (:alert_success) { ".flash__alert--success" }
 
@@ -169,10 +168,12 @@ feature 'Client management' do
     end
 
     context "when the client has related episodes" do
+      let! (:episode) { create(:episode, petitioner_id: client.id) }
+      
       before :each do
-        visit client_path client_with_episodes
+        visit client_path(client)
         accept_confirm do
-          click_on "Delete"
+          click_on "Delete client"
         end
       end
 
@@ -180,8 +181,8 @@ feature 'Client management' do
         expect(page).to have_css alert_danger
       end
 
-      it "returns the client page" do
-        expect(current_path).to eql client_path client_with_episodes
+      it "returns a user to the client page" do
+        expect(current_path).to eql client_path(client)
       end
     end
   end
