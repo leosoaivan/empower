@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature "Creating contacts" do
+xfeature "Creating contacts" do
   let (:user) { create(:user) }
   let (:client) { create(:client_with_episodes) }
   let (:episode) { client.all_episodes.first }
