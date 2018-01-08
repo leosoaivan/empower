@@ -12,4 +12,10 @@
   <% end %>
   <p>Respondent arrest: <%= episode.arrest %></p>
   <p>Status: <%= episode.open %></p>
+  <%= link_to client_episode_path(@client, episode), 
+    method: :delete,
+    class: "btn__delete-client-episode",
+    data: { confirm: "This will delete the episode. Are you sure?" } do %>
+    <span>Delete episode</span>
+  <% end %>
 </div>

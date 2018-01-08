@@ -61,4 +61,27 @@ describe EpisodesController, type: :controller do
       end
     end
   end
+
+  describe "DELETE #destroy" do
+    let! (:episode) { create(:episode, petitioner_id: client.id) }
+
+    it "deletes an episode" do
+      expect{
+        delete :destroy,
+        params: {
+          client_id: client.id,
+          id: episode.id
+        }
+      }.to change(Episode, :count).by -1 
+    end
+
+    it "returns a redirect response" do
+      delete :destroy,
+      params: {
+        client_id: client.id,
+        id: episode.id
+      }
+      expect(response).to have_http_status(302)
+    end
+  end
 end

@@ -2,11 +2,13 @@ require 'rails_helper'
 
 feature "Managing episodes" do
   let (:client) { create(:client) }
-  let (:id) { "episode_relationship[Now or previously married]" }
 
+  before :each do
+    log_in create(:user)
+  end
+  
   describe "creating an episode" do
     before :each do
-      log_in create(:user)
       visit client_path(client)
       click_on "btn__new-client-episode"
     end
@@ -55,6 +57,25 @@ feature "Managing episodes" do
       xit "keeps the checkboxes active" do
         expect(page).to have_unchecked_field(id, visible: true)
       end
+    end
+  end
+
+  describe "deleting an episode", js: true do
+    let! (:episode) { create(:episode, petitioner_id: client.id) }
+    
+    before :each do
+      visit client_path(client)
+      accept_confirm do
+        click_on "Delete episode"
+      end
+    end
+    
+    it "flashes a successful message" do
+      expect(page).to have_css ".flash__alert--success"
+    end
+
+    it "redirects a user back to the client's page" do
+      expect(current_path).to eql client_path(client)
     end
   end
 end

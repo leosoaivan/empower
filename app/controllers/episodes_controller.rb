@@ -20,6 +20,14 @@ class EpisodesController < ApplicationController
     end
   end
 
+  def destroy
+    client = Client.find(params[:client_id])
+    episode = Episode.find(params[:id])
+    episode.destroy
+    flash[:success] = "The episode was successfully deleted."
+    redirect_to client_path(client)
+  end
+
   private
 
   def episode_params
