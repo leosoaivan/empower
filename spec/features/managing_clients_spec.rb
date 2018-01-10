@@ -21,24 +21,24 @@ feature 'Client management' do
       end
 
       it "displays their demographic info" do
-        expect(page).to have_css "#client-demographic"
+        expect(page).to have_selector(
+          "#client-demographic", text: client.firstname)
       end
 
       it "displays a message indicating a lack of episodes" do
-        expect(page).to have_content "There are no episodes for this client"
+        expect(page).to have_content "There are no episodes"
       end
     end
 
-    context "with episodes" do
+    context "with one or more episode" do
       let (:respondent) { create(:client) }
-      let (:episode) {
+      let! (:episode) {
         client.petitioned_episodes.create(
           attributes_for(:episode, respondent_id: respondent.id)
         )
       }
 
       before :each do
-        episode
         visit client_path(client)
       end
 
@@ -51,7 +51,12 @@ feature 'Client management' do
       end
 
       it "displays their episodes" do
-        expect(page).to have_css ".card-panel__episode"
+        expect(page).to have_selector(
+          ".card-panel__episode", text: respondent.firstname)
+      end
+
+      it "does not display a message indicating a lack of episodes" do
+        expect(page).to_not have_content "There are no episodes"
       end
     end
   end
@@ -165,6 +170,10 @@ feature 'Client management' do
       it "redirects back to the clients search page" do
         expect(current_path).to eql clients_path
       end
+
+      it "does not display the client" do
+        expect(page).to_not have_content(client.firstname)
+      end
     end
 
     context "when the client has related episodes" do
@@ -183,6 +192,10 @@ feature 'Client management' do
 
       it "returns a user to the client page" do
         expect(current_path).to eql client_path(client)
+      end
+
+      it "displays the client" do
+        expect(page).to have_content(client.firstname)
       end
     end
   end

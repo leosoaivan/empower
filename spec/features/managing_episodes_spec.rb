@@ -37,7 +37,8 @@ feature "Managing episodes" do
       end
 
       it "displays the new episode" do
-        expect(page).to have_css '.card-panel__episode'
+        expect(page).to have_selector(
+          ".card-panel__episode", text: "Now or previously married")
       end
     end
 
@@ -73,9 +74,13 @@ feature "Managing episodes" do
     it "flashes a successful message" do
       expect(page).to have_css ".flash__alert--success"
     end
-
+    
     it "redirects a user back to the client's page" do
       expect(current_path).to eql client_path(client)
+    end
+    
+    it "does not display the episode" do
+      expect(page).to have_content "There are no episodes for this client"
     end
   end
 end
