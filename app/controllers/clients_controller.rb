@@ -43,8 +43,8 @@ class ClientsController < ApplicationController
 
   def destroy
     if @client.all_episodes.present?
-      flash.now[:danger] = "This client has episodes, or is the respondent in other episodes. Client cannot be deleted."
-      render :show
+      flash[:danger] = "This client has episodes, or is the respondent in other episodes. Client cannot be deleted."
+      redirect_to client_path @client
     else
       @client.destroy
       flash[:success] = "Client successfully deleted."

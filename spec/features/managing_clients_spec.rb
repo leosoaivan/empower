@@ -197,6 +197,10 @@ feature 'Client management' do
       it "displays the client" do
         expect(page).to have_content(client.firstname)
       end
+
+      it "displays the episode" do
+        expect(page).to have_css ".card-panel__episode"
+      end
     end
   end
 end
