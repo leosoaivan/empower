@@ -1,17 +1,10 @@
 <div class='card-panel card-panel__episode'>
-  <p>Respondent: <%= if_client(episode.respondent, :fullname) %></p>
-  <p>Date of birth: <%= if_client(episode.respondent, :mmddyyyy) %></p>
-  <p>Gender: <%= if_client(episode.respondent, :gender) %></p>
-  <p>Relationship:</p>
-  <% episode.relationship.each do |type| %>
-    <li><%= type %></li>
+  <%= render "episodes/episode_data", local_assigns  %>
+
+  <%= link_to client_episode_path(@client, episode), 
+    class: "btn__get-client-episode" do %>
+    <span>View episode</span>
   <% end %>
-  <p>Victimization:</p>
-  <% episode.victimization.each do |type| %>
-    <li><%= type %></li>
-  <% end %>
-  <p>Respondent arrest: <%= episode.arrest %></p>
-  <p>Status: <%= episode.open %></p>
   <%= link_to client_episode_path(@client, episode), 
     method: :delete,
     class: "btn__delete-client-episode",

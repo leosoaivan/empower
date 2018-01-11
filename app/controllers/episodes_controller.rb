@@ -20,6 +20,12 @@ class EpisodesController < ApplicationController
     end
   end
 
+  def show
+    @episode = Episode.find(params[:id])
+    @client = @episode.petitioner
+    @contacts = @episode.contacts
+  end
+
   def destroy
     client = Client.find(params[:client_id])
     episode = Episode.find(params[:id])

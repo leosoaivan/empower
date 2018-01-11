@@ -1,5 +1,7 @@
-<%= form_with model: @contact, local: true do |f| %>
-  <%= f.label :body %>
-  <%= f.text_field :body %>
-  <%= form.submit "Create" %>
+<%= form_with model: [@petitioner, @episode, @contact], local: true do |f| %>
+  <div class="input-field">
+    <%= f.label :body %>
+    <%= f.text_field :body, id: "contact_body" %>
+  </div>
+  <%= f.submit %>
 <% end %>
