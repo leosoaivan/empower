@@ -2,6 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+$tangy-pink: rgba(238, 110, 115, 1);
+$outer-space: rgba(73, 88, 103, 1);
+$outer-space-light: rgba(133, 154, 180, 1);
+$ucla-blue: #113a66;
+$pastel-blue: rgba(189, 213, 234, 1);
+$platinum: rgba(232, 232, 232, 1);
+
 // Form
 #respondent-info {
   display: grid;
@@ -26,5 +33,15 @@
 
   label {
     margin-right: 20px;
+  }
+}
+
+// Partial
+.episode-card {
+  .card-content__info-field {
+    font-weight: bold;
+  }
+  .card-action {
+    background-color: $ucla-blue;
   }
 }

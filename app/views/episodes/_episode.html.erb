@@ -1,14 +1,17 @@
-<div class='card-panel card-panel__episode'>
-  <%= render "episodes/episode_data", local_assigns  %>
-
-  <%= link_to client_episode_path(@client, episode), 
-    class: "btn__get-client-episode" do %>
-    <span>View episode</span>
-  <% end %>
-  <%= link_to client_episode_path(@client, episode), 
-    method: :delete,
-    class: "btn__delete-client-episode",
-    data: { confirm: "This will delete the episode. Are you sure?" } do %>
-    <span>Delete episode</span>
-  <% end %>
+<div class='card episode-card'>
+  <div class='card-content'>
+    <%= render "episodes/episode_data", local_assigns  %>
+  </div>
+  <div class='card-action'>
+    <%= link_to client_episode_path(@client, episode), 
+      class: "btn__get-client-episode" do %>
+      <span>View episode</span>
+    <% end %>
+    <%= link_to client_episode_path(@client, episode), 
+      method: :delete,
+      class: "btn__delete-client-episode",
+      data: { confirm: "This will delete the episode. Are you sure?" } do %>
+      <span>Delete episode</span>
+    <% end %>
+  </div>
 </div>

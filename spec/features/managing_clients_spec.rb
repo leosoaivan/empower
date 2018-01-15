@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'Client management' do
   let (:user)   { create(:user) }
-  let (:client) { create(:client) }
+  let (:client) { create(:client, firstname: "Jack") }
   let (:alert_danger) { ".flash__alert--danger" }
   let (:alert_success) { ".flash__alert--success" }
 
@@ -21,8 +21,9 @@ feature 'Client management' do
       end
 
       it "displays their demographic info" do
-        expect(page).to have_selector(
-          "#client-demographic", text: client.firstname)
+        within "#client-card__info" do
+          expect(page).not_to have_content(/client.firstname/)
+        end
       end
 
       it "displays a message indicating a lack of episodes" do
@@ -50,18 +51,19 @@ feature 'Client management' do
       end
 
       it "displays their demographic info" do
-        expect(page).to have_css "#client-demographic"
+        expect(page).to have_css "#client-card__info"
       end
 
       it "displays episodes where they are the petitioner" do
         expect(page).to have_selector(
-          ".card-panel__episode", text: "Respondent:")
+          ".card.episode-card", text: "Respondent:")
       end
 
       it "does not display episodes where they are the respondent" do
-        expect(page).not_to have_selector(
-          ".card-panel__episode", text: client.firstname)
-      end
+        within "#episodes-container" do
+          expect(page).not_to have_content(/jack/i)
+        end
+      end          
 
       it "does not display a message indicating a lack of episodes" do
         expect(page).not_to have_content "There are no episodes"
@@ -95,7 +97,7 @@ feature 'Client management' do
       end
 
       it "displays the updated attributes" do
-        expect(page).to have_content "Jack Black"
+        expect(page).to have_content(/jack black/i)
       end
     end
 
@@ -141,7 +143,7 @@ feature 'Client management' do
       end
 
       it "displays a client's attributes" do
-        expect(page).to have_content "Joe Black"
+        expect(page).to have_content(/Joe Black/i)
       end
     end
 
@@ -203,11 +205,11 @@ feature 'Client management' do
       end
 
       it "displays the client" do
-        expect(page).to have_content(client.firstname)
+        expect(page).to have_content(/jack/i)
       end
 
       it "displays the episode" do
-        expect(page).to have_css ".card-panel__episode"
+        expect(page).to have_css ".episode-card"
       end
     end
   end

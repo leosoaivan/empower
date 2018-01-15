@@ -1,3 +1,6 @@
 <% @contacts.each do |contact| %>
-  <p><%= contact.body %></p>
+  <tr>
+    <td><%= contact.created_at %></td>
+    <td><%= contact.body %></td>
+  </tr>
 <% end %>

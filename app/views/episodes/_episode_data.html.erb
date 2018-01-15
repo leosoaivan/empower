@@ -1,13 +1,31 @@
-<p>Respondent: <%= if_client(episode.respondent, :fullname) %></p>
-<p>Date of birth: <%= if_client(episode.respondent, :mmddyyyy) %></p>
-<p>Gender: <%= if_client(episode.respondent, :gender) %></p>
-<p>Relationship:</p>
+<p>
+  <span class='card-content__info-field'>Respondent:</span>
+  <%= if_client(episode.respondent, :fullname) %>
+</p>
+<p>
+  <span class='card-content__info-field'>Date of birth:</span>
+  <%= if_client(episode.respondent, :mmddyyyy) %>
+  </p>
+<p>
+  <span class='card-content__info-field'>Gender:</span>
+  <%= if_client(episode.respondent, :gender) %>
+</p>
+
+<span class='card-content__info-field'>Relationship:</span>
 <% episode.relationship.each do |type| %>
-  <li><%= type %></li>
+  <p><%= type %></p>
 <% end %>
-<p>Victimization:</p>
+
+<span class='card-content__info-field'>Victimization:</span>
 <% episode.victimization.each do |type| %>
-  <li><%= type %></li>
+  <p><%= type %></p>
 <% end %>
-<p>Respondent arrest: <%= episode.arrest %></p>
-<p>Status: <%= episode.open %></p>
+
+<p>
+  <span class='card-content__info-field'>Respondent arrest:</span>
+  <%= episode.arrest %>
+</p>
+<p>
+  <span class='card-content__info-field'>Status:</span>
+  <%= episode.open %>
+</p>

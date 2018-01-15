@@ -1,9 +1,18 @@
 <h2><%= @client.fullname %></h2>
-<div class='card-panel card-panel__episode'>
-  <%= render partial: 'episode_data', locals: { episode: @episode } %>
+<div class='card episode-card'>
+  <div class='card-content'>
+    <%= render partial: 'episode_data', locals: { episode: @episode } %>
+  </div>
 
-  <%=link_to new_client_episode_contact_path(@client, @episode) do %>
-    Create contact
-  <% end %>
+  <div class='card-action'>
+    <%=link_to new_client_episode_contact_path(@client, @episode) do %>
+      Create contact
+    <% end %>
+  </div>
 </div>
-<%= render @contacts %>
+
+<div class='card-panel'>
+  <table id='contacts'>
+    <%= render @contacts %>
+  </table>
+</div>

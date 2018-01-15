@@ -2,6 +2,12 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+$tangy-pink: rgba(238, 110, 115, 1);
+$outer-space: rgba(73, 88, 103, 1);
+$ucla-blue: rgba(87, 115, 153, 1);
+$pastel-blue: rgba(189, 213, 234, 1);
+$platinum: rgba(247, 247, 255, 1);
+
 // index
 .search-form {
   .row {
@@ -34,10 +40,14 @@
 }
 
 //show
-#client-demographic {
-  line-height: 1.5em;
+#client-card.card {
+  background-color: $outer-space;
 
-  h2 {
-    margin-bottom: 10px;
+  .card-title {
+    font-weight: bold;
+  }
+
+  .client-card__info-field {
+    font-weight: bold;
   }
 }

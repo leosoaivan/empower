@@ -38,7 +38,7 @@ feature "Managing episodes" do
 
       it "displays the new episode" do
         expect(page).to have_selector(
-          ".card-panel__episode", text: "Now or previously married")
+          ".episode-card", text: "Now or previously married")
       end
     end
 
