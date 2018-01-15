@@ -31,10 +31,13 @@ feature 'Client management' do
     end
 
     context "with one or more episode" do
-      let (:respondent) { create(:client) }
-      let! (:episode) {
-        client.petitioned_episodes.create(
-          attributes_for(:episode, respondent_id: respondent.id)
+      let (:petitioner) { create(:client) }
+      let! (:episode_1) { create(:episode, petitioner_id: client.id) }
+      let! (:episode_2) { 
+        create(
+          :episode,
+          petitioner_id: petitioner.id,
+          respondent_id: client.id
         )
       }
 
@@ -50,13 +53,18 @@ feature 'Client management' do
         expect(page).to have_css "#client-demographic"
       end
 
-      it "displays their episodes" do
+      it "displays episodes where they are the petitioner" do
         expect(page).to have_selector(
-          ".card-panel__episode", text: respondent.firstname)
+          ".card-panel__episode", text: "Respondent:")
+      end
+
+      it "does not display episodes where they are the respondent" do
+        expect(page).not_to have_selector(
+          ".card-panel__episode", text: client.firstname)
       end
 
       it "does not display a message indicating a lack of episodes" do
-        expect(page).to_not have_content "There are no episodes"
+        expect(page).not_to have_content "There are no episodes"
       end
     end
   end

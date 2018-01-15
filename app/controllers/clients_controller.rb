@@ -25,7 +25,7 @@ class ClientsController < ApplicationController
   end
 
   def show
-    @episodes = @client.all_episodes.includes(:respondent)
+    @episodes = @client.petitioned_episodes.includes(:respondent)
   end
 
   def edit
