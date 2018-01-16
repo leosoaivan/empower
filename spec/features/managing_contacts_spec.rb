@@ -4,6 +4,14 @@ feature "Contacts management" do
   let (:user) { create(:user) }
   let (:client) { create(:client) }
   let! (:episode) { create(:episode, petitioner_id: client.id) }
+  let! (:contact) { 
+    create(
+      :contact, 
+      episode_id: episode.id, 
+      user_id: user.id,
+      body: "This is a new contact."
+    )
+  }
   let (:alert_danger) { ".flash__alert--danger" }
   let (:alert_success) { ".flash__alert--success" }
   
@@ -54,6 +62,26 @@ feature "Contacts management" do
       it "returns the form" do
         expect(page).to have_css "form"
       end
+    end
+  end
+
+  describe "deleting a contact", js: true do
+    before :each do
+      accept_confirm do
+        click_on "Delete contact"
+      end
+    end
+
+    it "flashes a successful message" do
+      expect(page).to have_css(alert_success)
+    end
+
+    it "redirects back to the episode page" do
+      expect(current_path).to eql client_episode_path(client, episode)
+    end
+
+    it "does not display the contact" do
+      expect(page).not_to have_content(contact.body)
     end
   end
 end

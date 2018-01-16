@@ -1,5 +1,5 @@
 class ContactsController < ApplicationController
-  before_action :set_parent_objects, only: [:new, :create]
+  before_action :set_parent_objects, only: [:new, :create, :destroy]
 
   def new
     @contact = Contact.new
@@ -15,6 +15,18 @@ class ContactsController < ApplicationController
       flash.now[:danger] = "There was an error. Please try again."
       @contact = Contact.new
       render :new
+    end
+  end
+
+  def destroy
+    contact = Contact.find(params[:id])
+
+    if contact.destroy
+      flash[:success] = "Contact successfully deleted."
+      redirect_to client_episode_path(@episode.petitioner, @episode)
+    else
+      flash.now[:danger] = "There was an error. Please try again."
+      redirect_to client_episode_path(@episode.petitioner, @episode)
     end
   end
 
