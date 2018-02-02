@@ -16,7 +16,7 @@
       <li><a href="#">Create Interview</a></li>
       <li>
         <%= link_to logout_path, method: :delete do %>
-          <span>Log Off</span>
+          <span>Log Off [ <%=current_user.username%> ]</span>
         <% end %>
       </li>
     </ul>
@@ -48,7 +48,7 @@
       <li class='side-nav__list-item'>
         <%= link_to logout_path, method: :delete do %>
           <i class='material-icons'>exit_to_app</i>
-          <span>Log Off</span>
+          <span>Log Off <%=current_user.name%></span>
         <% end %>
       </li>
     </ul>

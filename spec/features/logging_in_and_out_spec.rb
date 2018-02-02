@@ -32,6 +32,14 @@ feature 'Login management' do
         log_in user
         expect(current_path).to eq user_path(user)
       end
+
+      it "displays a user's name in the navbar" do
+        visit root_path
+        log_in user
+        within "nav" do
+          expect(page).to have_content(user.name)
+        end
+      end
     end
 
     context "with incorrect credentials" do
