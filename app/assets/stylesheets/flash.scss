@@ -1,18 +1,21 @@
 @import "materialize";
 
+$red-lighten-4: #ffcdd2;
+$lighten-green-4: #c8e6c9;
+
 @mixin flash-alert {
   padding: 10px;
   text-align: center;
 }
 
-.flash__alert--danger {
-  @extend .red.lighten-4;
+div.flash__alert--danger {
   @include flash-alert;
+  background-color: $red-lighten-4;
   color: red;
 }
 
-.flash__alert--success {
-  @extend .green.lighten-4;
+div.flash__alert--success {
   @include flash-alert;
+  background-color: $lighten-green-4;
   color: green;
 }
