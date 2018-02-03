@@ -4,6 +4,20 @@ describe ContactsController, type: :controller do
   let (:user) { create(:user) }
   let (:petitioner) { create(:client) }
   let (:episode) { create(:episode, petitioner_id: petitioner.id) }
+  let (:valid_params) {
+    {
+      client_id: petitioner.id, 
+      episode_id: episode.id,
+      contact: attributes_for(:contact)
+    }
+  }
+  let (:invalid_params) {
+    {
+      client_id: petitioner.id,
+      episode_id: episode.id,
+      contact: attributes_for(:contact, body: "")
+    }
+  }
 
   before :each do
     login user
@@ -11,35 +25,17 @@ describe ContactsController, type: :controller do
 
   describe "GET #new" do
     it "returns a successful response" do
-      get :new, 
-      params: {
-        client_id: petitioner.id,
-        episode_id: episode.id }
+      get :new, params: { client_id: petitioner.id, episode_id: episode.id }
       expect(response).to have_http_status(200)
     end
   end
 
   describe "POST #create" do
-    let (:valid_params) {
-      {
-        client_id: petitioner.id,
-        episode_id: episode.id,
-        contact: { body: "This is a contact body." }
-      }
-    }
-    let (:invalid_params) {
-      {
-        client_id: petitioner.id,
-        episode_id: episode.id,
-        contact: { body: "" }
-      }
-    }
-
     context "with valid params" do
       it "creates a new contact" do
-        expect{
-          post :create,
-          params: valid_params
+        expect{ 
+          post :create, 
+          params: valid_params 
         }.to change(Contact, :count).by 1
       end
 

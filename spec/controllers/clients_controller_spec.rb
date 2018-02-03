@@ -2,8 +2,8 @@ require 'rails_helper'
 
 describe ClientsController, type: :controller do
   let (:client) { create(:client) }
-  let (:valid_params)   { { client: { firstname: "First", lastname: "Last" } } }
-  let (:invalid_params) { { client: { firstname: "First", lastname: "" } } }
+  let (:valid_params) { { client: attributes_for(:client) } } 
+  let (:invalid_params) { { client: attributes_for(:client, lastname: "") } }
 
   before :each do
     login create(:user)
@@ -85,7 +85,6 @@ describe ClientsController, type: :controller do
 
   describe "DELETE #destroy" do
     let! (:petitioner) { create(:client) }
-    let (:respondent) { create(:client) }
 
     context "with no related episodes" do
       it "deletes a client" do
@@ -102,10 +101,7 @@ describe ClientsController, type: :controller do
 
     context "with related episodes" do
       before :each do
-        create(:episode,
-          petitioner_id: petitioner.id,
-          respondent_id: respondent.id
-        )
+        create(:episode, petitioner_id: petitioner.id)
       end
 
       it "does not delete a client" do

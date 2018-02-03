@@ -5,19 +5,13 @@ describe EpisodesController, type: :controller do
   let (:valid_params) { 
     {
       client_id: client.id,
-      episode: {
-        relationship: ["Now or previously married"],
-        victimization: ["Intimate partner violence"]
-      }
+      episode: attributes_for(:episode)
     }
   }
   let (:invalid_params) { 
     {
       client_id: client.id,
-      episode: {
-        relationship: nil,
-        victimization: ["Intimate partner violence"]
-      }
+      episode: attributes_for(:episode, relationship: nil)
     }
   }
 
