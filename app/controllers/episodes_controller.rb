@@ -22,7 +22,7 @@ class EpisodesController < ApplicationController
   end
 
   def show
-    @client = @episode.petitioner
+    @client = ClientDecorator.new(@episode.petitioner)
     @contacts = @episode.contacts
   end
 

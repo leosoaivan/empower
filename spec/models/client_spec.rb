@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Client, type: :model do
-  let (:client) { create(:client) }
+  let (:client) { build_stubbed(:client) }
 
   describe "a valid client" do
     it "must have a firstname" do
@@ -29,13 +29,6 @@ RSpec.describe Client, type: :model do
     it "returns a client's DOB in mm/dd/yyyy format" do
       client = create(:client, dob: Date.new(2017, 11, 3))
       expect(client.mmddyyyy).to eq('11/03/2017')
-    end
-  end
-
-  describe '.fullname' do
-    it "returns a client's full name" do
-      client = create(:client, firstname: "Kevin", lastname: "Smith")
-      expect(client.fullname).to eq("Kevin Smith")
     end
   end
 end

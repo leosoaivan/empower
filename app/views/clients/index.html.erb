@@ -1,3 +1,5 @@
+<% provide(:title, "Client Search") %>
+
 <h1>Search</h1>
 
 <%= render partial: 'client_search_form' %>
@@ -5,7 +7,7 @@
 <div id='client-cards' class='row'>
   <% @clients.each do |client| %>
     <div class='col s12 m6'>
-      <%= render partial: 'client_card', locals: { client: client } %>
+      <%= render partial: 'client_search_card', locals: { client: client } %>
     </div>
   <% end %>
 </div>

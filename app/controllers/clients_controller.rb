@@ -18,10 +18,7 @@ class ClientsController < ApplicationController
   end
 
   def index
-    clients_with_matching_name = ClientsQuery.new(ClientsQuery.new
-      .firstname_like(params[:firstname]))
-      .lastname_like(params[:lastname])
-    @clients = ClientsQuery.new(clients_with_matching_name).id_like(params[:id])
+    @clients = decorated_clients
   end
 
   def show
@@ -54,11 +51,26 @@ class ClientsController < ApplicationController
 
   private
 
+  def client
+    Client.find(params[:id])
+  end
+
   def find_client
-    @client = Client.find(params[:id])
+    @client = ClientDecorator.new(client)
   end
 
   def client_params
     params.require(:client).permit(:firstname, :lastname, :dob, :telephone)
+  end
+
+  def queried_clients
+    clients_with_matching_name = ClientsQuery.new(ClientsQuery.new
+      .firstname_like(params[:firstname]))
+      .lastname_like(params[:lastname])
+    @clients = ClientsQuery.new(clients_with_matching_name).id_like(params[:id])
+  end
+
+  def decorated_clients
+    queried_clients.map { |client| ClientDecorator.new(client) }
   end
 end

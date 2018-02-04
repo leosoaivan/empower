@@ -14,8 +14,4 @@ class Client < ApplicationRecord
   def mmddyyyy
     dob.strftime("%m/%d/%Y") unless dob.nil?
   end
-
-  def fullname
-    "#{firstname} #{lastname}"
-  end
 end

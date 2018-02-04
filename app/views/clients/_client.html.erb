@@ -21,15 +21,15 @@
   <div id='client-card__links' class='card-action'>
     <%= link_to edit_client_path(@client),
       id: "edit-client-button" do %>
-      Edit client
+      <span>Edit client<span>
     <% end %>
     <%= link_to client_path(@client), method: :delete, 
       data: { confirm: "Are you sure? Deleting client cannot be undone." } do %>
-      Delete client
+      <span>Delete client</span>
     <% end %>
     <%= link_to new_client_episode_path(@client),
       id: "btn__new-client-episode" do %>
-      Create new episode
+      <span>Create new episode</span>
     <% end %>
   </div>
 </div>
