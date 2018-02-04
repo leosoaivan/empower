@@ -6,14 +6,12 @@ describe ContactsController, type: :controller do
   let (:episode) { create(:episode, petitioner_id: petitioner.id) }
   let (:valid_params) {
     {
-      client_id: petitioner.id, 
       episode_id: episode.id,
       contact: attributes_for(:contact)
     }
   }
   let (:invalid_params) {
     {
-      client_id: petitioner.id,
       episode_id: episode.id,
       contact: attributes_for(:contact, body: "")
     }
@@ -75,7 +73,6 @@ describe ContactsController, type: :controller do
       expect{
         delete :destroy,
         params: {
-          client_id: petitioner.id,
           episode_id: episode.id,
           id: contact.id
         }
@@ -85,7 +82,6 @@ describe ContactsController, type: :controller do
     it "returns a redirect response" do
       delete :destroy,
       params: {
-        client_id: petitioner.id,
         episode_id: episode.id,
         id: contact.id
       }

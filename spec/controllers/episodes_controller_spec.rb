@@ -30,7 +30,7 @@ describe EpisodesController, type: :controller do
     context "with valid params" do
       it "creates a new episode" do
         expect{
-          post :create,
+          post :create, 
           params: valid_params
         }.to change(Episode, :count).by 1
       end
@@ -62,19 +62,13 @@ describe EpisodesController, type: :controller do
     it "deletes an episode" do
       expect{
         delete :destroy,
-        params: {
-          client_id: client.id,
-          id: episode.id
-        }
+        params: { id: episode.id }
       }.to change(Episode, :count).by -1 
     end
 
     it "returns a redirect response" do
       delete :destroy,
-      params: {
-        client_id: client.id,
-        id: episode.id
-      }
+      params: { id: episode.id }
       expect(response).to have_http_status(302)
     end
   end

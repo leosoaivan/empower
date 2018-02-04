@@ -7,8 +7,8 @@ Rails.application.routes.draw do
 
   resources :users
   resources :clients do
-    resources :episodes do
-      resources :contacts
+    resources :episodes, shallow: true do
+      resources :contacts, shallow: true
     end
   end
-end
+ end

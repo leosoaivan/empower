@@ -3,11 +3,11 @@
     <%= render "episodes/episode_data", local_assigns  %>
   </div>
   <div class='card-action'>
-    <%= link_to client_episode_path(@client, episode), 
+    <%= link_to episode_path(episode), 
       class: "btn__get-client-episode" do %>
       <span>View episode</span>
     <% end %>
-    <%= link_to client_episode_path(@client, episode), 
+    <%= link_to episode_path(episode), 
       method: :delete,
       class: "btn__delete-client-episode",
       data: { confirm: "This will delete the episode. Are you sure?" } do %>

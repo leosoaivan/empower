@@ -1,6 +1,7 @@
 class EpisodesController < ApplicationController
   before_action :nil_respondent_if_blank, only: :create
   before_action :set_form_variables, only: [:new, :create]
+  before_action :set_episode, only: [:show, :destroy]
 
   def new
     @petitioner = Client.find(params[:client_id])
@@ -21,23 +22,24 @@ class EpisodesController < ApplicationController
   end
 
   def show
-    @episode = Episode.find(params[:id])
     @client = @episode.petitioner
     @contacts = @episode.contacts
   end
 
   def destroy
-    client = Client.find(params[:client_id])
-    episode = Episode.find(params[:id])
-    episode.destroy
+    @episode.destroy
     flash[:success] = "The episode was successfully deleted."
-    redirect_to client_path(client)
+    redirect_to client_path(@episode.petitioner)
   end
 
   private
 
   def episode_params
     @episode_params ||= params.require(:episode).permit(:respondent, :arrest, victimization:[], relationship:[])
+  end
+
+  def set_episode
+    @episode = Episode.find(params[:id])
   end
 
   def nil_respondent_if_blank

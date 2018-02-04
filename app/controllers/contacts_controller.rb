@@ -1,5 +1,5 @@
 class ContactsController < ApplicationController
-  before_action :set_parent_objects, only: [:new, :create, :destroy]
+  before_action :find_parent_episode, only: [:new, :create]
 
   def new
     @contact = Contact.new
@@ -10,7 +10,7 @@ class ContactsController < ApplicationController
 
     if contact.save
       flash[:success] = "Contact successfully created."
-      redirect_to client_episode_path(@episode.petitioner, @episode)
+      redirect_to episode_path(@episode)
     else
       flash.now[:danger] = "There was an error. Please try again."
       @contact = Contact.new
@@ -20,24 +20,23 @@ class ContactsController < ApplicationController
 
   def destroy
     contact = Contact.find(params[:id])
-
+    
     if contact.destroy
       flash[:success] = "Contact successfully deleted."
-      redirect_to client_episode_path(@episode.petitioner, @episode)
+      redirect_to episode_path(contact.episode)
     else
       flash.now[:danger] = "There was an error. Please try again."
-      redirect_to client_episode_path(@episode.petitioner, @episode)
+      redirect_to episode_path(contact.episode)
     end
   end
-
+  
   private
-
+  
   def contact_params
     params.require(:contact).permit(:body)
   end
-
-  def set_parent_objects
-    @petitioner = Client.find(params[:client_id])
+  
+  def find_parent_episode
     @episode = Episode.find(params[:episode_id])
   end
 end
