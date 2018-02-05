@@ -24,11 +24,4 @@ RSpec.describe Client, type: :model do
       expect(client.all_episodes).to include(episode1, episode2)
     end
   end
-
-  describe '.mmddyyy' do
-    it "returns a client's DOB in mm/dd/yyyy format" do
-      client = create(:client, dob: Date.new(2017, 11, 3))
-      expect(client.mmddyyyy).to eq('11/03/2017')
-    end
-  end
 end

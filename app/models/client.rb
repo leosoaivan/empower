@@ -10,8 +10,4 @@ class Client < ApplicationRecord
   def all_episodes
     self.petitioned_episodes.or(self.responded_episodes)
   end
-
-  def mmddyyyy
-    dob.strftime("%m/%d/%Y") unless dob.nil?
-  end
 end

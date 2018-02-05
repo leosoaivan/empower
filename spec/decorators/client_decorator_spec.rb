@@ -3,12 +3,22 @@ require 'rails_helper'
 RSpec.describe ClientDecorator do
   subject(:client_decorator) { ClientDecorator.new(client) }
   let(:client) { 
-    build_stubbed(:client, firstname: 'Jack', lastname: 'Black')
+    build_stubbed(
+      :client, 
+      firstname: 'Jack', 
+      lastname: 'Black',
+      dob: '1984-04-18')
   }
 
   describe '#fullname' do
-    it 'returns the full name of a client' do
+    it 'returns the client\'s full name' do
       expect(client_decorator.fullname).to eql 'Jack Black'
+    end
+  end
+
+  describe '#mmddyyyy' do
+    it 'returns the client\'s DOB in mm/dd/yyyy format' do
+      expect(client_decorator.mmddyyyy). to eql '04/18/1984'
     end
   end
 end
