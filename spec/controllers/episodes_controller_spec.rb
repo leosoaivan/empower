@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 describe EpisodesController, type: :controller do
+  let (:user) { create(:user) }
   let (:client) { create(:client) }
   let (:valid_params) { 
     {
@@ -16,7 +17,7 @@ describe EpisodesController, type: :controller do
   }
 
   before :each do
-    login create(:user)
+    login user
   end
 
   describe "GET #new" do

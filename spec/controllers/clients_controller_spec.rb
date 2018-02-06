@@ -1,12 +1,13 @@
 require 'rails_helper'
 
 describe ClientsController, type: :controller do
+  let (:user) { create(:user) }
   let (:client) { create(:client) }
-  let (:valid_params) { { client: attributes_for(:client) } } 
-  let (:invalid_params) { { client: attributes_for(:client, lastname: "") } }
+  let (:valid_params) { attributes_for(:client) } 
+  let (:invalid_params) { attributes_for(:client, lastname: "") }
 
   before :each do
-    login create(:user)
+    login user
   end
 
   describe "GET #index" do
@@ -28,12 +29,12 @@ describe ClientsController, type: :controller do
       it "creates a new client" do
         expect{
           post :create,
-          params: valid_params          
+          params: { client: valid_params }          
         }.to change(Client, :count).by 1
       end
       
       it "returns a redirect response" do
-        post :create, params: valid_params
+        post :create, params: { client: valid_params }
         expect(response).to have_http_status(302)
       end
     end
@@ -42,12 +43,12 @@ describe ClientsController, type: :controller do
       it "does not create a new client" do
         expect{
           post :create,
-          params: invalid_params          
+          params: { client: invalid_params }          
         }.to_not change(Client, :count)
       end
 
       it "returns a successful response" do
-        post :create, params: invalid_params
+        post :create, params: { client: invalid_params }
         expect(response).to have_http_status(200)
       end
     end
@@ -70,14 +71,14 @@ describe ClientsController, type: :controller do
   describe "PATCH #update" do
     context "with valid params" do
       it "returns a redirect response" do
-        put :update, params: { id: client.id, client: { firstname: "Leo" } }
+        put :update, params: { id: client.id, client: valid_params }
         expect(response).to have_http_status(302)
       end
     end
 
     context "with invalid params" do
       it "returns a successful response" do
-        put :update, params: { id: client.id, client: { firstname: "" } }
+        put :update, params: { id: client.id, client: invalid_params }
         expect(response).to have_http_status(200)
       end
     end
@@ -89,7 +90,8 @@ describe ClientsController, type: :controller do
     context "with no related episodes" do
       it "deletes a client" do
         expect{
-          delete :destroy, params: { id: petitioner.id }
+          delete :destroy, 
+          params: { id: petitioner.id }
         }.to change(Client, :count).by -1
       end
 
@@ -105,8 +107,9 @@ describe ClientsController, type: :controller do
       end
 
       it "does not delete a client" do
-        expect{
-          delete :destroy, params: { id: petitioner.id }
+        expect{ 
+          delete :destroy, 
+          params: { id: petitioner.id }
         }.to_not change(Client, :count)
       end
 

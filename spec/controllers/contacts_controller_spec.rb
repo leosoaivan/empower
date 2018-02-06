@@ -23,7 +23,7 @@ describe ContactsController, type: :controller do
 
   describe "GET #new" do
     it "returns a successful response" do
-      get :new, params: { client_id: petitioner.id, episode_id: episode.id }
+      get :new, params: { episode_id: episode.id }
       expect(response).to have_http_status(200)
     end
   end
