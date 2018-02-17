@@ -7,10 +7,6 @@ module ClientsHelper
     @client.send(attr).present? ? "active" : ""
   end
 
-  def return_attribute_if_respondent(respondent, attr)
-    respondent.send(attr) unless respondent.nil?
-  end
-
   def decorated_respondent(respondent, attr)
     ClientDecorator.new(respondent).send(attr) unless respondent.nil?
   end
