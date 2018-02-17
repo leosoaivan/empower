@@ -1,6 +1,6 @@
 <div class='card episode-card'>
   <div class='card-content'>
-    <%= render "episodes/episode_data", local_assigns  %>
+    <%= render "episodes/episode_data", episode: episode %>
   </div>
   <div class='card-action'>
     <%= link_to episode_path(episode), 

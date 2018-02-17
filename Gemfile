@@ -5,8 +5,6 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-ruby '~> 2.5.0'
-
 gem 'rails', '~> 5.1.4'
 gem 'pg', '~> 0.21'
 gem 'puma', '~> 3.7'
@@ -22,7 +20,7 @@ gem 'material_icons', '~> 2.2'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'rspec-rails', '~> 3.6', '>= 3.6.1'
+  gem 'rspec-rails', '~> 3.7', '>= 3.7.2'
   gem 'factory_girl_rails', '~> 4.5'
   gem 'faker', '~> 1.8', '>= 1.8.4'
   gem 'spring', '~> 2.0', '>= 2.0.2'

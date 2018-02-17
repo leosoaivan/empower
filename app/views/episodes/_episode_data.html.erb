@@ -1,14 +1,14 @@
 <p>
   <span class='card-content__info-field'>Respondent:</span>
-  <%#= if_client(episode.respondent, :fullname) %>
+  <%= decorated_respondent(episode.respondent, :fullname) %>
 </p>
 <p>
   <span class='card-content__info-field'>Date of birth:</span>
-  <%= if_client(episode.respondent, :mmddyyyy) %>
+  <%= decorated_respondent(episode.respondent, :mmddyyyy) %>
   </p>
 <p>
   <span class='card-content__info-field'>Gender:</span>
-  <%= if_client(episode.respondent, :gender) %>
+  <%= decorated_respondent(episode.respondent, :gender) %>
 </p>
 
 <span class='card-content__info-field'>Relationship:</span>
