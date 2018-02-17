@@ -20,7 +20,7 @@
         <% @relationships.each do |type| %>
           <div>
             <%= f.check_box "relationship", { id: "episode_relationship[#{type}]", multiple: true }, type, nil %>
-            <%= f.label "relationship[#{type}]", type %>
+            <%= f.label "relationship[#{type}]", type %><br/>
           </div>
         <% end %>
       </div>
@@ -29,7 +29,7 @@
         <p>Victimization type:</p>
         <% @victimizations.each do |type| %>
           <%= f.check_box "victimization", { id: "episode_victimization[#{type}]", multiple: true }, type, nil %>
-          <%= f.label "victimization_[#{type}]", type %><br />
+          <%= f.label "victimization[#{type}]", type %><br/>
         <% end %>
       </div>
     </div>

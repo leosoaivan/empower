@@ -7,7 +7,7 @@ feature 'Managing episodes' do
     log_in create(:user)
   end
   
-  describe 'creating an episode' do
+  describe 'creating an episode', js: true do
     before :each do
       visit client_path(petitioner)
       click_on 'btn__new-client-episode'
@@ -23,8 +23,8 @@ feature 'Managing episodes' do
 
     context 'with valid attributes' do
       before :each do
-        check 'episode_relationship[Now or previously married]'
-        check 'episode_victimization[Intimate partner violence]'
+        check 'Now or previously married', allow_label_click: true
+        check 'Intimate partner violence', allow_label_click: true
         click_on 'Create Episode'
       end
 

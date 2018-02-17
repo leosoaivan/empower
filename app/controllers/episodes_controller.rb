@@ -10,7 +10,8 @@ class EpisodesController < ApplicationController
 
   def create
     @petitioner = Client.find(params[:client_id])
-    @episode = @petitioner.petitioned_episodes.build(episode_params.merge(params[:episode][:respondent]))
+    @episode = @petitioner.petitioned_episodes.build(episode_params)
+    # .merge(params[:episode][:respondent]))
     
     if @episode.save
       flash[:success] = "Episode successfully created"
@@ -35,7 +36,7 @@ class EpisodesController < ApplicationController
   private
 
   def episode_params
-    @episode_params ||= params.require(:episode).permit(:respondent, :arrest, victimization:[], relationship:[])
+    @episode_params ||= params.require(:episode).permit(:arrest, victimization:[], relationship:[])
   end
 
   def set_episode
