@@ -1,3 +1,5 @@
+  <% provide :title, "Create Episode"%>
+
   <%= form_with model: [@petitioner, @episode], local: true do |f| %>
     <div id="respondent-info" class="row">
       <%= f.fields_for :respondent, Client.new do |respondent_f| %>
