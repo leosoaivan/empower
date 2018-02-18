@@ -7,27 +7,29 @@ feature 'Managing episodes' do
     log_in create(:user)
   end
   
-  describe 'creating an episode', js: true do
+  describe 'creating an episode' do
     before :each do
       visit client_path(petitioner)
-      click_on 'btn__new-client-episode'
+      click_on 'Create new episode'
+    end
+
+    it 'directs to the episode creation page' do
+      expect(current_path).to eql new_client_episode_path(petitioner)
     end
 
     it 'displays a form' do
       expect(page).to have_css 'form'
     end
 
-    xit 'displays active unchecked fields' do
-      expect(page).to have_unchecked_field(id, visible: true)
-    end
-
-    context 'with valid attributes' do
+    context 'with a respondent and valid attributes' do
       before :each do
+        fill_in 'respondent_firstname', with: 'Jack'
+        fill_in 'respondent_lastname', with: 'Black'
         check 'Now or previously married', allow_label_click: true
         check 'Intimate partner violence', allow_label_click: true
         click_on 'Create Episode'
       end
-
+      
       it 'flashes a successful message' do
         expect(page).to have_css '.flash__alert--success'
       end
@@ -39,6 +41,30 @@ feature 'Managing episodes' do
       it 'displays the new episode' do
         expect(page).to have_selector(
           '.episode-card', text: 'Now or previously married')
+      end
+
+      it 'displays the respondent\'s information' do
+        within '.episode-card' do
+          expect(page).to have_content 'Jack Black'
+        end
+      end
+    end
+
+    context 'with no respondent and valid attributes' do
+      before :each do
+        check 'Now or previously married', allow_label_click: true
+        check 'Intimate partner violence', allow_label_click: true
+        click_on 'Create Episode'
+      end
+
+      it 'flashes a successful message' do
+        expect(page).to have_css '.flash__alert--success'
+      end
+
+      it 'displays the respondent\'s information' do
+        within '.episode-card' do
+          expect(page).to have_content 'Respondent: '
+        end
       end
     end
 
@@ -53,10 +79,6 @@ feature 'Managing episodes' do
 
       it 'returns the form' do
         expect(page).to have_css 'form'
-      end
-
-      xit 'keeps the checkboxes active' do
-        expect(page).to have_unchecked_field(id, visible: true)
       end
     end
   end

@@ -6,6 +6,12 @@ describe EpisodesController, type: :controller do
   let (:valid_params) { 
     {
       client_id: client.id,
+      episode: attributes_for(:episode), respondent_firstname: 'Jack', respondent_lastname: 'Black'
+    }
+  }
+  let (:valid_params_with_respondent) { 
+    {
+      client_id: client.id,
       episode: attributes_for(:episode)
     }
   }
@@ -34,6 +40,13 @@ describe EpisodesController, type: :controller do
           post :create, 
           params: valid_params
         }.to change(Episode, :count).by 1
+      end
+
+      it "creates a new client as a respondent" do
+        expect{
+          post :create,
+          params: valid_params_with_respondent
+        }.to change(Client, :count).by 1
       end
 
       it "returns a redirect response" do

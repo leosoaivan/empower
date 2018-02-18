@@ -1,11 +1,17 @@
   <%= form_with model: [@petitioner, @episode], local: true do |f| %>
     <div id="respondent-info" class="row">
-      <div id="respondent-info-name" class="input-field col s6">
-        <%= f.label :respondent, "Respondent" %>
-        <%= f.text_field :respondent %>
-      </div>
-  
-      <div id="respondent-info-arrest" class="col s6">
+      <%= f.fields_for :respondent, Client.new do |respondent_f| %>
+        <div class="input-field col s10">
+          <%= respondent_f.label :firstname, "Respondent's first name" %>
+          <%= respondent_f.text_field :firstname, id: 'respondent_firstname' %>
+        </div>        
+        <div class="input-field col s10">
+          <%= respondent_f.label :lastname, "Respondent's last name" %>
+          <%= respondent_f.text_field :lastname, id: 'respondent_lastname' %>
+        </div>
+      <% end %>
+
+      <div id="respondent-info-arrest" class="col">
         Arrested?
           <%= f.radio_button :arrest, true, id: "episode_arrest_true" %>
           <%= f.label "arrest_true", "Yes" %>
