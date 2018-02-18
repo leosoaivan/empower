@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  let (:user) { FactoryGirl.create(:user, name: "Triss Merigold") }
+  let (:user) { create(:user, name: "Triss Merigold") }
   
   describe "a valid Factory" do
     it "creates a username" do

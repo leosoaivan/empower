@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :episode do
     relationship ['dating/romantic/sexual','shared residence']
     victimization ['intimate partner violence']

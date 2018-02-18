@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :client, aliases: [:petitioner, :respondent] do
     firstname { Faker::Name.first_name }
     lastname { Faker::Name.last_name }

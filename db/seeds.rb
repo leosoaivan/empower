@@ -10,12 +10,12 @@ user = User.create(
   password_confirmation: "testing"
 )
 
-FactoryGirl.create_list(:client, 5)
-FactoryGirl.create(:client, id: 44558, lastname: 'Smith-Lee-Buckner')
+FactoryBot.create_list(:client, 5)
+FactoryBot.create(:client, id: 44558, lastname: 'Smith-Lee-Buckner')
 
-FactoryGirl.create(:episode, petitioner_id: '1', respondent_id: '2')
-FactoryGirl.create(:episode, petitioner_id: '1', respondent_id: '3')
-FactoryGirl.create(:episode, petitioner_id: '2', respondent_id: '1')
+FactoryBot.create(:episode, petitioner_id: '1', respondent_id: '2')
+FactoryBot.create(:episode, petitioner_id: '1', respondent_id: '3')
+FactoryBot.create(:episode, petitioner_id: '2', respondent_id: '1')
 
 episode = Episode.first
 

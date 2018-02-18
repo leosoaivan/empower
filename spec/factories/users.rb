@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :user do
     name { Faker::Witcher.character }
     username { (name[0] + name.split(" ").last).downcase }
