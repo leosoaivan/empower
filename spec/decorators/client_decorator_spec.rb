@@ -18,7 +18,7 @@ RSpec.describe ClientDecorator do
 
   describe '#mmddyyyy' do
     it 'returns the client\'s DOB in mm/dd/yyyy format' do
-      expect(client_decorator.mmddyyyy). to eql '04/18/1984'
+      expect(client_decorator.mmddyyyy).to eql '04/18/1984'
     end
   end
 end

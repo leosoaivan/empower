@@ -1,5 +1,5 @@
 <tr>
-  <td><%= contact.created_at %></td>
+  <td><%= contact.date_and_time %></td>
   <td><%= contact.body %></td>
   <td>
     <%= link_to "Delete contact", contact_path(contact), method: :delete, data: { confirm: "Are you sure you want to delete this contact?"} %>

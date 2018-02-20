@@ -23,7 +23,7 @@ class EpisodesController < ApplicationController
 
   def show
     @client = ClientDecorator.new(@episode.petitioner)
-    @contacts = @episode.contacts
+    @contacts = decorated_contacts
   end
 
   def destroy
@@ -68,5 +68,9 @@ class EpisodesController < ApplicationController
       "Child abuse",
       "No DV offense disclose"
     ]
+  end
+
+  def decorated_contacts
+    @episode.contacts.map { |contact| ContactDecorator.new(contact) }
   end
 end
