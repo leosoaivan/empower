@@ -1,6 +1,7 @@
 class Client < ApplicationRecord
   has_many :petitioned_episodes, class_name: 'Episode', foreign_key: 'petitioner_id'
   has_many :responded_episodes, class_name: 'Episode', foreign_key: 'respondent_id'
+
   has_many :respondents, through: :petitioned_episodes
   has_many :petitioners, through: :responded_episodes
 

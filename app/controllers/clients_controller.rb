@@ -22,7 +22,7 @@ class ClientsController < ApplicationController
   end
 
   def show
-    @episodes = @client.petitioned_episodes.includes(:respondent)
+    @episodes = @client.petitioned_episodes.includes(:respondent).desc_order
   end
 
   def edit
