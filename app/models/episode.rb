@@ -7,7 +7,7 @@ class Episode < ApplicationRecord
   validates :relationship,  presence: true
   validates :victimization, presence: true
 
-  has_many :contacts, -> { order(created_at: :desc) }
+  has_many :contacts, -> { order(created_at: :desc) }, dependent: :destroy
 
   scope :desc_order, -> { order(created_at: :desc) }
 end
