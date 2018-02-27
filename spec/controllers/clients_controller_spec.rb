@@ -71,14 +71,14 @@ describe ClientsController, type: :controller do
   describe "PATCH #update" do
     context "with valid params" do
       it "returns a redirect response" do
-        put :update, params: { id: client.id, client: valid_params }
+        patch :update, params: { id: client.id, client: valid_params }
         expect(response).to have_http_status(302)
       end
     end
 
     context "with invalid params" do
       it "returns a successful response" do
-        put :update, params: { id: client.id, client: invalid_params }
+        patch :update, params: { id: client.id, client: invalid_params }
         expect(response).to have_http_status(200)
       end
     end
