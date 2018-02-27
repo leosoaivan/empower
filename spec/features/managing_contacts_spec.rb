@@ -65,6 +65,46 @@ feature 'Contacts management' do
     end
   end
 
+  describe 'editing a contact' do
+    before :each do
+      click_on 'Edit contact'
+    end
+    
+    context 'with a valid body' do
+      before :each do
+        fill_in 'Body', with: 'This is an edited contact.'
+        click_on 'Edit Contact'
+      end
+
+      it 'displays a successful message' do
+        expect(page).to have_css alert_success
+      end
+
+      it 'redirects a user back to the episode' do
+        expect(current_path).to eql episode_path(episode)
+      end
+
+      it 'displays the newly added contact' do
+        expect(page).to have_content 'This is an edited contact.'
+      end
+    end
+
+    context 'with an invalid body' do
+      before :each do
+        fill_in 'Body', with: ''
+        click_on 'Edit Contact'
+      end
+
+      it 'displays a danger message' do
+        expect(page).to have_css alert_danger
+      end
+
+      it 'returns the edit form' do
+        expect(page).to have_css 'form'
+      end
+    end
+  end
+
   describe 'deleting a contact', js: true do
     before :each do
       accept_confirm do

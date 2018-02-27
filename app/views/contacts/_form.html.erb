@@ -1,0 +1,12 @@
+<%= form_with model: @contact, url: form_url(@contact), local: true do |f| %>
+  <div class="input-field">
+    <%= f.label :body, class: form_field_active?(@contact) %>
+    <%= f.text_field :body, id: "contact_body" %>
+  </div>
+  <%= button_tag class: 'btn' do %>
+    <span>
+      <%= form_submit_text(@contact) %>
+      <i class='material-icons right'>send</i>
+    <span>
+  <% end %>
+<% end %>

@@ -18,6 +18,22 @@ class ContactsController < ApplicationController
     end
   end
 
+  def edit
+    @contact = Contact.find(params[:id])
+  end
+
+  def update
+    contact = Contact.find(params[:id])
+    if contact.update_attributes(contact_params)
+      flash[:success] = "Contact successfully edited."
+      redirect_to episode_path(contact.episode)
+    else
+      flash.now[:danger] = "There was an error. Please try again."
+      @contact = Contact.find(params[:id])
+      render :edit
+    end
+  end
+  
   def destroy
     contact = Contact.find(params[:id])
     
