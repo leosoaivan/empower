@@ -107,8 +107,14 @@ feature 'Contacts management' do
 
   describe 'deleting a contact', js: true do
     before :each do
-      accept_confirm do
-        click_on 'Delete contact'
+      click_on 'Create contact'
+      fill_in 'Body', with: 'This is a contact body.'
+      click_on 'Create Contact'
+
+      within("tr#contact-#{contact.id}") do
+        accept_confirm do
+          click_on 'Delete contact'
+        end
       end
     end
 
@@ -116,8 +122,13 @@ feature 'Contacts management' do
       expect(page).to have_css alert_success
     end
 
-    it 'redirects back to the episode page' do
-      expect(current_path).to eql episode_path(episode)
+    # it 'flashes a message' do
+    #   save_and_open_page
+    #   expect(page).to have_content 'Contact successfully deleted.'
+    # end
+
+    it 'flashes only one message at a time' do
+      expect(page).not_to have_select('#flash', count: 2)
     end
 
     it 'does not display the contact' do

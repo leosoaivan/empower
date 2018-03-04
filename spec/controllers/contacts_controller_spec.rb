@@ -84,32 +84,32 @@ describe ContactsController, type: :controller do
     end
   end
 
-  describe "DELETE #destroy" do
-    let! (:contact) {
-      create(
-        :contact, 
-        user_id: user.id, 
-        episode_id: episode.id
-      )
-    }
+  # describe "DELETE #destroy" do
+  #   let! (:contact) {
+  #     create(
+  #       :contact, 
+  #       user_id: user.id, 
+  #       episode_id: episode.id
+  #     )
+  #   }
 
-    it "destroys a contact" do
-      expect{
-        delete :destroy,
-        params: {
-          episode_id: episode.id,
-          id: contact.id
-        }
-      }.to change(Contact, :count).by -1
-    end
+  #   it "destroys a contact" do
+  #     expect{
+  #       delete :destroy,
+  #       params: {
+  #         episode_id: episode.id,
+  #         id: contact.id
+  #       }
+  #     }.to change(Contact, :count).by -1
+  #   end
 
-    it "returns a redirect response" do
-      delete :destroy,
-      params: {
-        episode_id: episode.id,
-        id: contact.id
-      }
-      expect(response).to have_http_status(302)
-    end
-  end
+  #   it "returns a redirect response" do
+  #     delete :destroy,
+  #     params: {
+  #       episode_id: episode.id,
+  #       id: contact.id
+  #     }
+  #     expect(response).to have_http_status(302)
+  #   end
+  # end
 end

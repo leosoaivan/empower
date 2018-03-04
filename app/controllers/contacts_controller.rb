@@ -35,14 +35,21 @@ class ContactsController < ApplicationController
   end
   
   def destroy
-    contact = Contact.find(params[:id])
-    
-    if contact.destroy
-      flash[:success] = "Contact successfully deleted."
-      redirect_to episode_path(contact.episode)
-    else
-      flash.now[:danger] = "There was an error. Please try again."
-      redirect_to episode_path(contact.episode)
+    @contact = Contact.find(params[:id])
+
+    if @contact.destroy
+      respond_to do |format|
+        # format.html {
+        #   flash[:success] = "Contact successfully deleted."
+        #   redirect_to episode_path(contact.episode)
+        # }
+        format.js { flash.now[:success] = "Contact successfully deleted." }
+      # else
+      #   format.html {
+      #     flash.now[:danger] = "There was an error. Please try again."
+      #     redirect_to episode_path(contact.episode)
+      #   }
+      end
     end
   end
   
