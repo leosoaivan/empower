@@ -106,33 +106,38 @@ feature 'Contacts management' do
   end
 
   describe 'deleting a contact', js: true do
-    before :each do
-      click_on 'Create contact'
-      fill_in 'Body', with: 'This is a contact body.'
-      click_on 'Create Contact'
+    context 'with a flash already present' do
+      before :each do
+        click_on 'Create contact'
+        fill_in 'Body', with: 'This is a contact body.'
+        click_on 'Create Contact'
 
-      within("tr#contact-#{contact.id}") do
+        within("tr#contact-#{contact.id}") do
+          accept_confirm do
+            click_on 'Delete contact'
+          end
+        end
+      end
+
+      it 'flashes only one message at a time' do
+        expect(page).to have_selector('#flash', count: 1)
+      end
+    end
+
+    context 'regardless of flash presence' do
+      before :each do
         accept_confirm do
           click_on 'Delete contact'
         end
       end
-    end
 
-    it 'flashes a successful message' do
-      expect(page).to have_css alert_success
-    end
+      it 'flashes a successful message' do
+        expect(page).to have_content 'Contact successfully deleted.'
+      end
 
-    # it 'flashes a message' do
-    #   save_and_open_page
-    #   expect(page).to have_content 'Contact successfully deleted.'
-    # end
-
-    it 'flashes only one message at a time' do
-      expect(page).not_to have_select('#flash', count: 2)
-    end
-
-    it 'does not display the contact' do
-      expect(page).not_to have_content contact.body
+      it 'does not display the contact' do
+        expect(page).not_to have_content contact.body
+      end
     end
   end
 end

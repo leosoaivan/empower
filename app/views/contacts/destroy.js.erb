@@ -1,27 +1,29 @@
-const container = document.querySelector(".container")
+"use strict";
+
+const container = document.querySelector(".container");
 
 function removeRow() {
-  const contactRow = document.querySelector("tr#contact-<%= @contact.id %>")
-  contactRow.parentNode.removeChild(contactRow)
+  const contactRow = document.querySelector("tr#contact-<%= contact.id %>");
+  contactRow.parentNode.removeChild(contactRow);
 }
 
 function removeOldFlash(flash) {
   if (document.contains(flash)) {
-    container.removeChild(flash)
+    container.removeChild(flash);
   }
 }
 
 function insertNewFlash(flash) {
-  container.insertAdjacentHTML('afterbegin', flash)
+  container.insertAdjacentHTML('afterbegin', flash);
 }
 
 function editFlash() {
-  const oldFlash = document.querySelector("#flash")
-  const newFlash = "<%= j render partial: 'shared/flash' %>"
+  const oldFlash = document.querySelector("#flash");
+  const newFlash = "<%= j render partial: 'shared/flash' %>";
   
-  // removeOldFlash(oldFlash)
-  insertNewFlash(newFlash)
+  removeOldFlash(oldFlash);
+  insertNewFlash(newFlash);
 }
 
-removeRow()
-editFlash()
+removeRow();
+editFlash();
