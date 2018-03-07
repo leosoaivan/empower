@@ -46,6 +46,7 @@ group :test do
   gem 'database_cleaner', '~> 1.6', '>= 1.6.1'
   gem 'guard-rspec', '~> 4.7', '>= 4.7.3', require: false
   gem 'chromedriver-helper', '~> 1.1'
+  gem 'shoulda-matchers', '~> 3.1', '>= 3.1.2'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
