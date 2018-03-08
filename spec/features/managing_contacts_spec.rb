@@ -30,9 +30,13 @@ feature 'Contacts management' do
       expect(page).to have_css 'form'
     end
     
-    context 'with a valid body' do
+    context 'with valid input' do
       before :each do
         fill_in 'Body', with: 'This is a contact body.'
+        within 'div#all_services' do
+          click_on '#crisis'
+          check 'provided hotel'
+        end
         click_on 'Create Contact'
       end
 
@@ -46,6 +50,10 @@ feature 'Contacts management' do
 
       it 'displays the newly added contact' do
         expect(page).to have_content 'This is a contact body.'
+      end
+
+      it 'displays the selected services' do
+        expect(page).to have_content 'provided hotel'
       end
     end
 

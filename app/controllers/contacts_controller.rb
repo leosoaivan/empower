@@ -3,6 +3,7 @@ class ContactsController < ApplicationController
 
   def new
     @contact = Contact.new
+    @all_service_types = ServiceType.all.includes(:services)
   end
 
   def create

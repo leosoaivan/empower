@@ -1,8 +1,35 @@
 <%= form_with model: @contact, url: form_url(@contact), local: true do |f| %>
-  <div class="input-field">
-    <%= f.label :body, class: form_field_active?(@contact) %>
-    <%= f.text_field :body, id: "contact_body" %>
-  </div>
+    <div class="row">
+      <div class="col s6">
+        <div class="input-field">
+          <% f.label :body, class: form_field_active?(@contact) %>
+          <%= f.text_area :body, id: "contact_body", placeholder: 'Body' %>
+        </div>
+      </div>
+
+      <div id="all_services" class="col s6">
+        <% @all_service_types.each do |service_type| %>
+          <div>
+            <ul class='collapsible' data-collapsible='accordion'>
+              <li>
+                <div class='collapsible-header'>
+                  <%= service_type.name %>
+                </div>
+                <!--
+                <div class='collapsible-body'>
+                  <% service_type.services.each do |service| %>
+                    <%= f.check_box , { id: 'contact_services[#{service}]', multiple: true }, service, nil %>
+                    <%= f.label 'services[#{service}]', service %><br />
+                  <% end %>
+                </div>
+                -->
+              </li>
+            </ul>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  
   <%= button_tag class: 'btn' do %>
     <span>
       <%= form_submit_text(@contact) %>
