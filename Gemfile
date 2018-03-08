@@ -45,7 +45,7 @@ group :test do
   gem 'launchy', '~> 2.4', '>= 2.4.3'
   gem 'database_cleaner', '~> 1.6', '>= 1.6.1'
   gem 'guard-rspec', '~> 4.7', '>= 4.7.3', require: false
-  gem 'chromedriver-helper', '~> 1.1'
+  gem 'chromedriver-helper', '~> 1.2.0'
   gem 'shoulda-matchers', '~> 3.1', '>= 3.1.2'
 end
 
