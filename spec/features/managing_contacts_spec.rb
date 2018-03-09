@@ -12,6 +12,9 @@ feature 'Contacts management' do
       body: 'This is a new contact.'
     )
   }
+  let! (:service_type) { create(:service_type, name: 'crisis') }
+  let! (:service) { create(:service, name: 'provided shelter', service_type: service_type) }
+  
   let (:alert_danger) { '.flash__alert--danger' }
   let (:alert_success) { '.flash__alert--success' }
   
@@ -34,8 +37,8 @@ feature 'Contacts management' do
       before :each do
         fill_in 'Body', with: 'This is a contact body.'
         within 'div#all_services' do
-          click_on '#crisis'
-          check 'provided hotel'
+          find('div', text: 'crisis').click
+          check service.name
         end
         click_on 'Create Contact'
       end
@@ -53,7 +56,7 @@ feature 'Contacts management' do
       end
 
       it 'displays the selected services' do
-        expect(page).to have_content 'provided hotel'
+        expect(page).to have_content service.name
       end
     end
 
