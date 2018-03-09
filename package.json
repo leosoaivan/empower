@@ -1,6 +1,7 @@
 {
   "name": "empower-package",
   "version": "0.0.1",
+  "license": "UNLICENSED",
   "dependencies": {
     "@rails/webpacker": "^3.3.0"
   },
