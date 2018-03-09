@@ -1,12 +1,15 @@
 class ContactsController < ApplicationController
-  before_action :find_parent_episode, only: [:new, :create]
+  before_action :set_parent_episode, only: [:new, :create]
+  before_action :set_service_types, only: [:new, :create, :edit, :update]
+  before_action :find_contact, only: [:new, :create, :edit, :update]
 
   def new
-    @contact = Contact.new
-    @service_types = ServiceType.all
+    # @contact = Contact.new
   end
 
   def create
+    # @contact = Contact.new
+
     contact = @episode.contacts.build(contact_params.merge(user: current_user))
     services = Service.where(name: contact_params[:services])
     contact.services << services
@@ -15,28 +18,24 @@ class ContactsController < ApplicationController
       flash[:success] = "Contact successfully created."
       redirect_to episode_path(@episode)
     else
-      flash.now[:danger] = "There was an error. Please try again."
-      @contact = Contact.new
-      @service_types = ServiceType.all
-      render :new
+      flash[:danger] = "There was an error. Please try again."
+      render :new, locals: { contact: @contact, service_types: @service_types }
     end
   end
 
   def edit
-    @contact = Contact.find(params[:id])
-    @service_types = ServiceType.all
+    # @contact = Contact.find(params[:id])
   end
 
   def update
-    contact = Contact.find(params[:id])
-    if contact.update_attributes(contact_params)
+    # @contact = Contact.find(params[:id])
+
+    if @contact.update_attributes(contact_params)
       flash[:success] = "Contact successfully edited."
-      redirect_to episode_path(contact.episode)
+      redirect_to episode_path(@contact.episode)
     else
       flash.now[:danger] = "There was an error. Please try again."
-      @contact = Contact.find(params[:id])
-      @service_types = ServiceType.all
-      render :edit
+      render :edit, locals: { contact: @contact, service_types: @service_types }
     end
   end
   
@@ -56,7 +55,15 @@ class ContactsController < ApplicationController
     params.require(:contact).permit(:body, service_ids:[])
   end
   
-  def find_parent_episode
+  def set_parent_episode
     @episode = Episode.find(params[:episode_id])
+  end
+
+  def find_contact
+    @contact = Contact.find_or_initialize_by(id: params[:id])
+  end
+
+  def set_service_types
+    @service_types = ServiceType.all
   end
 end
