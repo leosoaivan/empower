@@ -8,7 +8,6 @@ class ContactsController < ApplicationController
 
   def create
     @contact = @episode.contacts.build(contact_params)
-    # @contact.user = current_user
     @contact.services << Service.where(name: contact_params[:services])
 
     if @contact.save
