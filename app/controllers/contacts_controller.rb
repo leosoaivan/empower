@@ -17,12 +17,14 @@ class ContactsController < ApplicationController
     else
       flash.now[:danger] = "There was an error. Please try again."
       @contact = Contact.new
+      @service_types = ServiceType.all
       render :new
     end
   end
 
   def edit
     @contact = Contact.find(params[:id])
+    @service_types = ServiceType.all
   end
 
   def update
@@ -33,6 +35,7 @@ class ContactsController < ApplicationController
     else
       flash.now[:danger] = "There was an error. Please try again."
       @contact = Contact.find(params[:id])
+      @service_types = ServiceType.all
       render :edit
     end
   end

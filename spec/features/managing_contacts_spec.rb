@@ -9,7 +9,8 @@ feature 'Contacts management' do
       :contact, 
       episode_id: episode.id, 
       user_id: user.id,
-      body: 'This is a new contact.'
+      body: 'This is a new contact.',
+      services: [service]
     )
   }
   let! (:service_type) { create(:service_type, name: 'crisis') }
@@ -60,7 +61,7 @@ feature 'Contacts management' do
       end
     end
 
-    context 'with an invalid body' do
+    context 'with an invalid input' do
       before :each do
         fill_in 'Body', with: ''
         click_on 'Create Contact'

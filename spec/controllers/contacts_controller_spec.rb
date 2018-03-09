@@ -7,11 +7,10 @@ describe ContactsController, type: :controller do
   let (:contact) { create(:contact, episode: episode, user: user) }
   let! (:service_type) { create(:service_type, name: 'crisis') }
   let! (:service) { create(:service, name: 'provided shelter', service_type: service_type) }
- 
   let (:valid_params) {
     {
       episode_id: episode.id,
-      contact: attributes_for(:contact, service_ids:[service.id])
+      contact: attributes_for(:contact, services:[service])
     }
   }
   let (:invalid_params) {
@@ -87,32 +86,30 @@ describe ContactsController, type: :controller do
     end
   end
 
-  # describe "DELETE #destroy" do
-  #   let! (:contact) {
-  #     create(
-  #       :contact, 
-  #       user_id: user.id, 
-  #       episode_id: episode.id
-  #     )
-  #   }
+  describe "DELETE #destroy" do
+    it "destroys a contact" do
+      contact
+      
+      expect{
+        delete :destroy,
+        params: {
+          episode_id: episode.id,
+          id: contact.id
+        },
+        xhr: true
+      }.to change(Contact, :count).by -1
+    end
 
-  #   it "destroys a contact" do
-  #     expect{
-  #       delete :destroy,
-  #       params: {
-  #         episode_id: episode.id,
-  #         id: contact.id
-  #       }
-  #     }.to change(Contact, :count).by -1
-  #   end
-
-  #   it "returns a redirect response" do
-  #     delete :destroy,
-  #     params: {
-  #       episode_id: episode.id,
-  #       id: contact.id
-  #     }
-  #     expect(response).to have_http_status(302)
-  #   end
-  # end
+    it "returns a success response" do
+      contact
+      
+      delete :destroy,
+      params: {
+        episode_id: episode.id,
+        id: contact.id
+      },
+      xhr: true
+      expect(response).to have_http_status(200)
+    end
+  end
 end
