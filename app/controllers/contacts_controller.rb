@@ -7,9 +7,9 @@ class ContactsController < ApplicationController
   end
 
   def create
-    @contact = @episode.contacts.build(contact_params.merge(user: current_user))
-    services = Service.where(name: contact_params[:services])
-    @contact.services << services
+    @contact = @episode.contacts.build(contact_params)
+    # @contact.user = current_user
+    @contact.services << Service.where(name: contact_params[:services])
 
     if @contact.save
       flash[:success] = "Contact successfully created."
@@ -44,7 +44,7 @@ class ContactsController < ApplicationController
   private
   
   def contact_params
-    params.require(:contact).permit(:body, service_ids:[])
+    params.require(:contact).permit(:body, :user_id, service_ids:[])
   end
   
   def set_parent_episode

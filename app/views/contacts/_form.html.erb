@@ -1,4 +1,6 @@
 <%= form_with model: @contact, url: form_url(@contact), local: true do |f| %>
+  <%= hidden_field :contact, :user_id, value: current_user.id %>
+  
   <div class='row'>
     <div class='col s12 m6'>
       <div class='input-field'>

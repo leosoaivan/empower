@@ -10,7 +10,7 @@ describe ContactsController, type: :controller do
   let (:valid_params) {
     {
       episode_id: episode.id,
-      contact: attributes_for(:contact, services:[service])
+      contact: attributes_for(:contact, services:[service], user_id: user.id)
     }
   }
   let (:invalid_params) {

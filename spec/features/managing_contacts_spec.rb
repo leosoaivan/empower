@@ -43,7 +43,7 @@ feature 'Contacts management' do
         end
         click_on 'Create Contact'
       end
-
+      
       it 'displays a successful message' do
         expect(page).to have_css alert_success
       end
