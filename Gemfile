@@ -1,10 +1,5 @@
 source 'https://rubygems.org'
 
-git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
-  "https://github.com/#{repo_name}.git"
-end
-
 gem 'rails', '~> 5.1.4'
 gem 'pg', '~> 0.21.0'
 gem 'puma', '~> 3.7'
@@ -45,7 +40,7 @@ group :test do
   gem 'launchy', '~> 2.4', '>= 2.4.3'
   gem 'database_cleaner', '~> 1.6', '>= 1.6.1'
   gem 'guard-rspec', '~> 4.7', '>= 4.7.3', require: false
-  gem 'chromedriver-helper', '~> 1.1'
+  gem 'chromedriver-helper', '~> 1.2.0'
   gem 'shoulda-matchers', '~> 3.1', '>= 3.1.2'
 end
 

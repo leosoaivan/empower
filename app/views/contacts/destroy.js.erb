@@ -3,7 +3,7 @@
 const container = document.querySelector(".container");
 
 function removeRow() {
-  const contactRow = document.querySelector("tr#contact-<%= contact.id %>");
+  const contactRow = document.querySelector("tr#contact-<%= @contact.id %>");
   contactRow.parentNode.removeChild(contactRow);
 }
 

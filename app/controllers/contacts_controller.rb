@@ -3,10 +3,13 @@ class ContactsController < ApplicationController
 
   def new
     @contact = Contact.new
+    @service_types = ServiceType.all
   end
 
   def create
     contact = @episode.contacts.build(contact_params.merge(user: current_user))
+    services = Service.where(name: contact_params[:services])
+    contact.services << services
 
     if contact.save
       flash[:success] = "Contact successfully created."
@@ -47,7 +50,7 @@ class ContactsController < ApplicationController
   private
   
   def contact_params
-    params.require(:contact).permit(:body)
+    params.require(:contact).permit(:body, service_ids:[])
   end
   
   def find_parent_episode
