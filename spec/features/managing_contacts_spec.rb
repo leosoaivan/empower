@@ -85,6 +85,10 @@ feature 'Contacts management' do
     context 'with a valid body' do
       before :each do
         fill_in 'Body', with: 'This is an edited contact.'
+        within 'div#all_services' do
+          find('div', text: 'crisis').click
+          uncheck service.name
+        end
         click_on 'Edit Contact'
       end
 
@@ -96,8 +100,12 @@ feature 'Contacts management' do
         expect(current_path).to eql episode_path(episode)
       end
 
-      it 'displays the newly added contact' do
+      it 'displays the edited body' do
         expect(page).to have_content 'This is an edited contact.'
+      end
+
+      it 'displays the edited services' do
+        expect(page).not_to have_content service.name
       end
     end
 

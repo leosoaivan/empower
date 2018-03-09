@@ -1,20 +1,17 @@
 class ContactsController < ApplicationController
   before_action :set_parent_episode, only: [:new, :create]
   before_action :set_service_types, only: [:new, :create, :edit, :update]
-  before_action :find_contact, only: [:new, :create, :edit, :update]
+  before_action :find_contact, only: [:new, :edit, :update, :destroy]
 
   def new
-    # @contact = Contact.new
   end
 
   def create
-    # @contact = Contact.new
-
-    contact = @episode.contacts.build(contact_params.merge(user: current_user))
+    @contact = @episode.contacts.build(contact_params.merge(user: current_user))
     services = Service.where(name: contact_params[:services])
-    contact.services << services
+    @contact.services << services
 
-    if contact.save
+    if @contact.save
       flash[:success] = "Contact successfully created."
       redirect_to episode_path(@episode)
     else
@@ -24,12 +21,9 @@ class ContactsController < ApplicationController
   end
 
   def edit
-    # @contact = Contact.find(params[:id])
   end
 
   def update
-    # @contact = Contact.find(params[:id])
-
     if @contact.update_attributes(contact_params)
       flash[:success] = "Contact successfully edited."
       redirect_to episode_path(@contact.episode)
@@ -40,8 +34,6 @@ class ContactsController < ApplicationController
   end
   
   def destroy
-    @contact = Contact.find(params[:id])
-
     if @contact.destroy
       respond_to do |format|
         format.js { flash.now[:success] = "Contact successfully deleted." }
