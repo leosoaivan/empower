@@ -2,6 +2,14 @@
   <td><%= contact.date_and_time %></td>
   <td><%= contact.body %></td>
   <td>
+    <% if contact.services %>
+      <% contact.services.each do |service| %>
+        <ul>
+          <li><%= service.name %></li>
+        </ul>
+      <% end %>
+    <% end %>
+  <td>
     <%= link_to "Edit contact", edit_contact_path(contact) %>
     <%= link_to "Delete contact", contact_path(contact), remote: true, method: :delete, data: { confirm: "Delete? You will not be able to undo."} %>
   </td>
