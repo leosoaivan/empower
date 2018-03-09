@@ -8,6 +8,7 @@ class ContactsController < ApplicationController
 
   def create
     @contact = @episode.contacts.build(contact_params)
+    @contact.user = current_user
     @contact.services << Service.where(name: contact_params[:services])
 
     if @contact.save
@@ -43,7 +44,7 @@ class ContactsController < ApplicationController
   private
   
   def contact_params
-    params.require(:contact).permit(:body, :user_id, service_ids:[])
+    params.require(:contact).permit(:body, service_ids:[])
   end
   
   def set_parent_episode

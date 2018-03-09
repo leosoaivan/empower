@@ -71,6 +71,8 @@ class EpisodesController < ApplicationController
   end
 
   def decorated_contacts
-    @episode.contacts.map { |contact| ContactDecorator.new(contact) }
+    @episode.contacts.includes(:contacts_services, :services).map do |contact|
+      ContactDecorator.new(contact)
+    end
   end
 end
