@@ -1,27 +1,28 @@
 require 'rails_helper'
 
 RSpec.describe Client, type: :model do
-  let (:client) { build_stubbed(:client) }
-
-  describe "a valid client" do
-    it "must have a firstname" do
-      client.firstname = nil
-      expect(client).to_not be_valid
-    end
-
-    it "must have a lastname" do
-      client.lastname = nil
-      expect(client).to_not be_valid
-    end
-  end
+  it { is_expected.to have_many(:petitioned_episodes)
+    .class_name('Episode')
+    .with_foreign_key('petitioner_id')
+  }
+  it { is_expected.to have_many(:responded_episodes)
+    .class_name('Episode')
+    .with_foreign_key('respondent_id')
+  }
+  it { is_expected.to have_many(:respondents).through(:petitioned_episodes) }
+  it { is_expected.to have_many(:petitioners).through(:responded_episodes) }
+  it { is_expected.to validate_presence_of(:firstname) }
+  it { is_expected.to validate_presence_of(:lastname) }
 
   describe "#all_episodes" do
     it "returns all episodes in which a client is either petitioner or respondent" do
       client = create(:client)
-      other_client = create(:client)
-      episode1 = create(:episode, petitioner_id: client.id, respondent_id: other_client.id)
-      episode2 = create(:episode, petitioner_id: other_client.id, respondent_id: client.id)
-      expect(client.all_episodes).to include(episode1, episode2)
+      petitioned_episode = create(:episode, petitioner: client)
+      responded_episode = create(:episode, respondent: client)
+
+      all_episodes_ids = client.all_episodes.map(&:id)
+
+      expect(all_episodes_ids).to match_array [1, 2]
     end
   end
 end
