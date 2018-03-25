@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 describe ClientsController, type: :controller do
-  let (:user) { create(:user) }
-  let (:client) { create(:client) }
-  let (:valid_params) { attributes_for(:client) } 
-  let (:invalid_params) { attributes_for(:client, lastname: "") }
+  let(:user) { create(:user) }
+  let(:client) { create(:client) }
+  let(:valid_params) { attributes_for(:client) } 
+  let(:invalid_params) { attributes_for(:client, lastname: "") }
 
   before :each do
     login user
@@ -47,9 +47,9 @@ describe ClientsController, type: :controller do
         }.to_not change(Client, :count)
       end
 
-      it "returns a successful response" do
+      it "renders the new template" do
         post :create, params: { client: invalid_params }
-        expect(response).to have_http_status(200)
+        expect(response).to render_template(:new)
       end
     end
   end
@@ -77,9 +77,9 @@ describe ClientsController, type: :controller do
     end
 
     context "with invalid params" do
-      it "returns a successful response" do
+      it "renders the edit template" do
         patch :update, params: { id: client.id, client: invalid_params }
-        expect(response).to have_http_status(200)
+        expect(response).to render_template(:edit)
       end
     end
   end
@@ -113,8 +113,9 @@ describe ClientsController, type: :controller do
         }.to_not change(Client, :count)
       end
 
-      it "returns a successful response" do
-        expect(response).to have_http_status(200)
+      it "renders the show template" do
+        delete :destroy, params: { id: petitioner.id }
+        expect(response).to render_template(:show)
       end
     end
   end

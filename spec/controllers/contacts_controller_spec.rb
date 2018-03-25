@@ -1,19 +1,19 @@
 require 'rails_helper'
 
 describe ContactsController, type: :controller do
-  let (:user) { create(:user) }
-  let (:petitioner) { create(:client) }
-  let (:episode) { create(:episode, petitioner_id: petitioner.id) }
-  let (:contact) { create(:contact, episode: episode, user: user) }
-  let! (:service_type) { create(:service_type, name: 'crisis') }
-  let! (:service) { create(:service, name: 'provided shelter', service_type: service_type) }
-  let (:valid_params) {
+  let(:user) { create(:user) }
+  let(:petitioner) { create(:client) }
+  let(:episode) { create(:episode, petitioner_id: petitioner.id) }
+  let(:contact) { create(:contact, episode: episode, user: user) }
+  let!(:service_type) { create(:service_type, name: 'crisis') }
+  let!(:service) { create(:service, name: 'provided shelter', service_type: service_type) }
+  let(:valid_params) {
     {
       episode_id: episode.id,
       contact: attributes_for(:contact, services:[service], user_id: user.id)
     }
   }
-  let (:invalid_params) {
+  let(:invalid_params) {
     {
       episode_id: episode.id,
       contact: attributes_for(:contact, body: "")

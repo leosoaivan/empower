@@ -63,9 +63,9 @@ describe EpisodesController, type: :controller do
         }.to_not change(Episode, :count)
       end
 
-      it "returns a successful response" do
+      it "renders the new template" do
         post :create, params: invalid_params
-        expect(response).to have_http_status(200)
+        expect(response).to render_template(:new)
       end
     end
   end

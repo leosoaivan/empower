@@ -1,5 +1,6 @@
 class ClientsController < ApplicationController
   before_action :find_client, only: [:show, :edit, :update, :destroy]
+  before_action :find_episodes, only: [:show, :destroy]
   
   def new
     @client = Client.new
@@ -22,7 +23,6 @@ class ClientsController < ApplicationController
   end
 
   def show
-    @episodes = @client.petitioned_episodes.includes(:respondent).desc_order
   end
 
   def edit
@@ -41,7 +41,7 @@ class ClientsController < ApplicationController
   def destroy
     if @client.all_episodes.present?
       flash[:danger] = "This client has episodes, or is the respondent in other episodes. Client cannot be deleted."
-      redirect_to client_path @client
+      render :show, locals: { client: @client, episodes: @episodes }
     else
       @client.destroy
       flash[:success] = "Client successfully deleted."
@@ -72,5 +72,9 @@ class ClientsController < ApplicationController
 
   def decorated_clients
     queried_clients.map { |client| ClientDecorator.new(client) }
+  end
+
+  def find_episodes
+    @episodes = @client.petitioned_episodes.includes(:respondent).desc_order
   end
 end
