@@ -1,0 +1,20 @@
+language: ruby
+sudo: required
+dist: trusty
+rvm:
+  - 2.5.0
+services:
+  - postgresql
+notifications:
+  email: false
+addons:
+  chrome: stable
+before_install:
+  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
+before_script:
+  - cp config/database.yml.travis config/database.yml
+  - psql -c 'create database travis_ci_test;' -U postgres
+  - yarn
+script:
+  - bundle exec rails db:migrate RAILS_ENV=test
+  - bundle exec rspec
