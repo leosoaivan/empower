@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/leosoaivan/empower.svg?branch=master)](https://travis-ci.org/leosoaivan/empower)
+
 # Empower
 Empower is a client advocacy and management system designed to help you cultivate client relationships, manage the delivery of services, and track outcomes and trends.
 
@@ -25,6 +27,7 @@ N/A
 ## Built With
 * [Ruby on Rails](http://rubyonrails.org/) - Web framework
 * [Heroku](https://www.heroku.com/home) - Cloud platform/server
+* [Travis](https://travis-ci.org) - Continuous Integration
 
 ## To-Do
 N/A
