@@ -20,6 +20,7 @@ group :development, :test do
   gem 'factory_bot_rails', '~> 4.8', '>= 4.8.2'
   gem 'faker', '~> 1.8', '>= 1.8.4'
   gem 'bullet', '~> 5.7'
+  gem 'coveralls', require: false
 end
 
 group :development do
