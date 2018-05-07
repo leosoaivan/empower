@@ -36,7 +36,7 @@ end
 
 group :test do
   gem 'rails-controller-testing', '~> 1.0', '>= 1.0.2'
-  gem 'capybara', '~> 2.13'
+  gem 'capybara', '~> 3.0', '>= 3.0.3'
   gem 'selenium-webdriver'
   gem 'launchy', '~> 2.4', '>= 2.4.3'
   gem 'database_cleaner', '~> 1.6', '>= 1.6.1'
