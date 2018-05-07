@@ -60,12 +60,6 @@ feature 'Managing episodes' do
       it 'flashes a successful message' do
         expect(page).to have_css '.flash__alert--success'
       end
-
-      it 'displays the respondent\'s information' do
-        within '.episode-card' do
-          expect(page).to have_content 'Respondent: '
-        end
-      end
     end
 
     context 'with invalid attributes' do
