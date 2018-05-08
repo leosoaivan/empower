@@ -9,6 +9,12 @@ notifications:
   email: false
 addons:
   chrome: stable
+env:
+  - TEST_FOLDER=controllers
+  - TEST_FOLDER=decorators
+  - TEST_FOLDER=features
+  - TEST_FOLDER=models
+
 before_install:
   - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
 before_script:
@@ -17,4 +23,7 @@ before_script:
   - yarn
 script:
   - bundle exec rails db:migrate RAILS_ENV=test
-  - bundle exec rspec
+  - bundle exec rspec spec/$TEST_FOLDER
+branches:
+  only:
+    - master
