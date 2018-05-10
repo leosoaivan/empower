@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Login management -' do
+feature 'Sessions management -' do
   let (:user) { create(:user) }
   let (:alert_danger) { '.flash__alert--danger' }
   let (:alert_success) { '.flash__alert--success' }
