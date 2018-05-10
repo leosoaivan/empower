@@ -8,6 +8,12 @@ $lighten-green-4: #c8e6c9;
   text-align: center;
 }
 
+@mixin alert-variant($background, $border, $text-color) {
+  background-color: $background;
+  border-color: $border;
+  color: $text-color;
+}
+
 div.flash__alert--danger {
   @include flash-alert;
   background-color: $red-lighten-4;
@@ -18,4 +24,14 @@ div.flash__alert--success {
   @include flash-alert;
   background-color: $lighten-green-4;
   color: green;
+}
+
+div.flash__alert--alert {
+  @include flash-alert;
+  @include alert-variant($red-lighten-4, 0, red);
+}
+
+div.flash__alert--notice {
+  @include flash-alert;
+  @include alert-variant($lighten-green-4, 0, green);
 }

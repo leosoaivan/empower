@@ -4,11 +4,11 @@ DatabaseCleaner.clean_with(:truncation) if Rails.env.development?
 
 # Create an intial user
 user = User.create(
-  name: "User Tester",
+  first_name: "User",
+  last_name: "Tester",
   username: "utester",
   email: "utester@empower.org",
-  password: "testing",
-  password_confirmation: "testing"
+  password: "testing123"
 )
 
 FactoryBot.create_list(:client, 5)

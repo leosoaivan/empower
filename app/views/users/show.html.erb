@@ -2,10 +2,10 @@
 
 <div class='card'>
   <div class='card-content black-text'>
-    <span class='card-title black-text'><%= current_user.name %></span>
+    <span class='card-title black-text'><%= current_user.full_name %></span>
   </div>
 </div>
 
-<% if logged_in? %>
+<% if user_signed_in? %>
   <%= link_to "LOGOUT", logout_path, method: :delete %>
 <% end %>
