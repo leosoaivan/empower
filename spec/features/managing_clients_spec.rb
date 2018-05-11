@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Client management' do
+describe 'Client management -', type: :feature do
   let (:user)   { create(:user) }
   let (:petitioner) { create(:client) }
   let (:alert_danger) { '.flash__alert--danger' }

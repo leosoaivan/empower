@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Managing episodes' do
+describe 'Episode management -', type: :feature do
   let (:petitioner) { create(:client) }
 
   before :each do

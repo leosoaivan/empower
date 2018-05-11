@@ -23,7 +23,7 @@ describe EpisodesController, type: :controller do
   }
 
   before :each do
-    login user
+    sign_in user
   end
 
   describe "GET #new" do

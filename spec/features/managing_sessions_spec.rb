@@ -59,7 +59,6 @@ feature 'Sessions management -' do
 
   describe 'logging out' do
     before :each do
-      visit login_path
       log_in user
       click_on 'LOGOUT'
     end

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Contacts management' do
+describe 'Contacts management -', type: :feature do
   let (:user) { create(:user) }
   let (:client) { create(:client) }
   let! (:episode) { create(:episode, petitioner_id: client.id) }

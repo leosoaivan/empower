@@ -26,7 +26,7 @@ feature 'Client search' do
   let (:client_data) { '.card' }
 
   before :each do
-    log_in(user)
+    log_in user
     visit clients_path
   end
 

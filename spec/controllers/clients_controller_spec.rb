@@ -7,7 +7,7 @@ describe ClientsController, type: :controller do
   let(:invalid_params) { attributes_for(:client, lastname: "") }
 
   before :each do
-    login user
+    sign_in user
   end
 
   describe "GET #index" do
