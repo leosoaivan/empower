@@ -7,7 +7,7 @@ describe 'Episode management -', type: :feature do
     log_in create(:user)
   end
   
-  describe 'creating an episode' do
+  describe 'creating an episode', js: true do
     before :each do
       visit client_path(petitioner)
       click_on 'Create new episode'
