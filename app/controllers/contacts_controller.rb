@@ -56,6 +56,6 @@ class ContactsController < ApplicationController
   end
 
   def set_service_types
-    @service_types = ServiceType.all
+    @service_types = ServiceType.all.includes(:services)
   end
 end
