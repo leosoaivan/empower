@@ -14,6 +14,8 @@ gem 'materialize-sass', '~> 0.96.1'
 gem 'material_icons', '~> 2.2'
 gem 'webpacker', '~> 3.2'
 gem 'devise', '~> 4.4', '>= 4.4.3'
+gem 'cancancan', '~> 2.2'
+gem 'rolify', '~> 5.2'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
