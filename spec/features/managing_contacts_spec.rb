@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-feature 'Contacts management' do
-  let (:user) { create(:user) }
+describe 'Contacts management -', type: :feature do
+  let (:user) { create(:user_staff) }
   let (:client) { create(:client) }
   let! (:episode) { create(:episode, petitioner_id: client.id) }
   let! (:contact) { 
@@ -10,37 +10,32 @@ feature 'Contacts management' do
       episode_id: episode.id, 
       user_id: user.id,
       body: 'This is a new contact.',
-      services: [service]
+      services: [service1, service2]
     )
   }
   let! (:service_type) { create(:service_type, name: 'crisis') }
-  let! (:service) { create(:service, name: 'provided shelter', service_type: service_type) }
+  let! (:service1) { create(:service, name: 'provided shelter', service_type: service_type) }
+  let! (:service2) { create(:service, name: 'provided hotel', service_type: service_type) }
   
   let (:alert_danger) { '.flash__alert--danger' }
   let (:alert_success) { '.flash__alert--success' }
-  
+
   before :each do
     log_in user
     visit client_path(client)
     click_on 'View episode'
   end
   
-  describe 'creating a contact' do
+  describe 'creating a contact', js: true do
     before :each do
       click_on 'Create contact'
-    end
-
-    it 'displays a form' do
-      expect(page).to have_css 'form'
     end
     
     context 'with valid input' do
       before :each do
         fill_in 'Body', with: 'This is a contact body.'
-        within 'div#all_services' do
-          find('div', text: 'crisis').click
-          check service.name
-        end
+        find('div#crisis', text: 'crisis').click
+        check(service1.name, allow_label_click: true)
         click_on 'Create Contact'
       end
       
@@ -57,7 +52,7 @@ feature 'Contacts management' do
       end
 
       it 'displays the selected services' do
-        expect(page).to have_content service.name
+        expect(page).to have_content service1.name
       end
     end
 
@@ -77,7 +72,7 @@ feature 'Contacts management' do
     end
   end
 
-  describe 'editing a contact' do
+  describe 'editing a contact', js: true do
     before :each do
       click_on 'Edit contact'
     end
@@ -85,10 +80,8 @@ feature 'Contacts management' do
     context 'with a valid body' do
       before :each do
         fill_in 'Body', with: 'This is an edited contact.'
-        within 'div#all_services' do
-          find('div', text: 'crisis').click
-          uncheck service.name
-        end
+        find('div#crisis', text: 'crisis').click
+        uncheck(service1.name, allow_label_click: true)
         click_on 'Edit Contact'
       end
 
@@ -105,7 +98,7 @@ feature 'Contacts management' do
       end
 
       it 'displays the edited services' do
-        expect(page).not_to have_content service.name
+        expect(page).not_to have_content service1.name
       end
     end
 
@@ -126,6 +119,8 @@ feature 'Contacts management' do
   end
 
   describe 'deleting a contact', js: true do
+
+    # Due to previous request being followed up with an AJAX request
     context 'with a flash already present' do
       before :each do
         click_on 'Create contact'

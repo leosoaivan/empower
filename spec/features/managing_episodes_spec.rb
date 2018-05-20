@@ -1,13 +1,13 @@
 require 'rails_helper'
 
-feature 'Managing episodes' do
+describe 'Episode management -', type: :feature do
   let (:petitioner) { create(:client) }
 
   before :each do
-    log_in create(:user)
+    log_in create(:user_staff)
   end
   
-  describe 'creating an episode' do
+  describe 'creating an episode', js: true do
     before :each do
       visit client_path(petitioner)
       click_on 'Create new episode'

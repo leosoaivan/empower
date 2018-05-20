@@ -1,4 +1,6 @@
 class Contact < ApplicationRecord
+  resourcify
+  
   belongs_to :user
   belongs_to :episode
   has_and_belongs_to_many :services

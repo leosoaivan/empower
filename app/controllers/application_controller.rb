@@ -1,13 +1,15 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  before_action :require_login
   
-  include SessionsHelper
+  # Devise
+  before_action :authenticate_user!
 
-  def require_login
-    unless logged_in?
-      flash[:danger] = "Please log in to continue"
-      redirect_to login_path
-    end
+  rescue_from CanCan::AccessDenied do |exception|
+    flash[:danger] = exception.message
+    redirect_back(fallback_location: authenticated_root_path)
+  end
+
+  def current_ability
+    current_user.ability
   end
 end

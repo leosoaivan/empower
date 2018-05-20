@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 describe ClientsController, type: :controller do
-  let(:user) { create(:user) }
+  let(:user) { create(:user_staff) }
   let(:client) { create(:client) }
   let(:valid_params) { attributes_for(:client) } 
   let(:invalid_params) { attributes_for(:client, lastname: "") }
 
   before :each do
-    login user
+    sign_in user
   end
 
   describe "GET #index" do

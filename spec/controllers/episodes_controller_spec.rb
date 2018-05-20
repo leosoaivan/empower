@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe EpisodesController, type: :controller do
-  let (:user) { create(:user) }
+  let (:user) { create(:user_staff) }
   let (:client) { create(:client) }
   let (:valid_params) { 
     {
@@ -23,7 +23,7 @@ describe EpisodesController, type: :controller do
   }
 
   before :each do
-    login user
+    sign_in user
   end
 
   describe "GET #new" do

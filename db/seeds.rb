@@ -2,14 +2,24 @@ require 'database_cleaner'
 
 DatabaseCleaner.clean_with(:truncation) if Rails.env.development?
 
-# Create an intial user
-user = User.create(
-  name: "User Tester",
+# Create an intial guest
+guest = User.create(
+  first_name: "User",
+  last_name: "Tester",
   username: "utester",
   email: "utester@empower.org",
-  password: "testing",
-  password_confirmation: "testing"
+  password: "testing123"
 )
+guest.add_role(:guest)
+
+staff = User.create(
+  first_name: "Staff",
+  last_name: "Tester",
+  username: "stester",
+  email: "stester@empower.org",
+  password: "testing123"
+)
+staff.add_role(:staff)
 
 FactoryBot.create_list(:client, 5)
 FactoryBot.create(:client, id: 44558, lastname: 'Smith-Lee-Buckner')
@@ -21,7 +31,7 @@ FactoryBot.create(:episode, petitioner_id: '2', respondent_id: '1')
 episode = Episode.first
 
 5.times do
-  episode.contacts.create(body: Faker::HarryPotter.quote, user_id: user.id)
+  episode.contacts.create(body: Faker::HarryPotter.quote, user_id: staff.id)
 end
 
 # Create all services

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-feature 'Client management' do
-  let (:user)   { create(:user) }
+describe 'Client management -', type: :feature do
+  let (:user)   { create(:user_staff) }
   let (:petitioner) { create(:client) }
   let (:alert_danger) { '.flash__alert--danger' }
   let (:alert_success) { '.flash__alert--success' }
