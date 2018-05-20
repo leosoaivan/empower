@@ -2,7 +2,7 @@ require 'database_cleaner'
 
 DatabaseCleaner.clean_with(:truncation) if Rails.env.development?
 
-# Create an intial user
+# Create an intial guest
 user = User.create(
   first_name: "User",
   last_name: "Tester",
@@ -10,6 +10,7 @@ user = User.create(
   email: "utester@empower.org",
   password: "testing123"
 )
+user.add_role(:guest)
 
 FactoryBot.create_list(:client, 5)
 FactoryBot.create(:client, id: 44558, lastname: 'Smith-Lee-Buckner')

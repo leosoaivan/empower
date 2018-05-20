@@ -6,5 +6,17 @@ FactoryBot.define do
     email { username + "@empower.org" }
     password { "foobar" }
     password_confirmation { "foobar" }
+
+    factory :admin do
+      after(:create) { |user| user.add_role :admin }
+    end
+
+    factory :staff do
+      after(:create) { |user| user.add_role :staff }
+    end
+
+    factory :guest do
+      after(:create) { |user| user.add_role :guest }
+    end
   end
 end

@@ -1,6 +1,7 @@
 class ClientsController < ApplicationController
   before_action :find_client, only: [:show, :edit, :update, :destroy]
   before_action :find_episodes, only: [:show, :destroy]
+  load_and_authorize_resource only: [:create, :destroy]
   
   def new
     @client = Client.new

@@ -2,6 +2,7 @@ class EpisodesController < ApplicationController
   before_action :nil_respondent_if_blank, only: :create
   before_action :set_form_variables, only: [:new, :create]
   before_action :set_episode, only: [:show, :destroy]
+  load_and_authorize_resource only: [:create, :destroy]
 
   def new
     @petitioner = Client.find(params[:client_id])
