@@ -2,8 +2,8 @@
   <div class='row'>
     <div class='col s12 m6'>
       <div class='input-field'>
-        <% f.label :body, class: form_field_active?(@contact) %>
-        <%= f.text_area :body, id: 'contact_body', placeholder: 'Body' %>
+        <%= f.label :body, for: 'body' %>
+        <%= f.text_area :body, id: 'body', class: 'materialize-textarea' %>
       </div>
     </div>
 
