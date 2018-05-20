@@ -8,4 +8,8 @@ class ApplicationController < ActionController::Base
     flash[:danger] = exception.message
     redirect_back(fallback_location: authenticated_root_path)
   end
+
+  def current_ability
+    current_user.ability
+  end
 end

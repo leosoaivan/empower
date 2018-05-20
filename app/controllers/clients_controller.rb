@@ -1,15 +1,10 @@
 class ClientsController < ApplicationController
-  before_action :find_client, only: [:show, :edit, :update, :destroy]
-  before_action :find_episodes, only: [:show, :destroy]
-  load_and_authorize_resource only: [:create, :destroy]
-  
+  load_and_authorize_resource except: [:index, :show]
+    
   def new
-    @client = Client.new
   end
   
   def create
-    @client = Client.new(client_params)
-    
     if @client.save
       flash[:success] = "Client was successfully created."
       redirect_to @client
@@ -24,6 +19,9 @@ class ClientsController < ApplicationController
   end
 
   def show
+    client = Client.find(params[:id])
+    @client = ClientDecorator.new(client)
+    @episodes = @client.petitioned_episodes.includes(:respondent).desc_order
   end
 
   def edit
@@ -42,6 +40,8 @@ class ClientsController < ApplicationController
   def destroy
     if @client.all_episodes.present?
       flash[:danger] = "This client has episodes, or is the respondent in other episodes. Client cannot be deleted."
+      @client = ClientDecorator.new(@client)
+      @episodes = @client.petitioned_episodes.includes(:respondent).desc_order
       render :show, locals: { client: @client, episodes: @episodes }
     else
       @client.destroy
@@ -51,14 +51,6 @@ class ClientsController < ApplicationController
   end
 
   private
-
-  def client
-    Client.find(params[:id])
-  end
-
-  def find_client
-    @client = ClientDecorator.new(client)
-  end
 
   def client_params
     params.require(:client).permit(:firstname, :lastname, :dob, :telephone)
@@ -73,9 +65,5 @@ class ClientsController < ApplicationController
 
   def decorated_clients
     queried_clients.map { |client| ClientDecorator.new(client) }
-  end
-
-  def find_episodes
-    @episodes = @client.petitioned_episodes.includes(:respondent).desc_order
   end
 end

@@ -1,13 +1,13 @@
 class ContactsController < ApplicationController
-  before_action :set_parent_episode, only: [:new, :create]
   before_action :set_service_types, only: [:new, :create, :edit, :update]
-  before_action :find_contact, only: [:new, :edit, :update, :destroy]
-  load_and_authorize_resource only: [:create, :destroy]
+  load_and_authorize_resource
 
   def new
+    @episode = Episode.find(params[:episode_id])
   end
 
   def create
+    @episode = Episode.find(params[:episode_id])
     @contact = @episode.contacts.build(contact_params)
     @contact.user = current_user
     @contact.services << Service.where(name: contact_params[:services])

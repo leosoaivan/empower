@@ -14,6 +14,8 @@ class User < ApplicationRecord
   validates :email,       presence: true, uniqueness: { case_sensitive: false }
   validates :password,    presence: true, length: { minimum: 6 }
 
+  delegate :can?, :cannot?, to: :ability
+
   def email_required?
     false
   end
@@ -24,5 +26,9 @@ class User < ApplicationRecord
 
   def full_name
     "#{first_name.capitalize} #{last_name.capitalize}"
+  end
+
+  def ability
+    @ability ||= Ability.new(self)
   end
 end

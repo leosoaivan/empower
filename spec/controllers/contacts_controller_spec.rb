@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe ContactsController, type: :controller do
-  let(:user) { create(:user) }
+  let(:user) { create(:user_staff) }
   let(:petitioner) { create(:client) }
   let(:episode) { create(:episode, petitioner_id: petitioner.id) }
   let(:contact) { create(:contact, episode: episode, user: user) }

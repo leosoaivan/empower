@@ -7,15 +7,15 @@ FactoryBot.define do
     password { "foobar" }
     password_confirmation { "foobar" }
 
-    factory :admin do
+    factory :user_admin do
       after(:create) { |user| user.add_role :admin }
     end
 
-    factory :staff do
+    factory :user_staff do
       after(:create) { |user| user.add_role :staff }
     end
 
-    factory :guest do
+    factory :user_guest do
       after(:create) { |user| user.add_role :guest }
     end
   end

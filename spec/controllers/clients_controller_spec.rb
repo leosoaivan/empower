@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe ClientsController, type: :controller do
-  let(:user) { create(:user) }
+  let(:user) { create(:user_staff) }
   let(:client) { create(:client) }
   let(:valid_params) { attributes_for(:client) } 
   let(:invalid_params) { attributes_for(:client, lastname: "") }

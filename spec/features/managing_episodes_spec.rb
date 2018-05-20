@@ -4,7 +4,7 @@ describe 'Episode management -', type: :feature do
   let (:petitioner) { create(:client) }
 
   before :each do
-    log_in create(:user)
+    log_in create(:user_staff)
   end
   
   describe 'creating an episode', js: true do

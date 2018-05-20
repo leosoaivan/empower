@@ -19,7 +19,7 @@ RSpec.describe User, type: :model do
     let (:can_contact)  { FactoryBot.build_stubbed(:contact) }
     
     context "when user is an admin" do
-      let (:user) { FactoryBot.create(:admin) }
+      let (:user) { FactoryBot.create(:user_admin) }
       it { is_expected.to be_able_to(:manage, can_user) }
       it { is_expected.to be_able_to(:manage, can_client) }
       it { is_expected.to be_able_to(:manage, can_episode) }
@@ -27,7 +27,7 @@ RSpec.describe User, type: :model do
     end
 
     context "when user is a staff" do
-      let (:user) { FactoryBot.create(:staff) }
+      let (:user) { FactoryBot.create(:user_staff) }
       it { is_expected.not_to be_able_to(:manage, can_user) }
       it { is_expected.to be_able_to(:manage, can_client) }
       it { is_expected.to be_able_to(:manage, can_episode) }
@@ -35,7 +35,7 @@ RSpec.describe User, type: :model do
     end
 
     context "when user is a guest" do
-      let (:user) { FactoryBot.create(:guest) }
+      let (:user) { FactoryBot.create(:user_guest) }
       it { is_expected.not_to be_able_to(:manage, can_user) }
       it { is_expected.not_to be_able_to(:manage, can_client) }
       it { is_expected.not_to be_able_to(:manage, can_episode) }
