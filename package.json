@@ -12,6 +12,7 @@
     "eslint-plugin-node": "^6.0.1",
     "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-standard": "^3.0.1",
+    "materialize-css": "^1.0.0-rc.1",
     "webpack-cli": "^2.0.10",
     "webpack-dev-server": "^2.11.1"
   }

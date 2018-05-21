@@ -1,28 +1,38 @@
-<h2><%= @client.fullname %></h2>
-<div class='card episode-card'>
-  <div class='card-content'>
-    <%= render partial: 'episode_data', locals: { episode: @episode } %>
-  </div>
+<% provide :title, "##{@client.id}: Ep. #{@episode.id}" %>
 
-  <div class='card-action'>
-    <%=link_to new_episode_contact_path(@episode) do %>
-      Create contact
-    <% end %>
+<div class='row'>
+  <div class='col s12'>
+    <h2><%= @client.fullname %></h2>
+    <div class='card episode-card'>
+      <div class='card-content'>
+        <%= render partial: 'episode_data', locals: { episode: @episode } %>
+      </div>
+    
+      <div class='card-action'>
+        <%=link_to new_episode_contact_path(@episode) do %>
+          Create contact
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
 
-<div class='card-panel'>
-  <table id='contacts'>
-    <thead>
-      <tr>
-        <th>Date</th>
-        <th>Contact</th>
-        <th>Services</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <%= render @contacts %>
-    </tbody>
-  </table>
+<div class='row'>
+  <div class='col s12'>
+    <div class='card-panel'>
+      <table id='contacts'>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Contact</th>
+            <th>Services</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render @contacts %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
