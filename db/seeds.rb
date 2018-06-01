@@ -1,8 +1,4 @@
-require 'database_cleaner'
-
-DatabaseCleaner.clean_with(:truncation) if Rails.env.development?
-
-# Create an intial guest
+# Create an initial guest
 guest = User.create(
   first_name: "User",
   last_name: "Tester",
@@ -12,26 +8,33 @@ guest = User.create(
 )
 guest.add_role(:guest)
 
-staff = User.create(
-  first_name: "Staff",
-  last_name: "Tester",
-  username: "stester",
-  email: "stester@empower.org",
-  password: "testing123"
+5.times do
+  Client.create(firstname: Faker::Name.first_name, lastname: Faker::Name.last_name)
+end
+  
+Episode.create(
+  petitioner_id: '1',
+  respondent_id: '2',
+  relationship: ['dating/romantic/sexual','shared residence'],
+  victimization: ['intimate partner violence']
 )
-staff.add_role(:staff)
-
-FactoryBot.create_list(:client, 5)
-FactoryBot.create(:client, id: 44558, lastname: 'Smith-Lee-Buckner')
-
-FactoryBot.create(:episode, petitioner_id: '1', respondent_id: '2')
-FactoryBot.create(:episode, petitioner_id: '1', respondent_id: '3')
-FactoryBot.create(:episode, petitioner_id: '2', respondent_id: '1')
+Episode.create(
+  petitioner_id: '1',
+  respondent_id: '3',
+  relationship: ['dating/romantic/sexual','shared residence'],
+  victimization: ['intimate partner violence']
+)
+Episode.create(
+  petitioner_id: '2',
+  respondent_id: '1',
+  relationship: ['dating/romantic/sexual','shared residence'],
+  victimization: ['intimate partner violence']
+)
 
 episode = Episode.first
 
 5.times do
-  episode.contacts.create(body: Faker::HarryPotter.quote, user_id: staff.id)
+  episode.contacts.create(body: Faker::HarryPotter.quote, user_id: guest.id)
 end
 
 # Create all services

@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  after_create :assign_default_role
+
   rolify
 
    # Include default devise modules. Others available are:
@@ -30,5 +32,11 @@ class User < ApplicationRecord
 
   def ability
     @ability ||= Ability.new(self)
+  end
+
+  private
+
+  def assign_default_role
+    self.add_role(:guest) if self.roles.blank?
   end
 end

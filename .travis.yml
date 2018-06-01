@@ -1,5 +1,8 @@
 language: ruby
-cache: bundler
+cache: 
+  - bundler
+  directories: 
+    - /home/travis/.rvm/
 sudo: required
 dist: trusty
 rvm:

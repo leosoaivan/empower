@@ -15,12 +15,12 @@ gem 'webpacker', '~> 3.2'
 gem 'devise', '~> 4.4', '>= 4.4.3'
 gem 'cancancan', '~> 2.2'
 gem 'rolify', '~> 5.2'
+gem 'faker', '~> 1.8', '>= 1.8.4'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 3.7', '>= 3.7.2'
   gem 'factory_bot_rails', '~> 4.8', '>= 4.8.2'
-  gem 'faker', '~> 1.8', '>= 1.8.4'
   gem 'bullet', '~> 5.7'
   gem 'coveralls', require: false
 end
