@@ -27,3 +27,10 @@ script:
 branches:
   only:
     - master
+deploy:
+  provider: heroku
+  api_key:
+    secure: "et/mZprhRgkjdzLTNEuJu2h84A8sWQZj/i0n09bp8XAfLXWLgcykjTVDXtCtguf42H20Rz4nJrzQhb12U4wmZjz8lP72y3Dpo5U78eM8FXcbQxqVztYRdrkdOPH3z4UBZ5EFh2FLFBJhZUBYQgT+kFi3vBKx1hW9AqJMa7rSMytJYxMuU1GiegmE1KnYm2TLNwP28MvlVacBpUCy9ihKFDqiiAx9zQNgp1PyaF7Po1tcU7kThFl6MuDgNyuaNg8msmVMIMdfYdKacBDEIHFuRpZoYMu+VlaZpne+kxGfG9u22JXX/wqExDzbuGKySwonlF0t+qRg3jz2FNWXcsvbZntK7+k/vSSMTH1j2hy76rWBF/o/TrgLqTAkvxc7XnF73BLhxL+Gpgw2P/4vyyZHR49EbAr9PYlwL+NiFGHKL8FzHu6sKiYKLgrdlpuwcrID/5HTprzG3wjlQ7BLZAqwgyUJP9Su05Gio4HVAWVWMpLf5a34O2tVrmkJ22xjn+qAwW2icvyzVx2MdTtyiCZ886U4yiO1cRDlsNWlQZ1QfJ9siCABmpsTjyKkR5MV7ITWY9Uoxtp6s9bN+lvPeJd3l010DQoOSKvdwVK8unORqH1B5VojZ1albaz4KmLX+rzUm0EdJs5PWf3MN4FvnfEmys/kA7+d1lpf5TJ0vYHn+l4="
+  app: empower
+  on:
+    repo: leosoaivan/empower
