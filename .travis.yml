@@ -1,12 +1,9 @@
 language: ruby
-cache: 
-  - bundler
-  directories: 
-    - /home/travis/.rvm/
-sudo: required
-dist: trusty
 rvm:
   - 2.5.0
+cache: bundler
+sudo: required
+dist: trusty
 services:
   - postgresql
 notifications:
