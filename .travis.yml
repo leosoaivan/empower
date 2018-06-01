@@ -1,36 +1,37 @@
 language: ruby
 rvm:
-  - 2.5.0
+- 2.5.0
 cache: bundler
 sudo: required
 dist: trusty
 services:
-  - postgresql
+- postgresql
 notifications:
   email: false
 addons:
   chrome: stable
 env:
+  matrix:
   - TEST_FOLDER=controllers
   - TEST_FOLDER=decorators
   - TEST_FOLDER=features
   - TEST_FOLDER=models
+  global:
+  - secure: m32FNFRFa8S/AxJf6jHQ51vcuGyGrFf2S8yIgn5C9rtwzwlKVsar/HL4sjPc0y6ej0uP25QhgYCiw1+x4xePhe5TFRBtRbuv4tWC+4zbFqWTYwG4beDZsWmQYdlQRAwGLAb/WXSnTCE1uQS39yLjavl8MhhnpeC+3580CZMn4UQgyuKTCqZVW7rd9Y+Xvb2SjaQEr9hZyc6sMl1iCVhNCXBeT3Fx6DO2HfrwVNdju6/8+O06GXAgJY2hiEkvjS+ERHx+j6JOu1dcCX5QGOUUlE+pxSciVsT80XYG8ot/pONkDHdVBrmZDCUzLU5OcjU1dgWySHRiKjZKCJ2ruKWuKVidWKEDsYyO11Uc1KJYOBcIdnq+s4+NFK2JuSc2UVFnET9e684Cc2fT1755tCHMV5oiy7OqEWeBFRSDJwFLSx1mhBLwuPeh4CUH2YRJb9mpPUfWfasHS5FQRl5737IZ4dWb21zEQU43rRKvjXGQwF+rzf3lYd2Hr9kmQAhY8aej6dEE8zZOGS+y30snuH8GMShucxFFuYmYxIHXfAK2BHCd0YJRIuP9gLc9lMKdInmlowETTPE6stiZdc6pblS20a7aUDn6c7hgXhMcxrzYaLwaYMaDs58cl9qlfTjjm7h+ANi12qAOgBsHmO4mZqFFynKnZ7ylnRwueVBVdneezHU=
 before_install:
-  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
+- google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
 before_script:
-  - cp config/database.yml.travis config/database.yml
-  - psql -c 'create database travis_ci_test;' -U postgres
-  - yarn
-  - bundle exec rails db:migrate RAILS_ENV=test
+- cp config/database.yml.travis config/database.yml
+- psql -c 'create database travis_ci_test;' -U postgres
+- yarn
+- bundle exec rails db:migrate RAILS_ENV=test
 script:
-  - bundle exec rspec spec/$TEST_FOLDER
+- bundle exec rspec spec/$TEST_FOLDER
 branches:
   only:
-    - master
+  - master
 deploy:
   provider: heroku
-  api_key:
-    secure: "et/mZprhRgkjdzLTNEuJu2h84A8sWQZj/i0n09bp8XAfLXWLgcykjTVDXtCtguf42H20Rz4nJrzQhb12U4wmZjz8lP72y3Dpo5U78eM8FXcbQxqVztYRdrkdOPH3z4UBZ5EFh2FLFBJhZUBYQgT+kFi3vBKx1hW9AqJMa7rSMytJYxMuU1GiegmE1KnYm2TLNwP28MvlVacBpUCy9ihKFDqiiAx9zQNgp1PyaF7Po1tcU7kThFl6MuDgNyuaNg8msmVMIMdfYdKacBDEIHFuRpZoYMu+VlaZpne+kxGfG9u22JXX/wqExDzbuGKySwonlF0t+qRg3jz2FNWXcsvbZntK7+k/vSSMTH1j2hy76rWBF/o/TrgLqTAkvxc7XnF73BLhxL+Gpgw2P/4vyyZHR49EbAr9PYlwL+NiFGHKL8FzHu6sKiYKLgrdlpuwcrID/5HTprzG3wjlQ7BLZAqwgyUJP9Su05Gio4HVAWVWMpLf5a34O2tVrmkJ22xjn+qAwW2icvyzVx2MdTtyiCZ886U4yiO1cRDlsNWlQZ1QfJ9siCABmpsTjyKkR5MV7ITWY9Uoxtp6s9bN+lvPeJd3l010DQoOSKvdwVK8unORqH1B5VojZ1albaz4KmLX+rzUm0EdJs5PWf3MN4FvnfEmys/kA7+d1lpf5TJ0vYHn+l4="
   app: empower
   on:
     repo: leosoaivan/empower
