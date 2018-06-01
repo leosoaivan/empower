@@ -27,10 +27,23 @@
     </div>
   </div>
   
-  <%= button_tag class: 'btn' do %>
-    <span>
-      <%= form_submit_text(@contact) %>
-      <i class='material-icons right'>send</i>
-    <span>
-  <% end %>
+  <div class="row">
+    <div class="col s12 m4 offset-m2">
+      <%= button_tag class: 'btn' do %>
+        <span>
+          <%= form_submit_text(@contact) %>
+          <i class='material-icons right'>send</i>
+        <span>
+      <% end %>
+    </div>
+  
+    <div class="col s12 m4">
+      <%= link_to form_cancel_link(@contact), class: 'btn btn-cancel' do %>
+        <span>
+          Cancel 
+          <i class='material-icons right'>delete</i>
+        <span>
+      <% end %>
+    </div>
+    </div>
 <% end %>

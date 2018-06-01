@@ -118,8 +118,41 @@ describe 'Contacts management -', type: :feature do
     end
   end
 
-  describe 'deleting a contact', js: true do
+  describe 'canceling a contact' do
+    context 'in the processing of creating' do
+      before :each do
+        click_on 'Create contact'
+        fill_in 'Body', with: 'This is a contact that will be cancelled.'
+        click_on 'Cancel'
+      end
 
+      it 'returns to the episode page' do
+        expect(current_path).to eql episode_path(episode)
+      end
+
+      it 'does not display the cancelled contact' do
+        expect(page).not_to have_content 'This is a contact that will be cancelled.'
+      end
+    end
+
+    context 'in the processing of editing' do
+      before :each do
+        click_on 'Edit contact'
+        fill_in 'Body', with: 'This is an edited contact.'
+        click_on 'Cancel'
+      end
+
+      it 'returns to the episode page' do
+        expect(current_path).to eql episode_path(episode)
+      end
+
+      it 'does not display the cancelled contact' do
+        expect(page).not_to have_content 'This is a contact that will be cancelled.'
+      end
+    end
+  end
+
+  describe 'deleting a contact', js: true do
     # Due to previous request being followed up with an AJAX request
     context 'with a flash already present' do
       before :each do
@@ -156,4 +189,3 @@ describe 'Contacts management -', type: :feature do
     end
   end
 end
-

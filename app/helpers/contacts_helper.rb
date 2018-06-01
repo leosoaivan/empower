@@ -10,4 +10,8 @@ module ContactsHelper
   def form_submit_text(contact)
     contact.new_record? ? "Create Contact" : "Edit Contact" 
   end
+
+  def form_cancel_link(contact)
+    contact.new_record? ? episode_path(@episode) : episode_path(contact.episode)
+  end
 end
