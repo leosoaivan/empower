@@ -77,6 +77,24 @@ describe 'Episode management -', type: :feature do
     end
   end
 
+  describe 'cancelling an episode' do
+    before :each do
+      visit client_path(petitioner)
+      click_on 'Create new episode'
+      fill_in 'respondent_firstname', with: 'Jack'
+      fill_in 'respondent_lastname', with: 'Black'
+      click_on 'Cancel'
+    end
+
+    it 'redirects back to a client page' do
+      expect(current_path).to eql client_path(petitioner)
+    end
+
+    it 'does not display a new episode' do
+      expect(page).not_to have_content 'Jack Black'
+    end
+  end
+
   describe 'deleting an episode', js: true do
     let! (:episode) { create(:episode, petitioner_id: petitioner.id) }
     

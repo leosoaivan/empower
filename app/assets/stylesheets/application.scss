@@ -51,3 +51,17 @@ h2 {
 p {
   margin: 0px;
 }
+
+.btn {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+a.btn-cancel {
+  background-color: #e65100;
+  width: 100%;
+
+  &:hover {
+    background-color: #ef6c00;
+  }
+}
