@@ -16,9 +16,9 @@
       <div id="respondent-info-arrest" class="col">
         Arrested?
           <%= f.radio_button :arrest, true, id: "episode_arrest_true" %>
-          <%= f.label "arrest_true", "Yes" %>
+          <%= f.label "Yes", for: 'episode_arrest_true' %>
           <%= f.radio_button :arrest, false, id: "episode_arrest_false" %>
-          <%= f.label "arrest_false", "No" %>
+          <%= f.label "No", for: 'episode_arrest_false' %>
       </div>
     </div>
   

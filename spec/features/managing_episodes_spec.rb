@@ -25,6 +25,9 @@ describe 'Episode management -', type: :feature do
       before :each do
         fill_in 'respondent_firstname', with: 'Jack'
         fill_in 'respondent_lastname', with: 'Black'
+        within '#respondent-info-arrest' do
+          choose 'Yes', allow_label_click: true
+        end
         check 'Now or previously married', allow_label_click: true
         check 'Intimate partner violence', allow_label_click: true
         click_on 'Create Episode'
