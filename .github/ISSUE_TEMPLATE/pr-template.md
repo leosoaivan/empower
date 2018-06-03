@@ -1,6 +1,6 @@
 ---
 name: PR Template
-about: Create a full request to address an issue
+about: Create a pull request to address an issue
 
 ---
 
