@@ -16,6 +16,8 @@ gem 'devise', '~> 4.4', '>= 4.4.3'
 gem 'cancancan', '~> 2.2'
 gem 'rolify', '~> 5.2'
 gem 'faker', '~> 1.8', '>= 1.8.4'
+gem 'elasticsearch-model', '~> 5.0', '>= 5.0.2'
+gem 'elasticsearch-rails', '~> 5.0', '>= 5.0.2'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

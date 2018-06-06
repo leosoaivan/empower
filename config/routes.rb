@@ -17,6 +17,10 @@ Rails.application.routes.draw do
   resources :users
   
   resources :clients do
+    collection do
+      get 'search'
+    end
+    
     resources :episodes, shallow: true do
       resources :contacts, shallow: true
     end

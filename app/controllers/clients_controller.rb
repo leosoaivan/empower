@@ -15,7 +15,12 @@ class ClientsController < ApplicationController
   end
 
   def index
+  end
+
+  def search
     @clients = decorated_clients
+    
+    render :index
   end
 
   def show
@@ -57,10 +62,7 @@ class ClientsController < ApplicationController
   end
 
   def queried_clients
-    clients_with_matching_name = ClientsQuery.new(ClientsQuery.new
-      .firstname_like(params[:firstname]))
-      .lastname_like(params[:lastname])
-    @clients = ClientsQuery.new(clients_with_matching_name).id_like(params[:id])
+    clients = Client.search(params[:query])
   end
 
   def decorated_clients
