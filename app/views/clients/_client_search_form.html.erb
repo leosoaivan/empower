@@ -1,28 +1,26 @@
 <%= form_with url: clients_path, method: :get, local: true, class: 'search-form' do |f| %>
   <div class='row'> 
-    <div class='input-field col s12 l6'>
-      <%= label_tag "id", "ID" %>
-      <%= text_field_tag 'id', params[:id],
+    <div class='input-field col s12 m4'>
+      <%= f.label :where_id, "ID" %>
+      <%= f.text_field :where_id,
         class: 'search-form__input' %>
     </div>
-  </div>
 
-  <div class='row'>
-    <div class='input-field col s12 l6'>
-      <%= label_tag "firstname", "First name" %>
-      <%= text_field_tag 'firstname', params[:firstname],
+    <div class='input-field col s12 m4'>
+      <%= f.label :where_firstname_like, "First name" %>
+      <%= f.text_field :where_firstname_like,
         class: 'search-form__input' %>
     </div>
     
-    <div class='input-field col s12 l6'>
-      <%= label_tag "lastname", "Last name" %>
-      <%= text_field_tag 'lastname', params[:lastname],
+    <div class='input-field col s12 m4'>
+      <%= f.label :where_lastname_like, "Last name" %>
+      <%= f.text_field :where_lastname_like,
         class: 'search-form__input' %>
     </div>
   </div>
-
+    
   <div class='row'>
-    <div class='col s12 l7'>
+    <div class='col s10 offset-s1 m6 offset-m3'>
       <%= submit_tag 'Search', class: 'search-form__submit btn' %>
     </div>
   </div>

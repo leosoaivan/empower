@@ -74,8 +74,7 @@ describe 'Client management -', type: :feature do
     
   describe 'editing a client' do
     before :each do
-      search_for_client petitioner.id
-      click_on 'Edit'
+      visit edit_client_path(petitioner)
     end
 
     it 'displays an edit form' do

@@ -15,7 +15,13 @@ class ClientsController < ApplicationController
   end
 
   def index
-    @clients = decorated_clients
+    if search_params.presence
+      clients = Client.chain_scopes_for_searching(search_params.to_hash)
+
+      @clients = decorated_clients(clients)
+    end
+
+    @clients ||= decorated_clients(Client.all)
   end
 
   def show
@@ -56,14 +62,15 @@ class ClientsController < ApplicationController
     params.require(:client).permit(:firstname, :lastname, :dob, :telephone)
   end
 
-  def queried_clients
-    clients_with_matching_name = ClientsQuery.new(ClientsQuery.new
-      .firstname_like(params[:firstname]))
-      .lastname_like(params[:lastname])
-    @clients = ClientsQuery.new(clients_with_matching_name).id_like(params[:id])
+  def search_params
+    params.permit(
+      :where_id,
+      :where_firstname_like,
+      :where_lastname_like
+    )
   end
 
-  def decorated_clients
-    queried_clients.map { |client| ClientDecorator.new(client) }
+  def decorated_clients(clients)
+    clients.map { |client| ClientDecorator.new(client) }
   end
 end
