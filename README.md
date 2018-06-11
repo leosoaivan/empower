@@ -55,7 +55,7 @@ N/A
 * LPSV
 
 ## License
-N/A
+License available [here](https://github.com/leosoaivan/empower/blob/master/LICENSE)
 
 ## Acknowledgments
 * The Odin Project
