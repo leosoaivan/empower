@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/leosoaivan/empower.svg?branch=master)](https://travis-ci.org/leosoaivan/empower)
-<a href="https://codeclimate.com/github/leosoaivan/empower/maintainability"><img src="https://api.codeclimate.com/v1/badges/4152124b73650a208558/maintainability" /></a>
-<a href="https://codeclimate.com/github/leosoaivan/empower/test_coverage"><img src="https://api.codeclimate.com/v1/badges/4152124b73650a208558/test_coverage" /></a>
+[![Maintainability](https://api.codeclimate.com/v1/badges/4152124b73650a208558/maintainability)](https://codeclimate.com/github/leosoaivan/empower/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/4152124b73650a208558/test_coverage)](https://codeclimate.com/github/leosoaivan/empower/test_coverage)
 
 # Empower
 Empower is a client advocacy and management system designed to help you cultivate client relationships, manage the delivery of services, and track outcomes and trends.
