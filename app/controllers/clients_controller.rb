@@ -24,6 +24,14 @@ class ClientsController < ApplicationController
     @clients ||= decorated_clients(Client.all)
   end
 
+  # def respondent_search
+  #   if params[:term]
+  #     @clients = Client.search_respondent(params[:term])
+  #   else
+  #     @clients = Client.all
+  #   end
+  # end
+
   def show
     client = Client.find(params[:id])
     @client = ClientDecorator.new(client)

@@ -2,16 +2,50 @@
 
   <%= form_with model: [@petitioner, @episode], local: true do |f| %>
     <div id="respondent-info" class="row">
+      Respondent:
+      <div id='add-respondent' class="col s12">
+        <div class="col s12 m6">
+          <%= button_tag "Create", { type: 'button',
+                                                remote: true,
+                                                id: 'add-respondent__create-button',
+                                                class: 'btn' } %>
+        </div>
+        <div class="col s12 m6">
+          <%= button_tag "Search", { type: 'button',
+                                                remote: true,
+                                                id: 'add-respondent__search-button',
+                                                class: 'btn' } %>
+        </div>
+      </div>
+
+      <div id="add-respondent__create-form" class='add-respondent-action'>
       <%= f.fields_for :respondent, Client.new do |respondent_f| %>
         <div class="input-field col s12">
-          <%= respondent_f.label :firstname, "Respondent's first name" %>
           <%= respondent_f.text_field :firstname, id: 'respondent_firstname' %>
+          <%= respondent_f.label :firstname, "Respondent's first name" %>
         </div>        
         <div class="input-field col s12">
-          <%= respondent_f.label :lastname, "Respondent's last name" %>
           <%= respondent_f.text_field :lastname, id: 'respondent_lastname' %>
+          <%= respondent_f.label :lastname, "Respondent's last name" %>
         </div>
+
+          <%= button_tag "Cancel creating", 
+            { type: 'button',
+              remote: true,
+              id: 'add-respondent__create-form-cancel',
+              class: 'btn btn-cancel' } %>
       <% end %>
+      </div>
+
+      <div id="add-respondent__search-form" class='add-respondent-action'>
+        <%= f.collection_select :respondent_id, Client.all, :id, :fullname_and_dob, { prompt: true}, { id: 'add-respondent__dropdown', class: 'browser-default' } %>
+
+        <%= button_tag "Cancel searching", 
+            { type: 'button',
+              remote: true,
+              id: 'add-respondent__search-form-cancel',
+              class: 'btn btn-cancel' } %>
+      </div>
 
       <div id="respondent-info-arrest" class="col">
         Arrested?

@@ -23,6 +23,7 @@ describe 'Episode management -', type: :feature do
 
     context 'with a respondent and valid attributes' do
       before :each do
+        click_on 'add-respondent__create-button'
         fill_in 'respondent_firstname', with: 'Jack'
         fill_in 'respondent_lastname', with: 'Black'
         within '#respondent-info-arrest' do

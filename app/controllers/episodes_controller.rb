@@ -1,5 +1,4 @@
 class EpisodesController < ApplicationController
-  before_action :nil_respondent_if_blank, only: :create
   before_action :set_form_variables, only: [:new, :create]
   before_action :set_episode, only: [:show, :destroy]
   load_and_authorize_resource only: [:create, :destroy]
@@ -36,17 +35,11 @@ class EpisodesController < ApplicationController
   private
 
   def episode_params
-    @episode_params ||= params.require(:episode).permit(:arrest, victimization:[], relationship:[], respondent_attributes: [:firstname, :lastname])
+    @episode_params ||= params.require(:episode).permit(:arrest, :respondent_id, victimization:[], relationship:[], respondent_attributes: [:firstname, :lastname])
   end
 
   def set_episode
     @episode = Episode.find(params[:id])
-  end
-
-  def nil_respondent_if_blank
-    if params[:episode][:respondent].blank?
-      params[:episode][:respondent] = nil
-    end
   end
 
   def set_form_variables

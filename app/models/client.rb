@@ -27,4 +27,12 @@ class Client < ApplicationRecord
       object.send(*array_of_scope_with_args)
     end
   end
+
+  def fullname_and_dob
+    if dob
+      "#{firstname} #{lastname} - #{dob.strftime("%m/%d/%Y")}"
+    else
+      "#{firstname} #{lastname}"
+    end 
+  end
 end

@@ -57,11 +57,11 @@ p {
   margin-bottom: 15px;
 }
 
-a.btn-cancel {
-  background-color: #e65100;
+.btn-cancel {
+  background-color: #e65100 !important;
   width: 100%;
 
   &:hover {
-    background-color: #ef6c00;
+    background-color: #ef6c00 !important;
   }
 }
