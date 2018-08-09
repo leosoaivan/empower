@@ -16,6 +16,7 @@ gem 'devise', '~> 4.4', '>= 4.4.3'
 gem 'cancancan', '~> 2.2'
 gem 'rolify', '~> 5.2'
 gem 'faker', '~> 1.8', '>= 1.8.4'
+gem 'materialize-sass', '~> 0.100.2'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
