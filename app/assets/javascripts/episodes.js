@@ -1,6 +1,6 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
-window.addEventListener("load", function() {
+window.addEventListener("turbolinks:load", function() {
   const addRespondentSection = (() => {
     let addRespondentActions = document.querySelector('#add-respondent');
     let createButton = document.querySelector('#add-respondent__create-button');
