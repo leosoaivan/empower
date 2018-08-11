@@ -1,7 +1,9 @@
 language: ruby
 rvm:
 - 2.5.0
-cache: bundler
+cache: 
+  - bundler
+  - yarn
 sudo: required
 dist: trusty
 services:
@@ -23,7 +25,6 @@ before_install:
 before_script:
 - cp config/database.yml.travis config/database.yml
 - psql -c 'create database travis_ci_test;' -U postgres
-- yarn install --network-timeout 1000000
 - bundle exec rails db:migrate RAILS_ENV=test
 script:
 - bundle exec rspec spec/$TEST_FOLDER
