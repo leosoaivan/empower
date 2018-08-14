@@ -12,4 +12,13 @@ class Episode < ApplicationRecord
   has_many :contacts, -> { order(created_at: :desc) }, dependent: :destroy
 
   scope :desc_order, -> { order(created_at: :desc) }
+
+  def respondent_name
+    respondent.try(:firstname).try(:lastname)
+  end
+  
+  def respondent_name=(firstname, lastname)
+    byebug
+    self.respondent = Client.find_by(firstname: firstname, lastname: lastname)
+  end
 end

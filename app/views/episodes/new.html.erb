@@ -38,7 +38,11 @@
       </div>
 
       <div id="add-respondent__search-form" class='add-respondent-action'>
-        <%= f.collection_select :respondent_id, Client.all, :id, :fullname_and_dob, { prompt: true}, { id: 'add-respondent__dropdown', class: 'browser-default' } %>
+        <%#= f.collection_select :respondent_id, Client.all, :id, :fullname_and_dob, { prompt: true}, { id: 'add-respondent__dropdown', class: 'browser-default' } %>
+        <div class="input-field">
+          <%= f.label :respondent_name %>
+          <%= f.text_field :respondent_name %>
+        </div>
 
         <%= button_tag "Cancel searching", 
             { type: 'button',

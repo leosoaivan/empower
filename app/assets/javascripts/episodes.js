@@ -56,4 +56,8 @@ window.addEventListener("turbolinks:load", function() {
       })
     }
   })()
+
+  const initializeAutoComplete = (() => {
+    
+  })
 }, false);
