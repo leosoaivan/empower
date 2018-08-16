@@ -18,7 +18,7 @@ class Episode < ApplicationRecord
   end
   
   def respondent_fullname=(fullname)
-    if fullname
+    if fullname.present?
       respondent_names = fullname.split(' ')
       firstname = respondent_names[0]
       lastname = respondent_names[1..-1].join(' ')
