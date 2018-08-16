@@ -57,4 +57,30 @@ window.addEventListener("turbolinks:load", function() {
       })
     }
   })()
+
+  const initializeAutocomplete = (() => {
+    let respondentSearchField = document.querySelector('#respondent_fullname');
+    const options = {
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+      }
+    }
+
+    fetch('/clients/', options)
+    .then(response => response.json())
+    .then(function(myJson) {
+      let respondentArray = myJson;
+      
+      const dataRespondent = myJson.reduce((acc, item) => {
+        acc[item] = null
+        return acc
+      }, {}) 
+  
+      $('#respondent_fullname').autocomplete({
+        data: dataRespondent,
+        minLength: 2,
+        limit: 10
+      });
+    });
+  })();
 }, false);

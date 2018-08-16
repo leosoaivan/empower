@@ -22,6 +22,11 @@ class ClientsController < ApplicationController
     end
 
     @clients ||= decorated_clients(Client.all)
+
+    respond_to do |format|
+      format.json { render json: @clients.map(&:fullname_and_dob) }
+      format.html { render :index }
+    end
   end
 
   def show

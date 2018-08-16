@@ -21,7 +21,7 @@ describe 'Episode management -', type: :feature do
       expect(page).to have_css 'form'
     end
 
-    context 'with a respondent and valid attributes' do
+    context 'with a created respondent and valid attributes' do
       before :each do
         click_on 'add-respondent__create-button'
         fill_in 'respondent_firstname', with: 'Jack'
@@ -51,6 +51,19 @@ describe 'Episode management -', type: :feature do
         within '.episode-card' do
           expect(page).to have_content 'Jack Black'
         end
+      end
+    end
+
+    context 'with a searched respondent' do
+      let!(:respondent) { create(:client) }
+
+      before :each do
+        click_on 'add-respondent__search-button'
+        fill_in 'respondent_fullname', with: respondent.firstname[0..2]
+      end
+
+      it 'displays a drop down with the respondent\'s name' do
+        expect(page).to have_css('.autocomplete-content', text: respondent.firstname)
       end
     end
 
