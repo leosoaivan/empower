@@ -13,12 +13,17 @@ class Episode < ApplicationRecord
 
   scope :desc_order, -> { order(created_at: :desc) }
 
-  def respondent_name
-    respondent.try(:firstname).try(:lastname)
+  def respondent_fullname
+    respondent.try(:fullname_and_dob)
   end
   
-  def respondent_name=(firstname, lastname)
-    byebug
-    self.respondent = Client.find_by(firstname: firstname, lastname: lastname)
+  def respondent_fullname=(fullname)
+    if fullname
+      respondent_names = fullname.split(' ')
+      firstname = respondent_names[0]
+      lastname = respondent_names[1..-1].join(' ')
+      self.respondent = Client.find_or_create_by(firstname: firstname,
+                                                 lastname: lastname)
+    end
   end
 end

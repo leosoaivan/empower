@@ -41,9 +41,10 @@ window.addEventListener("turbolinks:load", function() {
     }
 
     const clearRespondentSelect = () => {
-      let dropDown = document.querySelector('#add-respondent__dropdown');
+      let autocomplete = document.querySelector('#respondent_fullname');
 
-      dropDown.selectedIndex = 0;
+      autocomplete.value = ''
+      autocomplete.previousElementSibling.classList.remove('active');
     }
 
     const toggleDisplay = (...elems) => {
@@ -56,8 +57,4 @@ window.addEventListener("turbolinks:load", function() {
       })
     }
   })()
-
-  const initializeAutoComplete = (() => {
-    
-  })
 }, false);

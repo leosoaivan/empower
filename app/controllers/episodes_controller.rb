@@ -35,7 +35,13 @@ class EpisodesController < ApplicationController
   private
 
   def episode_params
-    @episode_params ||= params.require(:episode).permit(:arrest, :respondent_id, victimization:[], relationship:[], respondent_attributes: [:firstname, :lastname])
+    @episode_params ||= params.require(:episode)
+      .permit(:arrest, 
+              :respondent_id,
+              :respondent_fullname, 
+              victimization: [], 
+              relationship: [], 
+              respondent_attributes: [:firstname, :lastname])
   end
 
   def set_episode

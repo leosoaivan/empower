@@ -21,12 +21,12 @@
       <div id="add-respondent__create-form" class='add-respondent-action'>
       <%= f.fields_for :respondent, Client.new do |respondent_f| %>
         <div class="input-field col s12">
-          <%= respondent_f.text_field :firstname, id: 'respondent_firstname' %>
           <%= respondent_f.label :firstname, "Respondent's first name" %>
+          <%= respondent_f.text_field :firstname, id: 'respondent_firstname' %>
         </div>        
         <div class="input-field col s12">
-          <%= respondent_f.text_field :lastname, id: 'respondent_lastname' %>
           <%= respondent_f.label :lastname, "Respondent's last name" %>
+          <%= respondent_f.text_field :lastname, id: 'respondent_lastname' %>
         </div>
 
           <%= button_tag "Cancel creating", 
@@ -38,10 +38,9 @@
       </div>
 
       <div id="add-respondent__search-form" class='add-respondent-action'>
-        <%#= f.collection_select :respondent_id, Client.all, :id, :fullname_and_dob, { prompt: true}, { id: 'add-respondent__dropdown', class: 'browser-default' } %>
         <div class="input-field">
-          <%= f.label :respondent_name %>
-          <%= f.text_field :respondent_name %>
+          <%= f.label :respondent_fullname, "Respondent's full name" %>
+          <%= f.text_field :respondent_fullname, id: 'respondent_fullname', class: 'autocomplete' %>
         </div>
 
         <%= button_tag "Cancel searching", 
