@@ -3,11 +3,11 @@
   <td><%= contact.body %></td>
   <td>
     <% if contact.services %>
-      <% contact.services.each do |service| %>
-        <ul>
+      <ul>
+        <% contact.services.each do |service| %>
           <li><%= service.name %></li>
+        <% end %>
         </ul>
-      <% end %>
     <% end %>
   <td>
     <%= link_to "Edit contact", edit_contact_path(contact) %>
