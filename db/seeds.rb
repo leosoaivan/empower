@@ -8,7 +8,15 @@ guest = User.create(
 )
 guest.add_role(:guest)
 
-5.times do
+staff = User.create(
+  first_name: "Staff",
+  last_name: "Tester",
+  username: "stester",
+  email: "stester@empower.org",
+  password: "staff123"
+)
+
+10.times do
   Client.create(firstname: Faker::Name.first_name, lastname: Faker::Name.last_name)
 end
   
