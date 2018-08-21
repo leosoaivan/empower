@@ -15,14 +15,16 @@ RSpec.describe Client, type: :model do
   it { is_expected.to validate_presence_of(:lastname) }
 
   describe '#all_episodes' do
+    let  (:client) { FactoryBot.create(:client) }
+    let! (:episode_1) do
+      FactoryBot.create(:episode, petitioner_id: client.id)
+    end
+    let! (:episode_2) do
+      FactoryBot.create(:episode, respondent_id: client.id)
+    end
+
     it 'returns all episodes in which a client is either petitioner or respondent' do
-      client = create(:client)
-      petitioned_episode = create(:episode, petitioner: client)
-      responded_episode = create(:episode, respondent: client)
-
-      all_episodes_ids = client.all_episodes.map(&:id)
-
-      expect(all_episodes_ids).to match_array [1, 2]
+      expect(client.all_episodes).to include(episode_1, episode_2)
     end
   end
 

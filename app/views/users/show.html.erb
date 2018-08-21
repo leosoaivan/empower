@@ -2,9 +2,38 @@
 
 <div class='card'>
   <div class='card-content black-text'>
-    <span class='card-title black-text'><%= current_user.full_name %></span>
+    <span class='card-title black-text'><%= @user.full_name %></span>
   </div>
 </div>
+
+<table class='striped'>
+  <caption>Past Contacts</caption>
+  <thead>
+    <tr>
+      <th>Date & Time</th>
+      <th>Client</th>
+      <th>Note</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @contacts.each.with_index(1) do |contact, i| %>
+    <tr>
+      <td>
+        <%= contact.date_and_time %>
+      </td>
+      <td>
+        <%= link_to episode_path(contact.episode),
+            id: "link-to-episode_#{i}" do %>
+          <%= contact.petitioner.fullname_and_id %>
+        <% end %>
+      </td>
+      <td>
+        <%= contact.body %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <% if user_signed_in? %>
   <%= link_to "LOGOUT", logout_path, method: :delete %>

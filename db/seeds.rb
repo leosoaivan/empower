@@ -11,10 +11,11 @@ guest.add_role(:guest)
 staff = User.create(
   first_name: "Staff",
   last_name: "Tester",
-  username: "stester",
+  username: "staff",
   email: "stester@empower.org",
   password: "staff123"
 )
+staff.add_role(:staff)
 
 10.times do
   Client.create(firstname: Faker::Name.first_name, lastname: Faker::Name.last_name)
@@ -42,7 +43,7 @@ Episode.create(
 episode = Episode.first
 
 5.times do
-  episode.contacts.create(body: Faker::HarryPotter.quote, user_id: guest.id)
+  episode.contacts.create(body: Faker::HarryPotter.quote, user_id: staff.id)
 end
 
 # Create all services
