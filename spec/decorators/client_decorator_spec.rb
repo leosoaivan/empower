@@ -5,8 +5,8 @@ RSpec.describe ClientDecorator do
   let(:client) { 
     build_stubbed(
       :client, 
-      firstname: 'Jack', 
-      lastname: 'Black',
+      first_name: 'Jack', 
+      last_name: 'Black',
       dob: '1984-04-18')
   }
 

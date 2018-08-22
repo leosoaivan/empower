@@ -11,8 +11,8 @@ RSpec.describe Client, type: :model do
   }
   it { is_expected.to have_many(:respondents).through(:petitioned_episodes) }
   it { is_expected.to have_many(:petitioners).through(:responded_episodes) }
-  it { is_expected.to validate_presence_of(:firstname) }
-  it { is_expected.to validate_presence_of(:lastname) }
+  it { is_expected.to validate_presence_of(:first_name) }
+  it { is_expected.to validate_presence_of(:last_name) }
 
   describe '#all_episodes' do
     let  (:client) { FactoryBot.create(:client) }
@@ -29,13 +29,13 @@ RSpec.describe Client, type: :model do
   end
 
   describe '.chain_scopes_for_searching' do
-    let! (:client_1) { FactoryBot.create(:client, firstname: 'Abe') }
-    let! (:client_2) { FactoryBot.create(:client, firstname: 'Becky') }
-    let! (:client_3) { FactoryBot.create(:client, firstname: 'Becky', lastname: 'Law') }
+    let! (:client_1) { FactoryBot.create(:client, first_name: 'Abe') }
+    let! (:client_2) { FactoryBot.create(:client, first_name: 'Becky') }
+    let! (:client_3) { FactoryBot.create(:client, first_name: 'Becky', last_name: 'Law') }
 
     it 'sends at least one valid scope/method' do
       scopes = { 
-        "where_firstname_like" => client_2.firstname        
+        "where_first_name_like" => client_2.first_name        
       }
 
       expect(Client.chain_scopes_for_searching(scopes)).to match_array [client_2, client_3]
@@ -44,7 +44,7 @@ RSpec.describe Client, type: :model do
     it 'sends two or more scopes/methods' do
       scopes = {
         "where_id" => client_2.id,
-        "where_firstname_like" => client_2.firstname
+        "where_first_name_like" => client_2.first_name
       }
 
       expect(Client.chain_scopes_for_searching(scopes)).to match_array [client_2]
@@ -53,7 +53,7 @@ RSpec.describe Client, type: :model do
     it 'ignores 1+ empty scopes' do
       scopes = { 
         "where_id" => client_1.id,
-        "where_firstname_like" => ""
+        "where_first_name_like" => ""
       }
 
       expect(Client.chain_scopes_for_searching(scopes)).to match_array [client_1]

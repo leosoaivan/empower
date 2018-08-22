@@ -6,7 +6,9 @@ describe EpisodesController, type: :controller do
   let (:valid_params) { 
     {
       client_id: client.id,
-      episode: attributes_for(:episode), respondent_firstname: 'Jack', respondent_lastname: 'Black'
+      episode: attributes_for(:episode),
+      respondent_first_name: 'Jack',
+      respondent_last_name: 'Black'
     }
   }
   let (:valid_params_with_respondent) { 

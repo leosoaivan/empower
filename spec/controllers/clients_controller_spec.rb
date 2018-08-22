@@ -4,7 +4,7 @@ describe ClientsController, type: :controller do
   let(:user) { create(:user_staff) }
   let(:client) { create(:client) }
   let(:valid_params) { attributes_for(:client) } 
-  let(:invalid_params) { attributes_for(:client, lastname: "") }
+  let(:invalid_params) { attributes_for(:client, last_name: "") }
 
   before :each do
     sign_in user

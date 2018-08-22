@@ -21,12 +21,12 @@
       <div id="add-respondent__create-form" class='add-respondent-action'>
       <%= f.fields_for :respondent, Client.new do |respondent_f| %>
         <div class="input-field col s12">
-          <%= respondent_f.label :firstname, "Respondent's first name" %>
-          <%= respondent_f.text_field :firstname, id: 'respondent_firstname' %>
+          <%= respondent_f.label :first_name, "Respondent's first name" %>
+          <%= respondent_f.text_field :first_name, id: 'respondent_first_name' %>
         </div>        
         <div class="input-field col s12">
-          <%= respondent_f.label :lastname, "Respondent's last name" %>
-          <%= respondent_f.text_field :lastname, id: 'respondent_lastname' %>
+          <%= respondent_f.label :last_name, "Respondent's last name" %>
+          <%= respondent_f.text_field :last_name, id: 'respondent_last_name' %>
         </div>
 
           <%= button_tag "Cancel creating", 

@@ -1,12 +1,12 @@
 <%= form_with model: @client, local: true do |form| %>
   <div class="input-field">
-    <%= form.label :firstname, "First name", class: set_label_class(:firstname) %>
-    <%= form.text_field :firstname %>
+    <%= form.label :first_name, "First name", class: set_label_class(:first_name) %>
+    <%= form.text_field :first_name %>
   </div>
   
   <div class="input-field">
-    <%= form.label :lastname, "Last name", class: set_label_class(:lastname) %>
-    <%= form.text_field :lastname %>
+    <%= form.label :last_name, "Last name", class: set_label_class(:last_name) %>
+    <%= form.text_field :last_name %>
   </div>
   
   <div class="input-field">

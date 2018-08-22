@@ -64,14 +64,14 @@ class ClientsController < ApplicationController
   private
 
   def client_params
-    params.require(:client).permit(:firstname, :lastname, :dob, :telephone)
+    params.require(:client).permit(:first_name, :last_name, :dob, :telephone)
   end
 
   def search_params
     params.permit(
       :where_id,
-      :where_firstname_like,
-      :where_lastname_like
+      :where_first_name_like,
+      :where_last_name_like
     )
   end
 

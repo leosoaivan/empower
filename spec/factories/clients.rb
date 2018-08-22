@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :client, aliases: [:petitioner, :respondent] do
-    firstname { Faker::Name.first_name }
-    lastname { Faker::Name.last_name }
+    first_name { Faker::Name.first_name }
+    last_name { Faker::Name.last_name }
   end
 
   factory :client_with_episodes, parent: :client do

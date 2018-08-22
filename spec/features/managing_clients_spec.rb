@@ -22,7 +22,7 @@ describe 'Client management -', type: :feature do
 
       it 'displays their demographic info' do
         within '#client-card__info' do
-          expect(page).to have_content petitioner.firstname.upcase
+          expect(page).to have_content petitioner.first_name.upcase
         end
       end
 
@@ -62,7 +62,7 @@ describe 'Client management -', type: :feature do
 
       it 'does not display episodes where they are the respondent' do
         within '#episodes-container' do
-          expect(page).not_to have_content 'Respondent: #{petitioner.firstname}'
+          expect(page).not_to have_content 'Respondent: #{petitioner.first_name}'
         end
       end          
 
@@ -83,8 +83,8 @@ describe 'Client management -', type: :feature do
 
     context 'with valid attributes' do
       before :each do
-        fill_in 'client[firstname]', with: 'Jack'
-        fill_in 'client[lastname]', with: 'Black'
+        fill_in 'client[first_name]', with: 'Jack'
+        fill_in 'client[last_name]', with: 'Black'
         click_on 'Edit Client'
       end
       
@@ -103,8 +103,8 @@ describe 'Client management -', type: :feature do
 
     context 'with invalid attributes' do
       before :each do
-        fill_in 'client[firstname]', with: 'Jack'
-        fill_in 'client[lastname]', with: ''
+        fill_in 'client[first_name]', with: 'Jack'
+        fill_in 'client[last_name]', with: ''
         click_button 'Edit Client'
       end
       
@@ -129,8 +129,8 @@ describe 'Client management -', type: :feature do
 
     context 'with valid attributes' do
       before :each do
-        fill_in 'client[firstname]', with: 'Joe'
-        fill_in 'client[lastname]', with: 'Black'
+        fill_in 'client[first_name]', with: 'Joe'
+        fill_in 'client[last_name]', with: 'Black'
         click_on 'Create Client'
       end
 
@@ -149,8 +149,8 @@ describe 'Client management -', type: :feature do
 
     context 'with invalid attributes' do
       before :each do
-        fill_in 'client[firstname]', with: 'Joe'
-        fill_in 'client[lastname]', with: ''
+        fill_in 'client[first_name]', with: 'Joe'
+        fill_in 'client[last_name]', with: ''
         click_on 'Create Client'
       end
 
@@ -182,7 +182,7 @@ describe 'Client management -', type: :feature do
       end
 
       it 'does not display the client' do
-        expect(page).to_not have_content petitioner.firstname
+        expect(page).to_not have_content petitioner.first_name
       end
     end
 
@@ -205,7 +205,7 @@ describe 'Client management -', type: :feature do
       end
 
       it 'displays the client' do
-        expect(page).to have_content petitioner.firstname.upcase
+        expect(page).to have_content petitioner.first_name.upcase
       end
 
       it 'displays the episode' do

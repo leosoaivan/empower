@@ -4,23 +4,23 @@ feature 'Client search' do
   let (:user) { create(:user) }
   let! (:client_1) { 
     create(:client,
-      firstname: 'Kevin',
-      lastname: 'Smith') 
+      first_name: 'Kevin',
+      last_name: 'Smith') 
   }
   let! (:client_2) { 
     create(:client,
-      firstname: 'Janice',
-      lastname: 'Smith') 
+      first_name: 'Janice',
+      last_name: 'Smith') 
   }
   let! (:client_3) { 
     create(:client,
-      firstname: 'Kevin',
-      lastname: 'Hopper') 
+      first_name: 'Kevin',
+      last_name: 'Hopper') 
   }
   let! (:client_4) { 
     create(:client,
-      firstname: 'Janice',
-      lastname: 'Hopper') 
+      first_name: 'Janice',
+      last_name: 'Hopper') 
   }
 
   let (:client_data) { '.card' }
@@ -63,8 +63,8 @@ feature 'Client search' do
     context 'with a valid ID and valid full name' do
       before :each do
         fill_in 'where_id', with: client_1.id
-        fill_in 'where_firstname_like', with: client_1.firstname
-        fill_in 'where_lastname_like', with: client_1.lastname
+        fill_in 'where_first_name_like', with: client_1.first_name
+        fill_in 'where_last_name_like', with: client_1.last_name
         click_button 'Search'
       end
 
@@ -77,21 +77,21 @@ feature 'Client search' do
       end
     end
 
-    context 'with a valid ID, valid firstname, and invalid lastname' do
+    context 'with a valid ID, valid first_name, and invalid last_name' do
       it 'returns no hits' do
         fill_in 'where_id', with: client_1.id
-        fill_in 'where_firstname_like', with: client_1.firstname
-        fill_in 'where_lastname_like', with: 'Grace'
+        fill_in 'where_first_name_like', with: client_1.first_name
+        fill_in 'where_last_name_like', with: 'Grace'
         click_button 'Search'
         expect(page).to_not have_css client_data
       end
     end
 
-    context 'with a valid ID, invalid firstname, and valid lastname' do
+    context 'with a valid ID, invalid first_name, and valid last_name' do
       it 'returns no hits' do
         fill_in 'where_id', with: client_1.id
-        fill_in 'where_firstname_like', with: 'Topher'
-        fill_in 'where_lastname_like', with: 'Smith'
+        fill_in 'where_first_name_like', with: 'Topher'
+        fill_in 'where_last_name_like', with: 'Smith'
         click_button 'Search'
         expect(page).to_not have_css client_data
       end
@@ -105,21 +105,21 @@ feature 'Client search' do
       end
     end
 
-    context 'with an invalid ID, valid firstname, and invalid lastname' do
+    context 'with an invalid ID, valid first_name, and invalid last_name' do
       it 'returns no hits' do
         fill_in 'where_id', with: 100
-        fill_in 'where_firstname_like', with: client_1.firstname
-        fill_in 'where_lastname_like', with: 'Grace'
+        fill_in 'where_first_name_like', with: client_1.first_name
+        fill_in 'where_last_name_like', with: 'Grace'
         click_button 'Search'
         expect(page).to_not have_css client_data
       end
     end
 
-    context 'with an invalid ID, invalid firstname, and valid lastname' do
+    context 'with an invalid ID, invalid first_name, and valid last_name' do
       it 'returns no hits' do
         fill_in 'where_id', with: 100
-        fill_in 'where_firstname_like', with: 'Topher'
-        fill_in 'where_lastname_like', with: client_1.lastname
+        fill_in 'where_first_name_like', with: 'Topher'
+        fill_in 'where_last_name_like', with: client_1.last_name
         click_button 'Search'
         expect(page).to_not have_css client_data
       end
@@ -127,51 +127,51 @@ feature 'Client search' do
   end
   
   describe 'searching by name only' do
-    context 'with a valid firstname' do
+    context 'with a valid first_name' do
       it 'returns match(es)' do
-        fill_in 'where_firstname_like', with: client_1.firstname
+        fill_in 'where_first_name_like', with: client_1.first_name
         click_button 'Search'
         expect(page).to have_css client_data, count: 2
       end
     end
 
-    context 'with a partial firstname' do
+    context 'with a partial first_name' do
       it 'returns match(es)' do
-        fill_in 'where_firstname_like', with: client_1.firstname[0, 3]
+        fill_in 'where_first_name_like', with: client_1.first_name[0, 3]
         click_button 'Search'
         expect(page).to have_css client_data, count: 2
       end
     end
 
-    context 'with a valid lastname' do
+    context 'with a valid last_name' do
       it 'returns match(es)' do
-        fill_in 'where_lastname_like', with: client_1.lastname
+        fill_in 'where_last_name_like', with: client_1.last_name
         click_button 'Search'
         expect(page).to have_css client_data, count: 2
       end
     end
 
-    context 'with a partial lastname' do
+    context 'with a partial last_name' do
       it 'returns match(es)' do
-        fill_in 'where_lastname_like', with: client_1.lastname[0, 3]
+        fill_in 'where_last_name_like', with: client_1.last_name[0, 3]
         click_button 'Search'
         expect(page).to have_css client_data, count: 2
       end
     end
 
-    context 'with valid firstname AND lastname' do
+    context 'with valid first_name AND last_name' do
       it 'returns match(es)' do
-        fill_in 'where_firstname_like', with: client_1.firstname
-        fill_in 'where_lastname_like', with: client_1.lastname
+        fill_in 'where_first_name_like', with: client_1.first_name
+        fill_in 'where_last_name_like', with: client_1.last_name
         click_button 'Search'
         expect(page).to have_css client_data, count: 1
       end
     end
 
-    context 'with partial firstname AND lastname' do
+    context 'with partial first_name AND last_name' do
       it 'returns match(es)' do
-        fill_in 'where_firstname_like', with: client_1.firstname[0, 3]
-        fill_in 'where_lastname_like', with: client_1.lastname[0, 3]
+        fill_in 'where_first_name_like', with: client_1.first_name[0, 3]
+        fill_in 'where_last_name_like', with: client_1.last_name[0, 3]
         click_button 'Search'
         expect(page).to have_css client_data, count: 1
       end
@@ -179,8 +179,8 @@ feature 'Client search' do
 
     context 'with an invalid first name' do
       it 'returns no hits' do
-        fill_in 'where_firstname_like', with: client_1.firstname
-        fill_in 'where_lastname_like', with: 'Mike'
+        fill_in 'where_first_name_like', with: client_1.first_name
+        fill_in 'where_last_name_like', with: 'Mike'
         click_button 'Search'
         expect(page).to_not have_css client_data
       end
@@ -188,8 +188,8 @@ feature 'Client search' do
 
     context 'with an invalid last name' do
       it 'returns no hits' do
-        fill_in 'where_firstname_like', with: 'Topher'
-        fill_in 'where_lastname_like', with: client_1.lastname
+        fill_in 'where_first_name_like', with: 'Topher'
+        fill_in 'where_last_name_like', with: client_1.last_name
         click_button 'Search'
         expect(page).to_not have_css client_data
       end
@@ -198,8 +198,8 @@ feature 'Client search' do
 
   describe 'clicking on view button' do
     it 'navigates user to client\'s page' do
-      fill_in 'where_firstname_like', with: client_1.firstname
-      fill_in 'where_lastname_like', with: client_1.lastname
+      fill_in 'where_first_name_like', with: client_1.first_name
+      fill_in 'where_last_name_like', with: client_1.last_name
       click_button 'Search'
       within('.card .card-action') do
         click_on 'VIEW'

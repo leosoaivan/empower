@@ -20,10 +20,10 @@ class Episode < ApplicationRecord
   def respondent_fullname=(fullname)
     if fullname.present?
       respondent_names = fullname.split(' ')
-      firstname = respondent_names[0]
-      lastname = respondent_names[1..-1].join(' ')
-      self.respondent = Client.find_or_create_by(firstname: firstname,
-                                                 lastname: lastname)
+      first_name = respondent_names[0]
+      last_name = respondent_names[1..-1].join(' ')
+      self.respondent = Client.find_or_create_by(first_name: first_name,
+                                                 last_name: last_name)
     end
   end
 end

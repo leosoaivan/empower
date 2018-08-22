@@ -2,8 +2,8 @@ class Client < ApplicationRecord
   resourcify
 
   scope :where_id, -> (id) { where(id: id) }
-  scope :where_firstname_like, -> (firstname) { where('firstname ILIKE ?', "%#{firstname}%") }
-  scope :where_lastname_like, -> (lastname) { where('lastname ILIKE ?', "%#{lastname}%") }
+  scope :where_first_name_like, -> (first_name) { where('first_name ILIKE ?', "%#{first_name}%") }
+  scope :where_last_name_like, -> (last_name) { where('last_name ILIKE ?', "%#{last_name}%") }
   
   has_many :petitioned_episodes, class_name: 'Episode', foreign_key: 'petitioner_id'
   has_many :responded_episodes, class_name: 'Episode', foreign_key: 'respondent_id' 
@@ -11,8 +11,8 @@ class Client < ApplicationRecord
   has_many :respondents, through: :petitioned_episodes
   has_many :petitioners, through: :responded_episodes
 
-  validates :firstname, presence: true
-  validates :lastname,  presence: true
+  validates :first_name, presence: true
+  validates :last_name,  presence: true
 
   def all_episodes
     self.petitioned_episodes.or(self.responded_episodes)
@@ -30,9 +30,9 @@ class Client < ApplicationRecord
 
   def fullname_and_dob
     if dob
-      "#{firstname} #{lastname} - #{dob.strftime("%m/%d/%Y")}"
+      "#{firs_tname} #{last_name} - #{dob.strftime("%m/%d/%Y")}"
     else
-      "#{firstname} #{lastname}"
+      "#{first_name} #{last_name}"
     end 
   end
 end

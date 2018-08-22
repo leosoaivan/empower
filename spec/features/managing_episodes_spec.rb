@@ -24,8 +24,8 @@ describe 'Episode management -', type: :feature do
     context 'with a created respondent and valid attributes' do
       before :each do
         click_on 'add-respondent__create-button'
-        fill_in 'respondent_firstname', with: 'Jack'
-        fill_in 'respondent_lastname', with: 'Black'
+        fill_in 'respondent_first_name', with: 'Jack'
+        fill_in 'respondent_last_name', with: 'Black'
         within '#respondent-info-arrest' do
           choose 'Yes', allow_label_click: true
         end
@@ -59,11 +59,11 @@ describe 'Episode management -', type: :feature do
 
       before :each do
         click_on 'add-respondent__search-button'
-        fill_in 'respondent_fullname', with: respondent.firstname[0..2]
+        fill_in 'respondent_fullname', with: respondent.first_name[0..2]
       end
 
       it 'displays a drop down with the respondent\'s name' do
-        expect(page).to have_css('.autocomplete-content', text: respondent.firstname)
+        expect(page).to have_css('.autocomplete-content', text: respondent.first_name)
       end
     end
 
@@ -99,7 +99,7 @@ describe 'Episode management -', type: :feature do
       visit client_path(petitioner)
       click_on 'Create new episode'
       click_on 'add-respondent__create-button'
-      fill_in 'respondent_firstname', with: 'Jack'
+      fill_in 'respondent_first_name', with: 'Jack'
       click_on 'episode-form__button--cancel'
     end
 

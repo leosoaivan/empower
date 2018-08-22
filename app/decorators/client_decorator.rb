@@ -1,6 +1,6 @@
 class ClientDecorator < ApplicationDecorator
   def fullname
-    "#{firstname} #{lastname}"
+    "#{first_name} #{last_name}"
   end
 
   def mmddyyyy

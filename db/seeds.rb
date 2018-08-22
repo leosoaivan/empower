@@ -18,7 +18,9 @@ staff = User.create(
 staff.add_role(:staff)
 
 10.times do
-  Client.create(firstname: Faker::Name.first_name, lastname: Faker::Name.last_name)
+  Client.create(first_name: Faker::Name.first_name,
+                last_name: Faker::Name.last_name
+  )
 end
   
 Episode.create(

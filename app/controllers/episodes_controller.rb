@@ -41,7 +41,7 @@ class EpisodesController < ApplicationController
               :respondent_fullname, 
               victimization: [], 
               relationship: [], 
-              respondent_attributes: [:firstname, :lastname])
+              respondent_attributes: [:first_name, :last_name])
   end
 
   def set_episode
