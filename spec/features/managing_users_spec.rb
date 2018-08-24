@@ -49,13 +49,13 @@ describe 'Users management -', type: :feature do
       expect(page).to have_css('tbody/tr:nth-child(1)', text: new_contact.body)
     end
 
-    # it 'displays a link to a related episode' do
-    #   within('tbody/tr:nth-child(1)') do
-    #     find('a').click
-    #   end
+    it 'displays a link to a related episode' do
+      within('tbody/tr:nth-child(1)') do
+        find('a').click
+      end
       
-    #   expect(current_path).to eql episode_path(episode)
-    # end
+      expect(current_path).to eql episode_path(episode)
+    end
   end
 
   describe 'viewing another user\'s homepage' do
