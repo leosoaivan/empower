@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     end
 
     @contacts = @user.contacts
-                  .includes(:episode)
+                  .includes(episode: :petitioner)
                   .desc
                   .limit(25)
                   .map { |contact| ContactDecorator.new(contact) }
