@@ -12,6 +12,9 @@
         <%=link_to new_episode_contact_path(@episode) do %>
           Create contact
         <% end %>
+        <%=link_to new_episode_follow_up_path(@episode) do%>
+          Schedule follow-up
+        <% end %>
       </div>
     </div>
   </div>
@@ -20,7 +23,29 @@
 <div class='row'>
   <div class='col s12'>
     <div class='card-panel'>
+      <table class='follow-ups__table'>
+        <caption>Follow-Ups</caption>
+        <thead>
+          <tr>
+            <th>Due Date</th>
+            <th>Due Shift</th>
+            <th>Assignee</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render @follow_ups %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class='row'>
+  <div class='col s12'>
+    <div class='card-panel'>
       <table id='contacts'>
+        <caption>Contacts</caption>
         <thead>
           <tr>
             <th>Date</th>

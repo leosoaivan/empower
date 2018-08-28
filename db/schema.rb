@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_22_113307) do
+ActiveRecord::Schema.define(version: 2018_08_27_210933) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -60,6 +60,17 @@ ActiveRecord::Schema.define(version: 2018_08_22_113307) do
     t.boolean "open", default: true
     t.index ["petitioner_id"], name: "index_episodes_on_petitioner_id"
     t.index ["respondent_id"], name: "index_episodes_on_respondent_id"
+  end
+
+  create_table "follow_ups", force: :cascade do |t|
+    t.datetime "due_by_date"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "due_by_shift"
+    t.bigint "episode_id"
+    t.index ["episode_id"], name: "index_follow_ups_on_episode_id"
+    t.index ["user_id"], name: "index_follow_ups_on_user_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -117,5 +128,7 @@ ActiveRecord::Schema.define(version: 2018_08_22_113307) do
 
   add_foreign_key "contacts", "episodes"
   add_foreign_key "contacts", "users"
+  add_foreign_key "follow_ups", "episodes"
+  add_foreign_key "follow_ups", "users"
   add_foreign_key "services", "service_types"
 end

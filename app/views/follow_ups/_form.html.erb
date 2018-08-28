@@ -1,0 +1,45 @@
+<%= form_with model: [@episode, FollowUp.new], local: true do |f| %>
+  <div class='row'>
+    <div class='col s12 m6'>
+      <div class='input-field'>
+        <%= f.label :due_by_date %>
+        <%= f.text_field :due_by_date, class: 'datepicker' %>
+      </div>
+    </div>
+
+    <div class='col s12 m6'>
+      <div class='input-field select-shift'>
+        <%= f.select :due_by_shift, @shift, { prompt: true } %>
+        <%= f.label :due_by_shift %>
+      </div>
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='col s12 m6'>
+      <div class='input-field select-user'>
+        <%= f.collection_select :user_id, User.all, :id, :full_name, { prompt: true } %>
+        <%= f.label :user_id %>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col s12 m4 offset-m2">
+      <%= f.submit "Create", class: 'btn' do %>
+        <span>
+          <i class='material-icons right'>send</i>
+        <span>
+      <% end %>
+    </div>
+  
+    <div class="col s12 m4">
+      <%= link_to episode_path(@episode), class: 'btn btn-cancel' do %>
+        <span>
+          Cancel 
+          <i class='material-icons right'>delete</i>
+        <span>
+      <% end %>
+    </div>
+    </div>
+<% end %>
