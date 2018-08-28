@@ -3,6 +3,7 @@ class Episode < ApplicationRecord
   
   belongs_to :petitioner, class_name: 'Client'
   belongs_to :respondent, class_name: 'Client', optional: true
+  has_many :follow_ups
 
   accepts_nested_attributes_for :respondent, reject_if: :all_blank
 

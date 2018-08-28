@@ -24,6 +24,7 @@ class EpisodesController < ApplicationController
   def show
     @client = ClientDecorator.new(@episode.petitioner)
     @contacts = decorated_contacts
+    @follow_ups = @episode.follow_ups.includes(:user)
   end
 
   def destroy

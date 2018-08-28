@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   resources :clients do
     resources :episodes, shallow: true do
       resources :contacts, shallow: true
+      resources :follow_ups, shallow: true
     end
   end
  end
