@@ -2,6 +2,7 @@ FactoryBot.define do
   factory :client, aliases: [:petitioner, :respondent] do
     first_name { Faker::Name.first_name }
     last_name { Faker::Name.last_name }
+    dob { DateTime.now }
   end
 
   factory :client_with_episodes, parent: :client do

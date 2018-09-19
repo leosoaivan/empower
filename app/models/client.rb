@@ -30,7 +30,7 @@ class Client < ApplicationRecord
 
   def fullname_and_dob
     if dob
-      "#{firs_tname} #{last_name} - #{dob.strftime("%m/%d/%Y")}"
+      "#{first_name} #{last_name} - #{dob.strftime("%m/%d/%Y")}"
     else
       "#{first_name} #{last_name}"
     end 
