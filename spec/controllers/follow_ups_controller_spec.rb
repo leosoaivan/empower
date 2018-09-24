@@ -10,7 +10,7 @@ describe FollowUpsController, type: :controller do
       follow_up: {
         user_id: staff.id,
         due_by_date: Date.current + 3.days,
-        due_by_shift: 1
+        due_by_shift: "morning"
       }
     }
   }

@@ -1,6 +1,7 @@
 class FollowUpsController < ApplicationController
+  before_action :find_episode, only: [:new, :create]
   before_action :define_shifts, only: [:new, :create]
-  
+
   def index
   end
 
@@ -8,14 +9,12 @@ class FollowUpsController < ApplicationController
   end
   
   def new
-    @episode = Episode.find(params[:episode_id])
   end
 
   def edit
   end
   
   def create
-    @episode = Episode.find(params[:episode_id])
     @follow_up = @episode.follow_ups.build(follow_up_params)
 
     if @follow_up.save
@@ -38,12 +37,11 @@ class FollowUpsController < ApplicationController
     params.require(:follow_up).permit(:due_by_date, :due_by_shift, :user_id)
   end
 
+  def find_episode
+    @episode = Episode.find(params[:episode_id])
+  end
+
   def define_shifts
-    @shifts = {
-      "morning": 1,
-      "afternoon": 2,
-      "evening": 3,
-      "overnight": 4
-    }
+    @shifts = FollowUp.due_by_shifts.keys.to_a
   end
 end
