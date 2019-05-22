@@ -26,3 +26,5 @@ yarn-debug.log*
 /yarn-error.log
 /vendor
 /config/secrets.yml
+# Ignore master key for decrypting credentials and more.
+/config/master.key
